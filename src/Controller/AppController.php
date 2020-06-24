@@ -109,7 +109,7 @@ class AppController extends Controller
         ]);
         
         if ($this->request->session()->check('Auth.User')) {
-			
+            /**
 			if (!$this->request->session()->check('Auth.User.modules')) {
 				$response = $this->req('GET', '/user_level_modules/active?code=TICKET&user_level_id='.$this->request->session()->read('Auth.User.user_level_id').'&order=code');
 				
@@ -122,7 +122,45 @@ class AppController extends Controller
 			$Modules = new ModulesController;
 			$menu = $Modules->menu();
 
-			$this->set(compact('menu'));
+            $this->set(compact('menu'));
+            */
+
+            $user_menu = $this->request->session()->read('Auth');
+
+            $menu = [
+                'menu-top' => [
+                    [
+                        'title' => 'Dashboard',
+                        'url' => ['controller' => 'Home', 'action' => 'index']
+                    ],
+                    [
+                        'title' => 'Medic Tools',
+                        'url' => ['controller' => 'MedicTools', 'action' => 'index']
+                    ],
+                    [
+                        'title' => 'Therapist',
+                        'url' => ['controller' => 'Therapist', 'action' => 'index']
+                    ],
+                    [
+                        'title' => 'Nurses',
+                        'url' => ['controller' => 'Nurses', 'action' => 'index']
+                    ],
+                    [
+                        'title' => 'Transport Times',
+                        'url' => ['controller' => 'TransportTime', 'action' => 'index']
+                    ],
+                    [
+                        'title' => 'PJ',
+                        'url' => ['controller' => 'Pjs', 'action' => 'index']
+                    ],
+                    [
+                        'title' => 'Patient',
+                        'url' => ['controller' => 'Patient', 'action' => 'index']
+                    ]
+                ]
+            ];
+
+            $this->set(compact('menu', 'user_menu'));
 		}
     }
 
@@ -156,7 +194,11 @@ class AppController extends Controller
 		
 		if (!empty($access_token)) {
 			$request_config['headers']['Authorization'] = 'Bearer '.$access_token;
-		}
+        }
+        
+        if ($method == 'DELETE') {
+            $request_config['headers']['X-CSRF-Token'] = json_encode($this->request->getParam('_csrfToken'));
+        }
 
         $http = new Client($request_config);
 
