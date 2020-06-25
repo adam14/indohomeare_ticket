@@ -134,6 +134,10 @@ class AppController extends Controller
                         'url' => ['controller' => 'Home', 'action' => 'index']
                     ],
                     [
+                        'title' => 'Contract',
+                        'url' => ['controller' => 'Contracts', 'action' => 'index']
+                    ],
+                    [
                         'title' => 'Medic Tools',
                         'url' => ['controller' => 'MedicTools', 'action' => 'index']
                     ],
