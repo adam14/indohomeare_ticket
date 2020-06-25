@@ -18,6 +18,7 @@ class ContractsController extends AppController
         $allowed_method = [
             'index',
             'add',
+            'detail',
             'edit',
             'getPatient'
         ];
@@ -117,6 +118,22 @@ class ContractsController extends AppController
         }
 
         $this->set(compact('patients', 'pjs'));
+    }
+
+    /**
+     *  detail method
+     *  detail page
+     */
+    public function detail($id)
+    {
+        $contracts = [];
+        $get_contracts = $this->req('GET', '/contracts/'.$id);
+
+        if (in_array($get_contracts->code, [200, 201])) {
+            $contracts = (object) $get_contracts->json['data'];
+        }
+
+        $this->set(compact('contracts'));
     }
 
     /**
