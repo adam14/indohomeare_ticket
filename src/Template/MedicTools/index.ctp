@@ -43,6 +43,7 @@
             <div class="panel-body">
                 <h4 class="page-head-line">Medic Tools</h4>
                 <?php echo $this->Html->link('Add New', '#', ['class' => 'disable btn btn-sm btn-success', 'data-href' => $this->Url->build(['controller' => 'MedicTools', 'action' => 'add']), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Add Data', 'title' => 'Click to Add', 'escape' => false]); ?>
+				<?php echo $this->Html->link('Medic Tools Session', ['controller' => 'MedicToolSessions', 'action' => 'index'], ['class' => 'disable btn btn-sm btn-info', 'title' => 'Medic Tools Session', 'escape' => false]); ?>
                 <div class="row">
                     <div class="col-md-12 margin-bottom-30">
                         <div class="panel panel-primary">

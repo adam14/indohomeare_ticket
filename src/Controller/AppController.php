@@ -187,7 +187,7 @@ class AppController extends Controller
 
             $result = [];
 
-            if ($response->code == 200) {
+            if ($response->json['status'] == true) {
                 $result = $response->json;
                 $this->request->session()->write('Auth.User.token', $result['data']['token']);
                 sleep(1);

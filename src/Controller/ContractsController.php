@@ -126,6 +126,66 @@ class ContractsController extends AppController
      */
     public function detail($id)
     {
+        /** Contract Event */
+        $response = $this->req('GET', '/event_contracts');
+        $result = $response->json['data'];
+        $event_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $event_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Transport Contract */
+        $response = $this->req('GET', '/transport_contracts');
+        $result = $response->json['data'];
+        $transport_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $transport_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Nurse Contract */
+        $response = $this->req('GET', '/nurse_contracts');
+        $result = $response->json['data'];
+        $nurse_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $nurse_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Therapist Contract */
+        $response = $this->req('GET', '/therapist_contracts');
+        $result = $response->json['data'];
+        $therapist_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $therapist_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Medic Tools Contract */
+        $response = $this->req('GET', '/medic_tool_contracts');
+        $result = $response->json['data'];
+        $medic_tool_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $medic_tool_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Contract Histories */
+        $response = $this->req('GET', '/contract_histories');
+        $result = $response->json['data'];
+        $contract_histories = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $contract_histories = $result['data'];
+        }
+        /** End */
+
         $contracts = [];
         $get_contracts = $this->req('GET', '/contracts/'.$id);
 
@@ -133,7 +193,7 @@ class ContractsController extends AppController
             $contracts = (object) $get_contracts->json['data'];
         }
 
-        $this->set(compact('contracts'));
+        $this->set(compact('contracts', 'event_contracts', 'transport_contracts', 'nurse_contracts', 'therapist_contracts', 'medic_tool_contracts', 'contract_histories'));
     }
 
     /**

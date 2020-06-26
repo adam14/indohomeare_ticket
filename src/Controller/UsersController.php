@@ -42,7 +42,14 @@ class UsersController extends AppController
 
             $response = $this->req('POST', '/login', $data);
 
-            if ($response->code == 200) {
+            // if ($response->json['status'] == false) {
+            //     $session->destroy();
+
+            //     $this->Flash->error('Your email or password is incorrect.');
+            //     return $this->redirect(['action' => 'login']);
+            // }
+
+            if ($response->json['status'] == true) {
                 $result = $response->json;
                 $access_token = $result['data']['token'];
 				$session->write('Auth.User.token', $access_token);
