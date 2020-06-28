@@ -70,7 +70,7 @@ class ContractsController extends AppController
      */
     public function add()
     {
-        $this->viewBuilder()->layout('modal');
+        //$this->viewBuilder()->layout('modal');
 
         if ($this->request->is('post')) {
             $pj_id = $this->request->data('pj_id');
@@ -100,6 +100,8 @@ class ContractsController extends AppController
 
             return $this->redirect($this->referer());
         }
+
+        $contract_no = "NMK.".date("Y-m-").rand(1000,9999);
 
         $response = $this->req('GET', '/patients');
         $result = $response->json['data'];

@@ -7,36 +7,36 @@
 					<div id="Detail" class="tab-pane fade in active">
 						<div class="row">
 							<div class="col-md-6 col-sm-12 margin-bottom-30">
-                                <h4>Contract Data</h4>
+                                <h4>Data Kontrak</h4>
                                 <div class="panel panel-primary">
                                     <div class="panel-body">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Contract No</label>
+                                                <label>Nomor Kontrak</label>
                                                 <input type="text" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Start Date</label>
+                                                <label>Tanggal Mulai</label>
                                                 <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>End Date</label>
+                                                <label>Tanggal Berakhir</label>
                                                 <input type="date" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Created By</label>
+                                                <label>Dibuat Oleh</label>
                                                 <input type="text" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Created At</label>
+                                                <label>Tanggal</label>
                                                 <input type="text" class="form-control input-sm">
                                             </div>
                                         </div>
@@ -44,79 +44,113 @@
                                 </div>
 							</div>
 							<div class="col-md-6 col-sm-12 margin-bottom-30">
-                                <h4>PJ Data</h4>
+                                <h4>Data PJ</h4>
                                 <div class="panel panel-primary">
                                     <div class="panel-body">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Fullname</label>
+                                                <label>PJ</label>
+                                                <select name="" id="" class="form-control input-sm">
+                                                    <option value="">--Silahkan Pilih--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Lengkap</label>
                                                 <input type="text" class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nomor Telepon</label>
+                                                <input type="text" class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>KTP</label>
+                                                <input type="text" class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Alamat</label>
+                                                <textarea name="" class="form-control input-sm" id="" cols="30" rows="3"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 							</div>
                             <div class="col-md-12 col-sm-12 margin-bottom-30">
-                                <h4>Patient Data</h4>
+                                <h4>Data Pasien</h4>
                                 <div class="panel panel-primary">
                                     <div class="panel-body">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Name</label>
-                                                <input type="text" class="form-control input-sm">
+                                                <label>Nama</label>
+                                                <select name="" id="" class="form-control input-sm">
+                                                    <option value="">--Silahkan Pilih--</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Recomendation From</label>
-                                                <input type="text" class="form-control input-sm">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Gender</label>
+                                                <label>Rekomendasi Dari</label>
                                                 <input type="text" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Years</label>
+                                                <label>Jenis Kelamin</label>
+                                                <input type="text" class="form-control input-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Umur</label>
                                                 <input type="number" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Height</label>
+                                                <label>Berat Badan (kg)</label>
                                                 <input type="number" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Weight</label>
+                                                <label>Tinggi Badan (cm)</label>
                                                 <input type="number" class="form-control input-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Address</label>
+                                                <label>Alamat Lengkap</label>
                                                 <textarea class="form-control input-sm" id="TicketDetail" name="ticket_detail" rows="2" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Attached Tools</label>
+                                                <label>Alat Yang Terpasang</label>
                                                 <textarea class="form-control input-sm" id="TicketDetail" name="ticket_detail" rows="2" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Diagnostic</label>
+                                                <label>Diagnosa</label>
                                                 <textarea class="form-control input-sm" id="TicketDetail" name="ticket_detail" rows="2" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Complaint</label>
+                                                <label>Keluhan Utama</label>
                                                 <textarea class="form-control input-sm" id="TicketDetail" name="ticket_detail" rows="2" required></textarea>
                                             </div>
                                         </div>
