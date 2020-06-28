@@ -207,4 +207,5 @@ Configure::write('year', '2020');
 Configure::write('company', 'INDOHOMECARE');
 Configure::write('app', 'Ticketing');
 Configure::write('base_uri_data', 'http://127.0.0.1/indohomecare/local_api/public/api');
+//Configure::write('base_uri_data', 'http://localhost:81/indohomecare_api/public/api');
 Configure::write('unique_key', '**adamkhamarullah14**');

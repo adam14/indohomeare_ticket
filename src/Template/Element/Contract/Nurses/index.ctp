@@ -13,6 +13,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nurse ID</th>
+                                            <th>Nurse Name</th>
+                                            <th>Nurse Session</th>
+                                            <th>Price</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -23,6 +26,9 @@
                                                 <tr>
                                                     <td><?php echo $i++; ?></td>
                                                     <td><?php echo $value['nurse_id']; ?></td>
+                                                    <td><?php echo $value['nurses']['fullname']; ?></td>
+                                                    <td><?php echo $value['nurse_sessions']['name']; ?></td>
+                                                    <td><?php echo $value['nurse_sessions']['price']; ?></td>
                                                     <td>
                                                         <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'NurseContracts', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Edit Data', 'title' => 'Click to Edit', 'escape' => false]); ?>
                                                         <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'confirm btn btn-sm btn-danger', 'data-href' => $this->Url->build(['controller' => 'NurseContracts', 'action' => 'delete', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#confirm', 'data-label' => 'Confirm Delete', 'data-message' => 'Are you sure you want to delete?', 'title' => 'Click to Delete', 'escape' => false]); ?>

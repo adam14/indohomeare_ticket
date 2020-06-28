@@ -1,15 +1,15 @@
 <?php $page = $this->PagingInfo->data($total_data, $data_limit, $paging); ?>
 <?php $this->start('script'); ?>
 <script>
-	$(document).ready(function() {		
+	$(document).ready(function() {
 		$('#confirm').on('show.bs.modal', function(e) {
 			var link = $(e.relatedTarget).data('href');
 			var label = $(e.relatedTarget).data('label');
 			var message = $(e.relatedTarget).data('message');
-			
+
 			$('#confirm-label').html(label);
 			$('.body-confirm').html(message);
-			
+
 			$(".btn-ok").on("click", function(e) {
 				var form = $('<form action="' + link + '" method="post">' +
 				'<input type="text" name="__method" value="post" />' +
@@ -41,7 +41,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4 class="page-head-line">PJ</h4>
+                <h4 class="page-head-line">Penanggung Jawab</h4>
                 <?php echo $this->Html->link('Add New', '#', ['class' => 'disable btn btn-sm btn-success', 'data-href' => $this->Url->build(['controller' => 'Pjs', 'action' => 'add']), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Add Data', 'title' => 'Click to Add', 'escape' => false]); ?>
                 <div class="row">
                     <div class="col-md-12 margin-bottom-30">

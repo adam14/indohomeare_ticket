@@ -4,15 +4,15 @@
 <?php $this->end(); ?>
 <?php $this->start('script'); ?>
 <script>
-	$(document).ready(function() {		
+	$(document).ready(function() {
 		$('#confirm').on('show.bs.modal', function(e) {
 			var link = $(e.relatedTarget).data('href');
 			var label = $(e.relatedTarget).data('label');
 			var message = $(e.relatedTarget).data('message');
-			
+
 			$('#confirm-label').html(label);
 			$('.body-confirm').html(message);
-			
+
 			$(".btn-ok").on("click", function(e) {
 				var form = $('<form action="' + link + '" method="post">' +
 				'<input type="text" name="__method" value="post" />' +
@@ -47,7 +47,8 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4 class="page-head-line">Contract No : <?php echo $contracts->contract_no; ?></h4>
+                <h4 class="page-head-line">Contract No : <?php echo $contracts->contract_no; ?> <span class="pull-right">Status: DEAL
+				</span></h4>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="AlertUpdate" hidden="true"></div>
@@ -66,7 +67,7 @@
                             <div id="detail" class="tab-pane fade in active">
                                 <?php echo $this->element('Contract/Detail/index'); ?>
                             </div>
-                            
+
                             <div id="perawat" class="tab-pane fade in">
                                 <?php echo $this->element('Contract/Nurses/index'); ?>
                             </div>

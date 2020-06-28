@@ -1,42 +1,92 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h4 class="page-head-line">History</h4>
-                <?php echo $this->Html->link('Add New', '#', ['class' => 'disable btn btn-sm btn-success', 'data-href' => $this->Url->build(['controller' => 'ContractHistories', 'action' => 'add', $contracts->id]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Add Data', 'title' => 'Click to Add', 'escape' => false]); ?>
-                <div class="row">
-                    <div class="col-md-12 margin-bottom-30">
-                        <div class="panel panel-primary">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Description</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php if (!empty($contract_histories)): ?>
-                                            <?php $i = 1; ?>
-                                            <?php foreach ($contract_histories as $value): ?>
-                                                <tr>
-                                                    <td><?php echo $i++; ?></td>
-                                                    <td><?php echo $value['description']; ?></td>
-                                                    <td>
-                                                        <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'ContractHistories', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Edit Data', 'title' => 'Click to Edit', 'escape' => false]); ?>
-                                                        <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'confirm btn btn-sm btn-danger', 'data-href' => $this->Url->build(['controller' => 'ContractHistories', 'action' => 'delete', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#confirm', 'data-label' => 'Confirm Delete', 'data-message' => 'Are you sure you want to delete?', 'title' => 'Click to Delete', 'escape' => false]); ?>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php echo $this->Html->script('/vendor/parsley/js/parsley.min'); ?>
+<script>
+	$(document).ready(function() {
+		$('input[name=ticket_status]').change(function(){
+			$('#TicketStatusDetail').val('');
+			$('#TicketStatusDetail').attr('disabled', 'disabled');
+			$('#TicketStatusDetail').attr('required', false);
+
+			if($(this).val() == 'assign') {
+				//$('#TicketNote').attr('required', false);
+				$('#DepartmentNote').removeAttr('disabled');
+				$('#DepartmentNote').attr('required', true);
+			} else {
+				//$('#TicketNote').attr('required', true);
+				$('#DepartmentNote').val('');
+				$('#DepartmentNote').attr('disabled', 'disabled');
+				$('#DepartmentNote').attr('required', false);
+
+				if ($(this).val() == 'note') {
+					$('#TicketStatusDetail').removeAttr('disabled');
+					$('#TicketStatusDetail').attr('required', true);
+				}
+			}
+		});
+
+		$('form#AddNote').submit(function(e){
+			$('button[type=submit]').attr('disabled', 'disabled');
+		});
+
+		$('#DepartmentNote').change(function() {
+			if ($(this).val() == '') {
+				$('#DepartmentName').val('');
+			} else {
+				var current_text = $('#DepartmentNote option:selected').text();
+				$('#DepartmentName').val(current_text);
+			}
+		});
+
+		$('#TicketStatusDetail').change(function() {
+			if ($(this).val() == '') {
+				$('#TicketStatusDetailName').val('');
+			} else {
+				var current_text = $('#TicketStatusDetail option:selected').text();
+				$('#TicketStatusDetailName').val(current_text);
+			}
+		});
+	});
+</script>
+<div class="panel panel-primary">
+	<div class="panel-body">
+        <h4 class="page-head-line">Contract Note</h4>
+		<?php echo $this->Form->create(null, ['url' => ['controller' => 'TicketNotes', 'action' => 'add', '?' => ['ticket' => 'xx', 'media' => $this->request->query('media')]], 'type' => 'post', 'id' => 'AddNote', 'data-parsley-validate']); ?>
+		<div class="form-group">
+			<label>Note</label>
+			<textarea class="form-control input-sm" id="TicketNote" name="ticket_note" rows="5" placeholder="Please fill ticket note here..." required></textarea>
+		</div>
+		<div class="form-group">
+			<label>Status</label>
+			<br>
+			<div class="btn-group" data-toggle="buttons" title="Click to change ticket status">
+				<label class="btn btn-sm btn-default active">
+					<input type="radio" name="ticket_status" id="Note" value="note"> Note
+				</label>
+
+                <label class="btn btn-sm btn-default">
+					<input type="radio" name="ticket_status" id="Assign" value="assign"> No Response
+				</label>
+
+				<label class="btn btn-sm btn-default">
+					<input type="radio" name="ticket_status" id="Assign" value="assign"> Done
+				</label>
+
+				<label class="btn btn-sm btn-default">
+					<input type="radio" name="ticket_status" id="Process" value="process"> Cancelled
+				</label>
+			</div>
+		</div>
+
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary" id="submit_ticket">Add Note</button>
+			<button type="reset" class="btn btn-danger" id="submit_ticket">Reset</button>
+		</div>
+		<?php echo $this->Form->end(); ?>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		Ticket Notes
+	</div>
+	<div class="panel-body" style="overflow-y:scroll; height:300px;">
+	</div>
 </div>

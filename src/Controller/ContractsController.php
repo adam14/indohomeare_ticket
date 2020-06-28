@@ -127,7 +127,7 @@ class ContractsController extends AppController
     public function detail($id)
     {
         /** Contract Event */
-        $response = $this->req('GET', '/event_contracts');
+        $response = $this->req('GET', '/event_contracts?contract_id='.$id);
         $result = $response->json['data'];
         $event_contracts = [];
 
@@ -137,7 +137,7 @@ class ContractsController extends AppController
         /** End */
 
         /** Transport Contract */
-        $response = $this->req('GET', '/transport_contracts');
+        $response = $this->req('GET', '/transport_contracts?contract_id='.$id);
         $result = $response->json['data'];
         $transport_contracts = [];
 
@@ -147,7 +147,7 @@ class ContractsController extends AppController
         /** End */
 
         /** Nurse Contract */
-        $response = $this->req('GET', '/nurse_contracts');
+        $response = $this->req('GET', '/nurse_contracts?contract_id='.$id);
         $result = $response->json['data'];
         $nurse_contracts = [];
 
@@ -157,7 +157,7 @@ class ContractsController extends AppController
         /** End */
 
         /** Therapist Contract */
-        $response = $this->req('GET', '/therapist_contracts');
+        $response = $this->req('GET', '/therapist_contracts?contract_id='.$id);
         $result = $response->json['data'];
         $therapist_contracts = [];
 
@@ -167,7 +167,7 @@ class ContractsController extends AppController
         /** End */
 
         /** Medic Tools Contract */
-        $response = $this->req('GET', '/medic_tool_contracts');
+        $response = $this->req('GET', '/medic_tool_contracts?contract_id='.$id);
         $result = $response->json['data'];
         $medic_tool_contracts = [];
 

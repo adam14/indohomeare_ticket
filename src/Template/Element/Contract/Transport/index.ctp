@@ -12,7 +12,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Distance</th>
+                                            <th>Transport Name</th>
+                                            <th>Distance (KM)</th>
+                                            <th>Price</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -22,7 +24,9 @@
                                             <?php foreach ($transport_contracts as $value): ?>
                                                 <tr>
                                                     <td><?php echo $i++; ?></td>
+                                                    <td><?php echo $value['transport_times']['name']; ?></td>
                                                     <td><?php echo $value['distance']; ?></td>
+                                                    <td><?php echo $value['transport_times']['price']; ?></td>
                                                     <td>
                                                         <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'ContractTransport', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Edit Data', 'title' => 'Click to Edit', 'escape' => false]); ?>
                                                         <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'confirm btn btn-sm btn-danger', 'data-href' => $this->Url->build(['controller' => 'ContractTransport', 'action' => 'delete', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#confirm', 'data-label' => 'Confirm Delete', 'data-message' => 'Are you sure you want to delete?', 'title' => 'Click to Delete', 'escape' => false]); ?>

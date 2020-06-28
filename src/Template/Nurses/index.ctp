@@ -1,15 +1,15 @@
 <?php $page = $this->PagingInfo->data($total_data, $data_limit, $paging); ?>
 <?php $this->start('script'); ?>
 <script>
-	$(document).ready(function() {		
+	$(document).ready(function() {
 		$('#confirm').on('show.bs.modal', function(e) {
 			var link = $(e.relatedTarget).data('href');
 			var label = $(e.relatedTarget).data('label');
 			var message = $(e.relatedTarget).data('message');
-			
+
 			$('#confirm-label').html(label);
 			$('.body-confirm').html(message);
-			
+
 			$(".btn-ok").on("click", function(e) {
 				var form = $('<form action="' + link + '" method="post">' +
 				'<input type="text" name="__method" value="post" />' +
@@ -54,6 +54,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Name</th>
+                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -64,6 +65,7 @@
                                                 <tr>
                                                     <td><?php echo $i++; ?></td>
                                                     <td><?php echo $value['fullname']; ?></td>
+                                                    <td><?php echo $value['nurse_categories']['name']; ?></td>
                                                     <td>
                                                         <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'Nurses', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Edit Data', 'title' => 'Click to Edit', 'escape' => false]); ?>
                                                         <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'confirm btn btn-sm btn-danger', 'data-href' => $this->Url->build(['controller' => 'Nurses', 'action' => 'delete', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#confirm', 'data-label' => 'Confirm Delete', 'data-message' => 'Are you sure you want to delete?', 'title' => 'Click to Delete', 'escape' => false]); ?>

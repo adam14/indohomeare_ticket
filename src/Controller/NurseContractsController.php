@@ -144,7 +144,8 @@ class NurseContractsController extends AppController
 
         $nurse_contracts = [];
 
-        $get_nurse_contracts = $this->req('GET', '/nurse_contracts/'.$id);
+        // $get_nurse_contracts = $this->req('GET', '/nurse_contracts/'.$id);
+        $get_nurse_contracts = $this->req('GET', '/nurse_contracts?contract_id='.$id);
 
         if (in_array($get_nurse_contracts->code, [200, 201])) {
             $nurse_contracts = $get_nurse_contracts->json['data'];

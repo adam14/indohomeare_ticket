@@ -1,15 +1,15 @@
 <?php $page = $this->PagingInfo->data($total_data, $data_limit, $paging); ?>
 <?php $this->start('script'); ?>
 <script>
-	$(document).ready(function() {		
+	$(document).ready(function() {
 		$('#confirm').on('show.bs.modal', function(e) {
 			var link = $(e.relatedTarget).data('href');
 			var label = $(e.relatedTarget).data('label');
 			var message = $(e.relatedTarget).data('message');
-			
+
 			$('#confirm-label').html(label);
 			$('.body-confirm').html(message);
-			
+
 			$(".btn-ok").on("click", function(e) {
 				var form = $('<form action="' + link + '" method="post">' +
 				'<input type="text" name="__method" value="post" />' +
@@ -51,6 +51,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Medic Tools</th>
+                                            <th>Name</th>
+                                            <th>Category</th>
                                             <th>Price</th>
                                             <th>Action</th>
                                         </tr>
@@ -61,6 +64,9 @@
                                             <?php foreach ($medic_tool_sessions as $value): ?>
                                                 <tr>
                                                     <td><?php echo $i++; ?></td>
+                                                    <td><?php echo $value['medic_tools']['name'] ?></td>
+                                                    <td><?php echo $value['name'] ?></td>
+                                                    <td><?php echo $value['medic_tools']['medic_tool_category'] ?></td>
                                                     <td><?php echo $this->Number->currency($value['price'], 'Rp '); ?></td>
                                                     <td>
                                                         <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'MedicToolSessions', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Edit Data', 'title' => 'Click to Edit', 'escape' => false]); ?>

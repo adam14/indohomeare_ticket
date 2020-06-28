@@ -26,6 +26,12 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label for="Price" class="col-lg-3 control-label">Session Name</label>
+		<div class="col-lg-9">
+			<input name="name" class="form-control" id="Name" placeholder="Session Name" type="text" required>
+		</div>
+	</div>
+    <div class="form-group">
 		<label for="Price" class="col-lg-3 control-label">Price</label>
 		<div class="col-lg-9">
 			<input name="price" class="number form-control" id="Price" placeholder="Price" type="text" required>

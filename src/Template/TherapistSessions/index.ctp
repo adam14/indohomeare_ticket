@@ -1,15 +1,15 @@
 <?php $page = $this->PagingInfo->data($total_data, $data_limit, $paging); ?>
 <?php $this->start('script'); ?>
 <script>
-	$(document).ready(function() {		
+	$(document).ready(function() {
 		$('#confirm').on('show.bs.modal', function(e) {
 			var link = $(e.relatedTarget).data('href');
 			var label = $(e.relatedTarget).data('label');
 			var message = $(e.relatedTarget).data('message');
-			
+
 			$('#confirm-label').html(label);
 			$('.body-confirm').html(message);
-			
+
 			$(".btn-ok").on("click", function(e) {
 				var form = $('<form action="' + link + '" method="post">' +
 				'<input type="text" name="__method" value="post" />' +
