@@ -19,8 +19,12 @@ class ContractsController extends AppController
             'index',
             'add',
             'detail',
+            'detailPatient',
+            'detailPj',
             'edit',
-            'getPatient'
+            'getAllNurseContract',
+            'getPatient',
+            'progressContract'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -46,10 +50,11 @@ class ContractsController extends AppController
         }
 
         $conditions .= '&page='.$page;
-        $conditions .= '$order=id';
+        $conditions .= '&order=id';
 
         $response = $this->req('GET', '/contracts'.$conditions);
         $result = $response->json;
+
         $total_data = 0;
         $contracts = [];
         $paging = [];
@@ -65,19 +70,60 @@ class ContractsController extends AppController
     }
 
     /**
+     *  progressContract method
+     *  progress contract process for get contract_id
+     */
+    public function progressContract()
+    {
+        $this->autoRender = false;
+
+        $response = $this->req('GET', '/contracts?start='.date('Y-m-01').'&end='.date('Y-m-d'));
+        $result = $response->json;
+        $total_contract = count($result['data']);
+
+        $no_prefix = $total_contract + 1;
+        $contract_no = "NMK.".date("Y-m-").sprintf('%04d', $no_prefix);
+        $created_by = $this->request->session()->read('Auth.User.id');
+        $status = "Draft";
+
+        $data = [
+            'contract_no' => $contract_no,
+            'created_by' => $created_by,
+            'status' => $status
+        ];
+
+        $post_data = $this->req('POST', '/contracts', $data);
+
+        if (in_array($post_data->code, [200, 201])) {
+            $this->Flash->success('The data has been saved.');
+            return $this->redirect(['controller' => 'Contracts', 'action' => 'add', $post_data->json['data']['contract_no']]);
+        } else {
+            $this->Flash->error('The data could not be save. Please, try again.');
+        }
+
+        return $this->redirect($this->referer());
+    }
+
+    /**
      *  add method
      *  add contract page and process
      */
-    public function add()
+    public function add($contract_no = null)
     {
         //$this->viewBuilder()->layout('modal');
+
+        if (empty($contract_no)) {
+            return $this->redirect(['action' => 'index']);
+        }
 
         if ($this->request->is('post')) {
             $pj_id = $this->request->data('pj_id');
             $patient_id = $this->request->data('patient_id');
-            $contract_no = rand(0, 999999);
+            $start_date = $this->request->data('start_date');
+            $end_date = $this->request->data('end_date');
+            $contract_id = $this->request->data('contract_id');
 
-            if (empty($pj_id) || empty($patient_id)) {
+            if (empty($pj_id) || empty($patient_id) || empty($start_date) || empty($end_date)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
@@ -85,15 +131,15 @@ class ContractsController extends AppController
             $data = [
                 'pj_id' => $pj_id,
                 'patient_id' => $patient_id,
-                'contract_no' => $contract_no,
-                'created_by' => $this->request->session()->read('Auth.User.id'),
-                'status' => 1
+                'start_date' => $start_date,
+                'end_date' => $end_date
             ];
 
-            $post_data = $this->req('POST', '/contracts', $data);
+            $post_data = $this->req('PUT', '/contracts/'.$contract_id, $data);
 
             if (in_array($post_data->code, [200, 201])) {
-                $this->Flash->success('The data has been saved.');
+                $this->Flash->success('Data completed.');
+                return $this->redirect(['action' => 'detail', $contract_id]);
             } else {
                 $this->Flash->error('The data could not be save. Please, try again.');
             }
@@ -101,7 +147,11 @@ class ContractsController extends AppController
             return $this->redirect($this->referer());
         }
 
-        $contract_no = "NMK.".date("Y-m-").rand(1000,9999);
+        // $contract_no = "NMK.".date("Y-m-").rand(1000,9999);
+
+        $response = $this->req('GET', '/contracts?contract_no='.$contract_no);
+        $result = $response->json;
+        $contracts = $result['data'];
 
         $response = $this->req('GET', '/patients');
         $result = $response->json['data'];
@@ -119,7 +169,7 @@ class ContractsController extends AppController
             $pjs = $result['data'];
         }
 
-        $this->set(compact('patients', 'pjs'));
+        $this->set(compact('patients', 'pjs', 'contracts'));
     }
 
     /**
@@ -188,6 +238,16 @@ class ContractsController extends AppController
         }
         /** End */
 
+        /** Get PJ */
+        $response = $this->req('GET', '/pjs');
+        $result = $response->json['data'];
+        $pjs = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $pjs = $result['data'];
+        }
+        /** End */
+
         $contracts = [];
         $get_contracts = $this->req('GET', '/contracts/'.$id);
 
@@ -195,7 +255,7 @@ class ContractsController extends AppController
             $contracts = (object) $get_contracts->json['data'];
         }
 
-        $this->set(compact('contracts', 'event_contracts', 'transport_contracts', 'nurse_contracts', 'therapist_contracts', 'medic_tool_contracts', 'contract_histories'));
+        $this->set(compact('contracts', 'event_contracts', 'transport_contracts', 'nurse_contracts', 'therapist_contracts', 'medic_tool_contracts', 'contract_histories', 'pjs'));
     }
 
     /**
@@ -213,6 +273,60 @@ class ContractsController extends AppController
 
             $patient = $getPatient->json;
             echo json_encode($patient);
+        }
+    }
+
+    /**
+     *  detailPatient method
+     *  detail patient get result data with patient_id
+     */
+    public function detailPatient()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $patient_id = $this->request->data('patient_id');
+
+            $detailPatient = $this->req('GET', '/patients/'.$patient_id);
+
+            $patients = $detailPatient->json;
+            echo json_encode($patients);
+        }
+    }
+
+    /**
+     *  detailPj method
+     *  detail pj get result data with pj_id
+     */
+    public function detailPj()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $pj_id = $this->request->data('pj_id');
+
+            $detailPj = $this->req('GET', '/pjs/'.$pj_id);
+
+            $pjs = $detailPj->json;
+            echo json_encode($pjs);
+        }
+    }
+
+    /**
+     *  getAllNurseContract method
+     *  get all nurse contract data with $contract_id
+     */
+    public function getAllNurseContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+
+            $getAllNurseContract = $this->req('GET', '/nurse_contracts?contract_id='.$contract_id);
+
+            $nurse_contracts = $getAllNurseContract->json;
+            echo json_encode($nurse_contracts);
         }
     }
 }

@@ -27,6 +27,17 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label for="TherapistType" class="col-lg-3 control-label">Therapist Type</label>
+		<div class="col-lg-9">
+			<select class="form-control" name="therapist_type_id" id="TherapistType" required>
+				<option value="">-- Please Select --</option>
+				<?php foreach ($therapist_types as $value): ?>
+					<option value="<?php echo $value['id']; ?>" <?php echo ($therapist_session['therapist_type_id'] == $value['id']) ? 'selected' : ''; ?>><?php echo $value['name']; ?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
 			<button type="submit" class="btn btn-primary">Edit</button>
 		</div>

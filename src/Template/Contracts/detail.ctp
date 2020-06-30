@@ -5,6 +5,86 @@
 <?php $this->start('script'); ?>
 <script>
 	$(document).ready(function() {
+		var contract_pj_id = $('#ContractPJ').val();
+		var data_contract_pj = {
+			'pj_id' : contract_pj_id
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'getPatient']); ?>',
+			data: data_contract_pj,
+			dataType: "json",
+			success: function(result) {
+                    $('#ContractPatient').empty();
+                    $('#ContractPatient').append(new Option('-- Please Select --', ''));
+
+                    for (i = 0; i < result.data.length; i++) {
+                        $('#ContractPatient').append('<option value="'+ result.data[i].id +'">'+ result.data[i].fullname +'</option>')
+						$('#ContractPatient').val('<?php echo $contracts->patient_id; ?>');
+                    }
+					
+					$('#ContractPatient').attr('disabled', true);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detailPj']); ?>',
+                        data: data_contract_pj,
+                        dataType: "json",
+                        success: function(result) {                            
+                            if (result.status == 'true') {
+                                $('#ContractPJNamaLengkap').val(result.data.fullname);
+                                $('#ContractPJNomorTelepon').val(result.data.handphone);
+                                $('#ContractPJKTP').val(result.data.ktp);
+                                $('#ContractPJEmail').val(result.data.email);
+                                $('#ContractPJAlamat').val(result.data.address);
+                            } else {
+                                $('#ContractPJNamaLengkap').val('');
+                                $('#ContractPJNomorTelepon').val('');
+                                $('#ContractPJKTP').val('');
+                                $('#ContractPJEmail').val('');
+                                $('#ContractPJAlamat').val('');
+                            }
+                        }
+                    });
+
+					var patient_id = '<?php echo $contracts->patient_id ?>';
+					var contract_data_patient = {
+						'patient_id' : patient_id
+					}
+
+					$.ajax({
+						type: 'POST',
+						url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detailPatient']); ?>',
+						data: contract_data_patient,
+						dataType: "json",
+						success: function(result) {
+							if (result.status == 'true') {
+								$('#ContractPatientRekomendasiDari').val(result.data.recomendation_from);
+								$('#ContractPatientJenisKelamin').val(result.data.gender);
+								$('#ContractPatientUmur').val(result.data.years);
+								$('#ContractPatientBeratBadan').val(result.data.height);
+								$('#ContractPatientTinggiBadan').val(result.data.weight);
+								$('#ContractPatientAlamatLengkap').val(result.data.address);
+								$('#ContractPatientAlatTerpasang').val(result.data.attached_tools);
+								$('#ContractPatientDiagnosa').val(result.data.diagnosis);
+								$('#ContractPatientKeluhanUtama').val(result.data.main_complaint);
+							} else {
+								$('#ContractPatientRekomendasiDari').val('');
+								$('#ContractPatientJenisKelamin').val('');
+								$('#ContractPatientUmur').val('');
+								$('#ContractPatientBeratBadan').val('');
+								$('#ContractPatientTinggiBadan').val('');
+								$('#ContractPatientAlamatLengkap').val('');
+								$('#ContractPatientAlatTerpasang').val('');
+								$('#ContractPatientDiagnosa').val('');
+								$('#ContractPatientKeluhanUtama').val('');
+							}
+						}
+					});
+                }
+		})
+
 		$('#confirm').on('show.bs.modal', function(e) {
 			var link = $(e.relatedTarget).data('href');
 			var label = $(e.relatedTarget).data('label');
@@ -47,8 +127,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4 class="page-head-line">Contract No : <?php echo $contracts->contract_no; ?> <span class="pull-right">Status: DEAL
-				</span></h4>
+                <h4 class="page-head-line">Contract No : <?php echo $contracts->contract_no; ?> <span class="pull-right">Status: <?php echo $contracts->status; ?></span></h4>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="AlertUpdate" hidden="true"></div>

@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-class PjsController extends AppController
+class TherapistTypesController extends AppController
 {
     /**
      *  isAuthorized method
@@ -46,51 +46,43 @@ class PjsController extends AppController
         $conditions .= '&page='.$page;
         $conditions .= '&order=id';
 
-        $response = $this->req('GET', '/pjs'.$conditions);
+        $response = $this->req('GET', '/therapist_types'.$conditions);
         $result = $response->json;
         $total_data = 0;
-        $pjs = [];
+        $therapist_types = [];
         $paging = [];
         $paging['current'] = 0;
 
         if (in_array($response->code, [200, 201])) {
             $total_data = $result['data']['total'];
-            $pjs = $result['data']['data'];
+            $therapist_types = $result['data']['data'];
             $paging = $result['data']['current_page'];
         }
 
-        $this->set(compact('pjs', 'total_data', 'paging', 'data_limit'));
+        $this->set(compact('therapist_types', 'total_data', 'paging', 'data_limit'));
     }
 
     /**
      *  add method
-     *  add pj page and process
+     *  add therapist type page and process
      */
     public function add()
     {
         $this->viewBuilder()->layout('modal');
 
         if ($this->request->is('post')) {
-            $fullname = htmlentities($this->request->data('fullname'));
-            $handphone = $this->request->data('handphone');
-            $ktp = $this->request->data('ktp');
-            $email = $this->request->data('email');
-            $address = $this->request->data('address');
+            $name = htmlentities($this->request->data('name'));
 
-            if (empty($fullname) || empty($handphone) || empty($ktp) || empty($email) || empty($address)) {
+            if (empty($name)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
 
             $data = [
-                'fullname' => $fullname,
-                'handphone' => $handphone,
-                'ktp' => $ktp,
-                'email' => $email,
-                'address' => $address
+                'name' => $name
             ];
 
-            $post_data = $this->req('POST', '/pjs', $data);
+            $post_data = $this->req('POST', '/therapist_types', $data);
 
             if (in_array($post_data->code, [200, 201])) {
                 $this->Flash->success('The data has been saved.');
@@ -104,7 +96,7 @@ class PjsController extends AppController
 
     /**
      *  edit method
-     *  edit pj page and process
+     *  edit therapist type page and process
      */
     public function edit($id = null)
     {
@@ -116,27 +108,19 @@ class PjsController extends AppController
         $this->viewBuilder()->layout('modal');
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $fullname = htmlentities($this->request->data('fullname'));
-            $handphone = $this->request->data('handphone');
-            $ktp = $this->request->data('ktp');
-            $email = $this->request->data('email');
-            $address = $this->request->data('address');
+            $name = htmlentities($this->request->data('name'));
 
-            if (empty($fullname) || empty($handphone) || empty($ktp) || empty($email) || empty($address)) {
+            if (empty($name)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
 
             $data = [
-                'fullname' => $fullname,
-                'handphone' => $handphone,
-                'ktp' => $ktp,
-                'email' => $email,
-                'address' => $address,
+                'name' => $name,
                 'updated_at' => date('Y-m-d H:i:s')
             ];
 
-            $put_data = $this->req('PUT', '/pjs/'.$id, $data);
+            $put_data = $this->req('PUT', '/therapist_types/'.$id, $data);
 
             if (in_array($put_data->code, [200, 201])) {
                 $this->Flash->success('Data successfully edited.');
@@ -144,25 +128,25 @@ class PjsController extends AppController
             }
         }
 
-        $pjs = [];
+        $therapist_types = [];
 
-        $get_pjs = $this->req('GET', '/pjs/'.$id);
+        $get_therapist_types = $this->req('GET', '/therapist_types/'.$id);
 
-        if (in_array($get_pjs->code, [200, 201])) {
-            $pjs = $get_pjs->json['data'];
+        if (in_array($get_therapist_types->code, [200, 201])) {
+            $therapist_types = $get_therapist_types->json['data'];
         }
 
-        $this->set(compact('pjs'));
+        $this->set(compact('therapist_types'));
     }
 
     /**
      *  delete method
-     *  delete pj process
+     *  delete therapist type process
      */
     public function delete($id = null)
     {
         if (is_numeric($id)) {
-            $response = $this->req('DELETE', '/pjs/'.$id);
+            $response = $this->req('DELETE', '/therapist_types/'.$id);
 
             if (in_array($response->code, [200, 201])) {
                 $this->Flash->success('Data successfully deleted.');

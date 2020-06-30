@@ -46,7 +46,7 @@ class MedicToolsController extends AppController
         }
 
         $conditions .= '&page='.$page;
-        $conditions .= '$order=id';
+        $conditions .= '&order=id';
 
         $response = $this->req('GET', '/medic_tools'.$conditions);
         $result = $response->json;

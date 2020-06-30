@@ -46,7 +46,7 @@ class TransportTimeController extends AppController
         }
 
         $conditions .= '&page='.$page;
-        $conditions .= '$order=id';
+        $conditions .= '&order=id';
 
         $response = $this->req('GET', '/transport_times'.$conditions);
         $result = $response->json;

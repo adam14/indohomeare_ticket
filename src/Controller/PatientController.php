@@ -46,7 +46,7 @@ class PatientController extends AppController
         }
 
         $conditions .= '&page='.$page;
-        $conditions .= '$order=id';
+        $conditions .= '&order=id';
 
         $response = $this->req('GET', '/patients'.$conditions);
         $result = $response->json;
@@ -75,15 +75,33 @@ class PatientController extends AppController
         if ($this->request->is('post')) {
             $fullname = htmlentities($this->request->data('fullname'));
             $pj_id = $this->request->data('pj_id');
+            $gender = $this->request->data('gender');
+            $years = $this->request->data('years');
+            $recomendation_from = htmlentities($this->request->data('recomendation_from'));
+            $height = $this->request->data('height');
+            $weight = $this->request->data('weight');
+            $address = $this->request->data('address');
+            $attached_tools = $this->request->data('attached_tools');
+            $diagnosis = $this->request->data('diagnosis');
+            $main_complaint = $this->request->data('main_complaint');
 
-            if (empty($fullname) || empty($pj_id)) {
+            if (empty($fullname) || empty($pj_id) || empty($gender) || empty($years) || empty($recomendation_from) || empty($height) || empty($weight) || empty($address) || empty($attached_tools) || empty($diagnosis) || empty($main_complaint)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
 
             $data = [
                 'fullname' => $fullname,
-                'pj_id' => $pj_id
+                'pj_id' => $pj_id,
+                'gender' => $gender,
+                'years' => $years,
+                'recomendation_from' => $recomendation_from,
+                'height' => $height,
+                'weight' => $weight,
+                'address' => $address,
+                'attached_tools' => $attached_tools,
+                'diagnosis' => $diagnosis,
+                'main_complaint' => $main_complaint
             ];
 
             $post_data = $this->req('POST', '/patients', $data);
@@ -124,8 +142,17 @@ class PatientController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fullname = htmlentities($this->request->data('fullname'));
             $pj_id = $this->request->data('pj_id');
+            $gender = $this->request->data('gender');
+            $years = $this->request->data('years');
+            $recomendation_from = htmlentities($this->request->data('recomendation_from'));
+            $height = $this->request->data('height');
+            $weight = $this->request->data('weight');
+            $address = $this->request->data('address');
+            $attached_tools = $this->request->data('attached_tools');
+            $diagnosis = $this->request->data('diagnosis');
+            $main_complaint = $this->request->data('main_complaint');
 
-            if (empty($fullname) || empty($pj_id)) {
+            if (empty($fullname) || empty($pj_id) || empty($gender) || empty($years) || empty($recomendation_from) || empty($height) || empty($weight) || empty($address) || empty($attached_tools) || empty($diagnosis) || empty($main_complaint)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
@@ -133,6 +160,15 @@ class PatientController extends AppController
             $data = [
                 'fullname' => $fullname,
                 'pj_id' => $pj_id,
+                'gender' => $gender,
+                'years' => $years,
+                'recomendation_from' => $recomendation_from,
+                'height' => $height,
+                'weight' => $weight,
+                'address' => $address,
+                'attached_tools' => $attached_tools,
+                'diagnosis' => $diagnosis,
+                'main_complaint' => $main_complaint,
                 'updated_at' => date('Y-m-d H:i:s')
             ];
 

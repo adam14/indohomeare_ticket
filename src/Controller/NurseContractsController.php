@@ -17,9 +17,11 @@ class NurseContractsController extends AppController
         $allowed_method = [
             'index',
             'add',
+            'delete',
             'edit',
+            'getNurse',
             'getNurseSessions',
-            'delete'
+            'saveNurseContract'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -144,8 +146,8 @@ class NurseContractsController extends AppController
 
         $nurse_contracts = [];
 
-        // $get_nurse_contracts = $this->req('GET', '/nurse_contracts/'.$id);
-        $get_nurse_contracts = $this->req('GET', '/nurse_contracts?contract_id='.$id);
+        $get_nurse_contracts = $this->req('GET', '/nurse_contracts/'.$id);
+        // $get_nurse_contracts = $this->req('GET', '/nurse_contracts?contract_id='.$id);
 
         if (in_array($get_nurse_contracts->code, [200, 201])) {
             $nurse_contracts = $get_nurse_contracts->json['data'];
@@ -174,6 +176,32 @@ class NurseContractsController extends AppController
     }
 
     /**
+     *  saveNurseContract method
+     *  save nurse contract from ajax
+     */
+    public function saveNurseContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+            $nurse_id = $this->request->data('nurse_id');
+            $nurse_session_id = $this->request->data('nurse_session_id');
+
+            $data = [
+                'contract_id' => $contract_id,
+                'nurse_id' => $nurse_id,
+                'nurse_session_id' => $nurse_session_id
+            ];
+
+            $post_data = $this->req('POST', '/nurse_contracts', $data);
+
+            $nurse_contracts = $post_data->json;
+            echo json_encode($nurse_contracts);
+        }
+    }
+
+    /**
      *  getNurseSessions method
      *  provide nurse sessions dropdown data based on given nurse_category_id
      */
@@ -189,5 +217,19 @@ class NurseContractsController extends AppController
             $nurse_sessions = $getNurseSessions->json;
             echo json_encode($nurse_sessions);
         }
+    }
+    
+    /**
+     *  getNurse method
+     *  provide nurse dropdwon data based
+     */
+    public function getNurse()
+    {
+        $this->autoRender = false;
+
+        $getNurse = $this->req('GET', '/nurses');
+
+        $nurses = $getNurse->json['data'];
+        echo json_encode($nurses);
     }
 }

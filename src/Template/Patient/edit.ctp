@@ -28,6 +28,64 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label for="Gender" class="col-lg-3 control-label">Gender</label>
+		<div class="col-lg-9">
+			<select class="form-control" id="Gender" name="gender" required>
+				<option value="">-- Please Select --</option>
+				<option value="Laki-Laki" <?php echo ($patients['gender'] == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
+				<option value="Perempuan" <?php echo ($patients['gender'] == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="Years" class="col-lg-3 control-label">Age</label>
+		<div class="col-lg-9">
+			<input type="text" maxlength="3" id="Years" name="years" class="form-control number" placeholder="Age" value="<?php echo $patients['years']; ?>" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="RecomendationFrom" class="col-lg-3 control-label">Recomendation From</label>
+		<div class="col-lg-9">
+			<input type="text" id="RecomendationFrom" name="recomendation_from" class="form-control" placeholder="Recomendation From" value="<?php echo $patients['recomendation_from']; ?>" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="Height" class="col-lg-3 control-label">Height</label>
+		<div class="col-lg-9">
+			<input type="text" id="Height" name="height" class="form-control number" placeholder="Height" value="<?php echo $patients['height']; ?>" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="Weight" class="col-lg-3 control-label">Weight</label>
+		<div class="col-lg-9">
+			<input type="text" id="Weight" name="weight" class="form-control number" placeholder="Weight" value="<?php echo $patients['weight']; ?>" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="Address" class="col-lg-3 control-label">Address</label>
+		<div class="col-lg-9">
+			<textarea rows="5" id="Address" name="address" class="form-control" required><?php echo $patients['address']; ?></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="AttachedTools" class="col-lg-3 control-label">Attached Tools</label>
+		<div class="col-lg-9">
+			<textarea rows="5" id="AttachedTools" name="attached_tools" class="form-control" required><?php echo $patients['attached_tools']; ?></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="Diagnosis" class="col-lg-3 control-label">Diagnosis</label>
+		<div class="col-lg-9">
+			<textarea rows="5" id="Diagnosis" name="diagnosis" class="form-control" required><?php echo $patients['diagnosis']; ?></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="MainComplaint" class="col-lg-3 control-label">Main Complaint</label>
+		<div class="col-lg-9">
+			<textarea rows="5" id="MainComplaint" name="main_complaint" class="form-control" required><?php echo $patients['main_complaint']; ?></textarea>
+		</div>
+	</div>
+	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
 			<button type="submit" class="btn btn-primary">Edit</button>
 		</div>

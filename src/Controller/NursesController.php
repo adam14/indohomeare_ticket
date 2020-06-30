@@ -46,7 +46,7 @@ class NursesController extends AppController
         }
 
         $conditions .= '&page='.$page;
-        $conditions .= '$order=id';
+        $conditions .= '&order=id';
 
         $response = $this->req('GET', '/nurses'.$conditions);
         $result = $response->json;

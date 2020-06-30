@@ -46,7 +46,7 @@ class TherapistController extends AppController
         }
 
         $conditions .= '&page='.$page;
-        $conditions .= '$order=id';
+        $conditions .= '&order=id';
 
         $response = $this->req('GET', '/therapist'.$conditions);
         $result = $response->json;
@@ -74,14 +74,16 @@ class TherapistController extends AppController
 
         if ($this->request->is('post')) {
             $name = htmlentities($this->request->data('name'));
+            $therapist_type_id = $this->request->data('therapist_type_id');
 
-            if (empty($name)) {
+            if (empty($name) || empty($therapist_type_id)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
 
             $data = [
-                'name' => $name
+                'name' => $name,
+                'therapist_type_id' => $therapist_type_id
             ];
 
             $post_data = $this->req('POST', '/therapist', $data);
@@ -94,6 +96,16 @@ class TherapistController extends AppController
 
             return $this->redirect($this->referer());
         }
+
+        $response = $this->req('GET', '/therapist_types');
+        $result = $response->json['data'];
+        $therapist_types = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $therapist_types = $result['data'];
+        }
+
+        $this->set(compact('therapist_types'));
     }
 
     /**
@@ -111,14 +123,16 @@ class TherapistController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $name = htmlentities($this->request->data('name'));
+            $therapist_type_id = $this->request->data('therapist_type_id');
 
-            if (empty($name)) {
+            if (empty($name) || empty($therapist_type_id)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
 
             $data = [
                 'name' => $name,
+                'therapist_type_id' => $therapist_type_id,
                 'updated_at' => date('Y-m-d H:i:s')
             ];
 
@@ -130,6 +144,14 @@ class TherapistController extends AppController
             }
         }
 
+        $response = $this->req('GET', '/therapist_types');
+        $result = $response->json['data'];
+        $therapist_types = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $therapist_types = $result['data'];
+        }
+
         $therapist = [];
 
         $get_therapist = $this->req('GET', '/therapist/'.$id);
@@ -138,7 +160,7 @@ class TherapistController extends AppController
             $therapist = $get_therapist->json['data'];
         }
 
-        $this->set(compact('therapist'));
+        $this->set(compact('therapist', 'therapist_types'));
     }
 
     /**
