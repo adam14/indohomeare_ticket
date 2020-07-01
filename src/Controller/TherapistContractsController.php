@@ -18,7 +18,10 @@ class TherapistContractsController extends AppController
             'index',
             'add',
             'edit',
-            'delete'
+            'delete',
+            'getTherapist',
+            'getTherapistSessions',
+            'saveTherapistContract'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -154,12 +157,12 @@ class TherapistContractsController extends AppController
 
     /**
      *  delete method
-     *  delete nurse contract process
+     *  delete therapist contract process
      */
     public function delete($id = null)
     {
         if (is_numeric($id)) {
-            $response = $this->req('DELETE', '/nurse_contracts/'.$id);
+            $response = $this->req('DELETE', '/therapist_contracts/'.$id);
 
             if (in_array($response->code, [200, 201])) {
                 $this->Flash->success('Data successfully deleted.');
@@ -169,5 +172,63 @@ class TherapistContractsController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  saveTherapistContract method
+     *  save therapist contract from ajax
+     */
+    public function saveTherapistContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+            $therapist_id = $this->request->data('therapist_id');
+            $therapist_session_id = $this->request->data('therapist_session_id');
+
+            $data = [
+                'contract_id' => $contract_id,
+                'therapist_id' => $therapist_id,
+                'therapist_session_id' => $therapist_session_id
+            ];
+
+            $post_data = $this->req('POST', '/therapist_contracts', $data);
+
+            $therapist_contracts = $post_data->json;
+            echo json_encode($therapist_contracts);
+        }
+    }
+
+    /**
+     *  getTherapistSessions method
+     *  provide therapist sessions dropdown data based on given therapist_type_id
+     */
+    public function getTherapistSessions()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $therapist_type_id = $this->request->data('therapist_type_id');
+
+            $getTherapistSessions = $this->req('GET', '/therapist_session/therapist_type_id/'.$therapist_type_id);
+
+            $therapist_session = $getTherapistSessions->json;
+            echo json_encode($therapist_session);
+        }
+    }
+    
+    /**
+     *  getTherapist method
+     *  provide therapist dropdwon data based
+     */
+    public function getTherapist()
+    {
+        $this->autoRender = false;
+
+        $getTherapist = $this->req('GET', '/therapist');
+
+        $therapist = $getTherapist->json['data'];
+        echo json_encode($therapist);
     }
 }

@@ -20,7 +20,8 @@ class ContractEventController extends AppController
             'edit',
             'enable',
             'disable',
-            'delete'
+            'delete',
+            'saveEventContract'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -139,5 +140,31 @@ class ContractEventController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  saveEventContract method
+     *  save event contract from ajax
+     */
+    public function saveEventContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+            $event_name = $this->request->data('event_name');
+            $price = $this->request->data('price');
+
+            $data = [
+                'contract_id' => $contract_id,
+                'event_name' => $event_name,
+                'price' => $price
+            ];
+
+            $post_data = $this->req('POST', '/event_contracts', $data);
+
+            $event_contracts = $post_data->json;
+            echo json_encode($event_contracts);
+        }
     }
 }

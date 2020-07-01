@@ -17,6 +17,10 @@
             todayHighlight: true,
 	    });
 
+        $('.number').keyup(function() {
+            this.value = this.value.replace(/[^0-9\.]/g,'');
+        });
+
 		$('#Code').bind('change keyup input', function() {
 			this.value = this.value.toUpperCase();
 		});
@@ -150,6 +154,13 @@
                                                     <input type="text" class="form-control input-sm" value="<?php echo date('d-m-Y', strtotime($contracts['created_at'])); ?>" readonly>
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Jumlah Biaya</label>
+                                                    <input type="text" class="form-control input-sm" id="JumlahBiaya" readonly>
+                                                    <input type="hidden" class="form-control input-sm" id="TotalPriceContract" name="total_price">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -213,13 +224,13 @@
                                                 <li><a data-toggle="tab" href="#event" class="menu-tab">Event</a></li>
                                             </ul>
                                             <div class="tab-content">
-                                                <div id="perawat" class="tab-pane fade in active">
+                                                <div id="perawat" class="tab-pane fade in">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
-                                                                    <h4 class="page-head-line">Nurses</h4>
                                                                     <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddContractNurse', 'title' => 'Click to Add', 'escape' => false]); ?>
+                                                                    <input type="hidden" id="TotalPriceNurseContract" class="form-control input-sm" value="0">
                                                                     <div class="row">
                                                                         <div id="NurseAdd" class="col-md-12 margin-bottom-30">
                                                                             <div class="panel panel-primary">
@@ -271,19 +282,233 @@
                                                 </div>
 
                                                 <div id="therapist" class="tab-pane fade in">
-                                                    <h4>form therapist</h4>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddTherapistContract', 'title' => 'Click to Add', 'escape' => false]); ?>
+                                                                    <input type="hidden" id="TotalPriceTherapistContract" class="form-control input-sm" value="0">
+                                                                    <div class="row">
+                                                                        <div id="TherapistAdd" class="col-md-12 margin-bottom-30">
+                                                                            <div class="panel panel-primary">
+                                                                                <div class="panel-body">
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-6">
+                                                                                            <div class="form-group">
+                                                                                                <label>Therapist</label>
+                                                                                                <select id="Therapist" class="form-control input-sm">
+                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label>Therapist Sessions</label>
+                                                                                                <select id="TherapistSessions" class="form-control input-sm">
+                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddTherapistContract">Save</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddTherapistContract">Cancel</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="TherapistList" class="col-md-12 margin-bottom-30">
+                                                                            <div class="panel panel-primary">
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-striped table-hover">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Therapist Name</th>
+                                                                                                <th>Therapist Session</th>
+                                                                                                <th>Price</th>
+                                                                                                <th>Action</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody id="bodyTherapist">
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div id="alkes" class="tab-pane fade in">
-                                                    <h4>form alkes</h4>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddMedicToolContract', 'title' => 'Click to Add', 'escape' => false]); ?>
+                                                                    <input type="hidden" id="TotalPriceMedicToolContract" class="form-control input-sm" value="0">
+                                                                    <div class="row">
+                                                                        <div id="MedicToolAdd" class="col-md-12 margin-bottom-30">
+                                                                            <div class="panel panel-primary">
+                                                                                <div class="panel-body">
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-6">
+                                                                                            <div class="form-group">
+                                                                                                <label>Medic Tools</label>
+                                                                                                <select id="MedicTool" class="form-control input-sm">
+                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label>Medic Tool Sessions</label>
+                                                                                                <select id="MedicToolSessions" class="form-control input-sm">
+                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                </select>
+                                                                                                <input type="hidden" id="PriceMedicToolSessions" class="form-control input-sm">
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label>Quantity</label>
+                                                                                                <input type="text" id="Quantity" class="form-control input-sm number">
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label>Total Price</label>
+                                                                                                <input type="text" id="FormTotalPriceMedicToolContract" class="form-control input-sm" readonly>
+                                                                                                <input type="hidden" id="SaveTotalPriceMedicToolContract" class="form-control input-sm">
+                                                                                            </div>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddMedicToolContract">Save</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddMedicToolContract">Cancel</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="MedicToolList" class="col-md-12 margin-bottom-30">
+                                                                            <div class="panel panel-primary">
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-striped table-hover">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Medic Tool Name</th>
+                                                                                                <th>Price</th>
+                                                                                                <th>Action</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody id="bodyMedicTool">
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div id="transport" class="tab-pane fade in">
-                                                    <h4>form transport</h4>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddTransportContract', 'title' => 'Click to Add', 'escape' => false]); ?>
+                                                                    <input type="hidden" id="TotalPriceTransportContract" class="form-control input-sm" value="0">
+                                                                    <div class="row">
+                                                                        <div id="TransportAdd" class="col-md-12 margin-bottom-30">
+                                                                            <div class="panel panel-primary">
+                                                                                <div class="panel-body">
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-6">
+                                                                                            <div class="form-group">
+                                                                                                <label>Transport</label>
+                                                                                                <select id="Transport" class="form-control input-sm">
+                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label>Distance</label>
+                                                                                                <input type="text" id="Distance" class="form-control input-sm number">
+                                                                                            </div>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddTransportContract">Save</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddTransportContract">Cancel</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="TransportList" class="col-md-12 margin-bottom-30">
+                                                                            <div class="panel panel-primary">
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-striped table-hover">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Transport Name</th>
+                                                                                                <th>Distance (KM)</th>
+                                                                                                <th>Price</th>
+                                                                                                <th>Action</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody id="bodyTransport">
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div id="event" class="tab-pane fade in">
-                                                    <h4>form event</h4>
+                                                <div id="event" class="tab-pane fade in active">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddEventContract', 'title' => 'Click to Add', 'escape' => false]); ?>
+                                                                    <input type="hidden" id="TotalPriceEventContract" class="form-control input-sm" value="0">
+                                                                    <div class="row">
+                                                                        <div id="EventAdd" class="col-md-12 margin-bottom-30">
+                                                                            <div class="panel panel-primary">
+                                                                                <div class="panel-body">
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-6">
+                                                                                            <div class="form-group">
+                                                                                                <label>Event Name</label>
+                                                                                                <input type="text" id="EventName" class="form-control input-sm">
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label>Price</label>
+                                                                                                <input type="text" id="PriceEvent" class="form-control input-sm number">
+                                                                                            </div>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddEventContract">Save</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddEventContract">Cancel</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="EventList" class="col-md-12 margin-bottom-30">
+                                                                            <div class="panel panel-primary">
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-striped table-hover">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Event Name</th>
+                                                                                                <th>Price</th>
+                                                                                                <th>Action</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody id="bodyEvent">
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

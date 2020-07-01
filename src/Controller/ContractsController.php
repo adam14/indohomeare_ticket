@@ -22,7 +22,11 @@ class ContractsController extends AppController
             'detailPatient',
             'detailPj',
             'edit',
+            'getAllEventContract',
+            'getAllMedicToolContract',
             'getAllNurseContract',
+            'getAllTherapistContract',
+            'getAllTransportContract',
             'getPatient',
             'progressContract'
         ];
@@ -122,6 +126,7 @@ class ContractsController extends AppController
             $start_date = $this->request->data('start_date');
             $end_date = $this->request->data('end_date');
             $contract_id = $this->request->data('contract_id');
+            $total_price = $this->request->data('total_price');
 
             if (empty($pj_id) || empty($patient_id) || empty($start_date) || empty($end_date)) {
                 $this->Flash->error('Please complete the form.');
@@ -132,7 +137,8 @@ class ContractsController extends AppController
                 'pj_id' => $pj_id,
                 'patient_id' => $patient_id,
                 'start_date' => $start_date,
-                'end_date' => $end_date
+                'end_date' => $end_date,
+                'total_price' => (!empty($total_price)) ? $total_price : 0
             ];
 
             $post_data = $this->req('PUT', '/contracts/'.$contract_id, $data);
@@ -327,6 +333,78 @@ class ContractsController extends AppController
 
             $nurse_contracts = $getAllNurseContract->json;
             echo json_encode($nurse_contracts);
+        }
+    }
+
+    /**
+     *  getAllTherapistContract method
+     *  get all therapist contract data with $contract_id
+     */
+    public function getAllTherapistContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+
+            $getAllTherapistContract = $this->req('GET', '/therapist_contracts?contract_id='.$contract_id);
+
+            $therapist_contracts = $getAllTherapistContract->json;
+            echo json_encode($therapist_contracts);
+        }
+    }
+
+    /**
+     *  getAllMedicToolContract method
+     *  get all medic tool contract data with $contract_id
+     */
+    public function getAllMedicToolContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+
+            $getAllMedicToolContract = $this->req('GET', '/medic_tool_contracts?contract_id='.$contract_id);
+
+            $medic_tool_contracts = $getAllMedicToolContract->json;
+            echo json_encode($medic_tool_contracts);
+        }
+    }
+
+    /**
+     *  getAllTransportContract method
+     *  get all transport contract data with $contract_id
+     */
+    public function getAllTransportContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+
+            $getAllTransportContract = $this->req('GET', '/transport_contracts?contract_id='.$contract_id);
+
+            $transport_contracts = $getAllTransportContract->json;
+            echo json_encode($transport_contracts);
+        }
+    }
+
+    /**
+     *  getAllEventContract method
+     *  get all event contract data with $contract_id
+     */
+    public function getAllEventContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+
+            $getAllEventContract = $this->req('GET', '/event_contracts?contract_id='.$contract_id);
+
+            $event_contracts = $getAllEventContract->json;
+            echo json_encode($event_contracts);
         }
     }
 }

@@ -20,7 +20,9 @@ class ContractTransportController extends AppController
             'edit',
             'enable',
             'disable',
-            'delete'
+            'delete',
+            'getTransport',
+            'saveTransportContract'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -155,5 +157,45 @@ class ContractTransportController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  saveTransportContract method
+     *  save transport contract from ajax
+     */
+    public function saveTransportContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+            $transport_time_id = $this->request->data('transport_time_id');
+            $distance = $this->request->data('distance');
+
+            $data = [
+                'contract_id' => $contract_id,
+                'transport_time_id' => $transport_time_id,
+                'distance' => $distance
+            ];
+
+            $post_data = $this->req('POST', '/transport_contracts', $data);
+
+            $transport_contracts = $post_data->json;
+            echo json_encode($transport_contracts);
+        }
+    }
+    
+    /**
+     *  getTransport method
+     *  provide transport dropdwon data based
+     */
+    public function getTransport()
+    {
+        $this->autoRender = false;
+
+        $getTransport = $this->req('GET', '/transport_times');
+
+        $transport_times = $getTransport->json['data'];
+        echo json_encode($transport_times);
     }
 }

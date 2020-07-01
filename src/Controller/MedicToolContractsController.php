@@ -18,7 +18,9 @@ class MedicToolContractsController extends AppController
             'index',
             'add',
             'edit',
+            'getMedicTool',
             'getMedicToolSessions',
+            'saveMedicToolContract',
             'delete'
         ];
 
@@ -157,6 +159,36 @@ class MedicToolContractsController extends AppController
     }
 
     /**
+     *  saveMedicToolContract method
+     *  save therapist contract from ajax
+     */
+    public function saveMedicToolContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+            $medic_tool_id = $this->request->data('medic_tool_id');
+            $medic_tool_session_id = $this->request->data('medic_tool_session_id');
+            $quantity = $this->request->data('quantity');
+            $total_price = $this->request->data('total_price');
+
+            $data = [
+                'contract_id' => $contract_id,
+                'medic_tool_id' => $medic_tool_id,
+                'medic_tool_session_id' => $medic_tool_session_id,
+                'quantity' => $quantity,
+                'total_price' => $total_price
+            ];
+
+            $post_data = $this->req('POST', '/medic_tool_contracts', $data);
+
+            $medic_tool_contracts = $post_data->json;
+            echo json_encode($medic_tool_contracts);
+        }
+    }
+
+    /**
      *  getMedicToolSessions method
      *  provide medic tool sessions dropdown data based on given medic_tool_id
      */
@@ -172,5 +204,19 @@ class MedicToolContractsController extends AppController
             $medic_tool_sessions = $getMedicToolSessions->json;
             echo json_encode($medic_tool_sessions);
         }
+    }
+    
+    /**
+     *  getMedicTool method
+     *  provide medic tool dropdwon data based
+     */
+    public function getMedicTool()
+    {
+        $this->autoRender = false;
+
+        $getMedicTool = $this->req('GET', '/medic_tools');
+
+        $medic_tools = $getMedicTool->json['data'];
+        echo json_encode($medic_tools);
     }
 }
