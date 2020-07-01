@@ -20,6 +20,7 @@ class NurseContractsController extends AppController
             'delete',
             'edit',
             'getNurse',
+            'getNurseCategories',
             'getNurseSessions',
             'saveNurseContract'
         ];
@@ -227,9 +228,27 @@ class NurseContractsController extends AppController
     {
         $this->autoRender = false;
 
-        $getNurse = $this->req('GET', '/nurses');
+        if ($this->request->is('post')) {
+            $nurse_category_id = $this->request->data('nurse_category_id');
 
-        $nurses = $getNurse->json['data'];
-        echo json_encode($nurses);
+            $getNurse = $this->req('GET', '/nurses?nurse_category_id='.$nurse_category_id);
+
+            $nurses = $getNurse->json['data'];
+            echo json_encode($nurses);
+        }
+    }
+    
+    /**
+     *  getNurseCategories method
+     *  provide nurse dropdwon data based
+     */
+    public function getNurseCategories()
+    {
+        $this->autoRender = false;
+
+        $getNurseCategories = $this->req('GET', '/nurse_categories');
+
+        $nurse_categories = $getNurseCategories->json['data'];
+        echo json_encode($nurse_categories);
     }
 }

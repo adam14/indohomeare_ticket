@@ -224,7 +224,7 @@
                                                 <li><a data-toggle="tab" href="#event" class="menu-tab">Event</a></li>
                                             </ul>
                                             <div class="tab-content">
-                                                <div id="perawat" class="tab-pane fade in">
+                                                <div id="perawat" class="tab-pane fade in active">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="panel panel-default">
@@ -237,6 +237,12 @@
                                                                                 <div class="panel-body">
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
+                                                                                            <div class="form-group">
+                                                                                                <label>Nurse Category</label>
+                                                                                                <select id="NurseCategory" class="form-control input-sm">
+                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                </select>
+                                                                                            </div>
                                                                                             <div class="form-group">
                                                                                                 <label>Nurses</label>
                                                                                                 <select id="Nurses" class="form-control input-sm">
@@ -459,7 +465,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div id="event" class="tab-pane fade in active">
+                                                <div id="event" class="tab-pane fade in">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="panel panel-default">

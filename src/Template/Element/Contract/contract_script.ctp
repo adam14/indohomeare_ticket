@@ -15,6 +15,22 @@
         });
     }
 
+    function selectNurseCategory() {
+        $.ajax({
+            type: 'GET',
+            url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurseCategories']); ?>',
+            dataType: 'json',
+            success: function(result) {
+                $('#NurseCategory').empty();
+				$('#NurseCategory').append(new Option('-- Please Select --', ''));
+
+                for (i = 0; i < result.data.length; i++) {
+                    $('#NurseCategory').append('<option value="'+ result.data[i]['id'] +'">'+ result.data[i]['name'] +'</option>');
+                }
+            }
+        })
+    }
+
     function selectTherapist() {
         $.ajax({
             type: 'GET',
@@ -310,7 +326,8 @@
 
             $('#ButtonAddContractNurse').hide();
             $('#NurseList').hide();
-            selectNurses();
+            // selectNurses();
+            selectNurseCategory();
         });
 
         $('#SaveAddContractNurse').on('click', function() {
@@ -335,6 +352,8 @@
                         $('#ButtonAddContractNurse').show();
                         $('#NurseList').show();
 
+                        $('#NurseCategory').empty();
+                        $('#NurseCategory').append(new Option('-- Please Select --', ''));
                         $('#Nurses').empty();
                         $('#Nurses').append(new Option('-- Please Select --', ''));
                         $('#NurseSessions').empty();
@@ -350,10 +369,34 @@
             $('#ButtonAddContractNurse').show();
             $('#NurseList').show();
 
+            $('#NurseCategory').empty();
+            $('#NurseCategory').append(new Option('-- Please Select --', ''));
             $('#Nurses').empty();
 			$('#Nurses').append(new Option('-- Please Select --', ''));
             $('#NurseSessions').empty();
 			$('#NurseSessions').append(new Option('-- Please Select --', ''));
+        });
+
+        $('#NurseCategory').on('change', function(e) {
+            var nurse_category_id = $(this).val();
+            var data_nurse = {
+                'nurse_category_id' : nurse_category_id
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurse']); ?>',
+                data: data_nurse,
+                dataType: 'json',
+                success: function(result) {
+                    $('#Nurses').empty();
+                    $('#Nurses').append(new Option('-- Please Select --', ''));
+
+                    for (i = 0; i < result.data.length; i++) {
+                        $('#Nurses').append('<option value="'+ result.data[i]['id'] +'" category="'+ result.data[i]['nurse_category_id'] +'">'+ result.data[i]['fullname'] +'</option>');
+                    }
+                }
+            })
         });
 
         $('#Nurses').on('change', function(e) {

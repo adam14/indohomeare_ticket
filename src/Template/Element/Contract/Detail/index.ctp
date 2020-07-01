@@ -40,6 +40,12 @@
                                                 <input type="text" class="form-control input-sm" value="<?php echo (!empty($contracts->created_at)) ? date('d-m-Y', strtotime($contracts->created_at)) : ''; ?>" readonly>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Jumlah Biaya</label>
+                                                <input type="text" class="form-control input-sm" value="<?php echo $this->Number->currency($contracts->total_price, 'Rp '); ?>" readonly>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 							</div>
