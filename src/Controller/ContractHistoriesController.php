@@ -18,7 +18,8 @@ class ContractHistoriesController extends AppController
             'index',
             'add',
             'edit',
-            'delete'
+            'delete',
+            'saveHistory'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -133,5 +134,29 @@ class ContractHistoriesController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  saveHistory method
+     *  save history contract with ajax
+     */
+    public function saveHistory()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+            $description = $this->request->data('description');
+
+            $data = [
+                'contract_id' => $contract_id,
+                'description' => $description
+            ];
+
+            $post_data = $this->req('POST', '/contract_histories', $data);
+
+            $saveHistory = $post_data->json;
+            echo json_encode($saveHistory);
+        }
     }
 }

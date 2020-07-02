@@ -27,8 +27,10 @@ class ContractsController extends AppController
             'getAllNurseContract',
             'getAllTherapistContract',
             'getAllTransportContract',
+            'getHistory',
             'getPatient',
-            'progressContract'
+            'progressContract',
+            'updateStatus'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -405,6 +407,48 @@ class ContractsController extends AppController
 
             $event_contracts = $getAllEventContract->json;
             echo json_encode($event_contracts);
+        }
+    }
+
+    /**
+     *  getHistory method
+     *  get history all data contract history with $contract_id
+     */
+    public function getHistory()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $contract_id = $this->request->data('contract_id');
+
+            $getHistory = $this->req('GET', '/contract_histories?contract_id='.$contract_id);
+            
+            $contract_histories = $getHistory->json;
+            echo json_encode($contract_histories);
+        }
+    }
+
+    /**
+     *  updateStatus method
+     *  update status contract with $contract_id
+     */
+    public function updateStatus()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $id = $this->request->data('id');
+            $status = $this->request->data('status');
+
+            $data = [
+                'status' => $status,
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+
+            $put_data = $this->req('PUT', '/contracts/'.$id, $data);
+
+            $updateStatus = $put_data->json;
+            echo json_encode($updateStatus);
         }
     }
 }

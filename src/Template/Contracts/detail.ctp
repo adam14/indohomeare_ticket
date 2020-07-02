@@ -117,7 +117,107 @@
 		$('#modal-form').on('hidden.bs.modal', function() {
 			$('.body-form').html('<p>Loading...</p>');
 		});
+
+		/** History */
+		$('#HistoryNav').on('click', function() {
+			var contract_id = '<?php echo $contracts->id; ?>';
+
+			$.ajax({
+				type: 'POST',
+				url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'getHistory']); ?>',
+				data: {
+					'contract_id' : contract_id
+				},
+				dataType: 'json',
+				success: function(result) {
+					console.log(result);
+
+					$('#ResultNote').html('');
+
+					if (result.status == 'true') {
+						$.each(result.data.data, function(i, result) {
+							$('#ResultNote').append(`<i>` + result.created_at + `</i> <p>[Status : <?php echo $contracts->status; ?>] `+ result.description +`</p>`);
+						});
+					}
+				}
+			});
+		});
+
+		$('input:radio[name="ticket_status"]').on('change', function() {
+			var value = $('input:radio[name="ticket_status"]:checked').val();
+
+			$('#StatusUpdated').val(value);
+		});
+
+		$('#AddHistory').on('click', function() {
+			var status = '';
+			var contract_id = '<?php echo $contracts->id; ?>';
+			var status_updated = $('#StatusUpdated').val();
+
+			if (status_updated == 'Note') {
+				addHistory(status_updated);
+			} else {
+				addHistory(status_updated);
+				
+				var data_contract = {
+					'id' : contract_id,
+					'status' : status_updated
+				};
+
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'updateStatus']); ?>',
+					data: data_contract,
+					dataType: 'json',
+					success: function(result) {
+						console.log(result);
+					}
+				});
+			}
+		});
+
+		$('#ResetHistory').on('click', function() {
+			$('#Description').val('');
+		});
+		/** End */
 	});
+
+	function addHistory(status_updated) {
+		var contract_id = '<?php echo $contracts->id ?>';
+		var description = $('#Description').val();
+		var data_contract_histories = {
+			'contract_id' : contract_id,
+			'description' : description
+		};
+		var status_last = '';
+
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo $this->Url->build(['controller' => 'ContractHistories', 'action' => 'saveHistory']); ?>',
+			data: data_contract_histories,
+			dataType: 'json',
+			success: function(result) {
+				if (result.status == 'true') {
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					$('#Description').val('');
+					$('#AlertUpdate').html(`<div class="alert alert-success">History contract has been saved !</div>`);
+					$('#AlertUpdate').show('slow');
+
+					if (status_updated == 'Note') {
+						status_last = '<?php echo $contracts->status; ?>';
+					} else {
+						status_last = status_updated;
+					}
+
+					$('#ResultNote').append(`<i><?php echo date('Y-m-d H:i:s'); ?></i> <p>[Status : `+ status_last +`] `+ data_contract_histories.description +`</p>`);
+					$('#StatusContract').html('Status: '+ status_last);
+				} else {
+					$('#AlertUpdate').html(`<div class="alert alert-error">`+ result.error_msg +`</div>`);
+					$('#AlertUpdate').show('slow');
+				}
+			}
+		});
+	}
 </script>
 <?php echo $this->Html->script('/vendor/parsley/js/parsley.min'); ?>
 <?php echo $this->Html->script('/vendor/bootstrap-select/js/bootstrap-select'); ?>
@@ -127,7 +227,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4 class="page-head-line">Contract No : <?php echo $contracts->contract_no; ?> <span class="pull-right">Status: <?php echo $contracts->status; ?></span></h4>
+                <h4 class="page-head-line">Contract No : <?php echo $contracts->contract_no; ?> <span class="pull-right" id="StatusContract">Status: <?php echo $contracts->status; ?></span></h4>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="AlertUpdate" hidden="true"></div>
@@ -140,7 +240,7 @@
                             <li><a data-toggle="tab" href="#alkes" class="menu-tab">Alkes</a></li>
                             <li><a data-toggle="tab" href="#transport" class="menu-tab">Transport</a></li>
                             <li><a data-toggle="tab" href="#event" class="menu-tab">Event</a></li>
-                            <li><a data-toggle="tab" href="#history" class="menu-tab">History</a></li>
+                            <li><a data-toggle="tab" href="#history" id="HistoryNav" class="menu-tab">History</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="detail" class="tab-pane fade in active">

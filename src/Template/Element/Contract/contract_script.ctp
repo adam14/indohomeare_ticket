@@ -396,7 +396,7 @@
                         $('#Nurses').append('<option value="'+ result.data[i]['id'] +'" category="'+ result.data[i]['nurse_category_id'] +'">'+ result.data[i]['fullname'] +'</option>');
                     }
                 }
-            })
+            });
         });
 
         $('#Nurses').on('change', function(e) {
