@@ -19,6 +19,21 @@
 		}
 
 		$.ajax({
+			type: 'GET',
+			url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurseCategories']); ?>',
+			dataType: 'json',
+			success: function(result) {
+				$('#NurseCategory').empty();
+				$('#NurseCategory').append(new Option('-- Please Select --', ''));
+
+                for (i = 0; i < result.data.length; i++) {
+                    $('#NurseCategory').append('<option value="'+ result.data[i]['id'] +'">'+ result.data[i]['name'] +'</option>');
+					$('#NurseCategory').val(nurse_category_id);
+                }
+			}
+		});
+
+		$.ajax({
 			type: 'POST',
 			url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurseSessions']) ?>',
 			data: data_nurse_session,
@@ -37,6 +52,32 @@
 				}
 			}
 		});
+
+		$('#NurseCategory').on('change', function(e) {
+            var nurse_category_id = $(this).val();
+            var data_nurse = {
+                'nurse_category_id' : nurse_category_id
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurse']); ?>',
+                data: data_nurse,
+                dataType: 'json',
+				beforeSend: function() {
+					$('#NurseSessions').empty();
+					$('#NurseSessions').append(new Option('-- Please Select --'));
+				},
+                success: function(result) {
+                    $('#Nurses').empty();
+                    $('#Nurses').append(new Option('-- Please Select --', ''));
+
+                    for (i = 0; i < result.data.length; i++) {
+                        $('#Nurses').append('<option value="'+ result.data[i]['id'] +'" category="'+ result.data[i]['nurse_category_id'] +'">'+ result.data[i]['fullname'] +'</option>');
+                    }
+                }
+            });
+        });
 
 		$('#Nurses').on('change', function(e) {
 			var nurse_id = $(this).val();
@@ -81,7 +122,19 @@
 </script>
 <?php $this->end(); ?>
 <?php echo $this->Form->create(null, ['url' => ['action' => 'edit', $nurse_contracts['id']], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
+<input name="contract_id" class="form-control" type="hidden" value="<?php echo $nurse_contracts['contract_id']; ?>">
 <fieldset>
+	<div class="form-group">
+		<label for="NurseCategory" class="col-lg-3 control-label">Nurse Category</label>
+		<div class="col-lg-9">
+            <select class="form-control" id="NurseCategory" name="nurse_category_id" required>
+                <option value="">-- Please Select --</option>
+				<!-- <?php foreach ($nurse_categories as $value): ?>
+					<option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+				<?php endforeach; ?> -->
+            </select>
+		</div>
+	</div>
 	<div class="form-group">
 		<label for="Nurses" class="col-lg-3 control-label">Nurses</label>
 		<div class="col-lg-9">
@@ -91,7 +144,6 @@
                     <option value="<?php echo $value['id']; ?>" <?php echo ($nurse_contracts['nurse_id'] == $value['id']) ? 'selected' : ''; ?> category="<?php echo $value['nurse_category_id']; ?>"><?php echo $value['fullname']; ?></option>
                 <?php endforeach; ?>
             </select>
-            <input name="contract_id" class="form-control" type="hidden" value="<?php echo $nurse_contracts['contract_id']; ?>">
 		</div>
 	</div>
 	<div class="form-group">

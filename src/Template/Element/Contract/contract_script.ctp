@@ -170,7 +170,7 @@
             data: data_medic_tool_contract,
             dataType: 'json',
             beforeSend: function() {
-                $('#bodyMediTool').html('');
+                $('#bodyMedicTool').html('');
             },
             success: function(result) {
                 if (result.data.data.length > 0) {
@@ -184,6 +184,8 @@
                             <tr>
                                 <td>`+ result.data.data[i]['medic_tools']['name'] +`</td>
                                 <td>Rp. `+ formatRupiah(result.data.data[i]['medic_tool_sessions']['price']) +`</td>
+                                <td>`+ result.data.data[i]['quantity'] +`</td>
+                                <td>Rp. `+ formatRupiah(result.data.data[i]['total_price']) +`</td>
                                 <td>
                                     <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractNurse"><i class="fa fa-trash"></i></a>
                                 </td>

@@ -6,6 +6,32 @@
 			this.value = this.value.toUpperCase();
 		});
 
+		$('#NurseCategory').on('change', function(e) {
+            var nurse_category_id = $(this).val();
+            var data_nurse = {
+                'nurse_category_id' : nurse_category_id
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurse']); ?>',
+                data: data_nurse,
+                dataType: 'json',
+				beforeSend: function() {
+					$('#NurseSessions').empty();
+					$('#NurseSessions').append(new Option('-- Please Select --'));
+				},
+                success: function(result) {
+                    $('#Nurses').empty();
+                    $('#Nurses').append(new Option('-- Please Select --', ''));
+
+                    for (i = 0; i < result.data.length; i++) {
+                        $('#Nurses').append('<option value="'+ result.data[i]['id'] +'" category="'+ result.data[i]['nurse_category_id'] +'">'+ result.data[i]['fullname'] +'</option>');
+                    }
+                }
+            });
+        });
+
 		$('#Nurses').on('change', function(e) {
 			var nurse_id = $(this).val();
 			var nurse_category_id = $('#Nurses option:selected').attr("category");
@@ -49,17 +75,25 @@
 </script>
 <?php $this->end(); ?>
 <?php echo $this->Form->create(null, ['url' => ['action' => 'add', $id], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
+<input name="contract_id" class="form-control" type="hidden" value="<?php echo $id; ?>">
 <fieldset>
+	<div class="form-group">
+		<label for="NurseCategory" class="col-lg-3 control-label">Nurse Category</label>
+		<div class="col-lg-9">
+            <select class="form-control" id="NurseCategory" name="nurse_category_id" required>
+                <option value="">-- Please Select --</option>
+				<?php foreach ($nurse_categories as $value): ?>
+					<option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+				<?php endforeach; ?>
+            </select>
+		</div>
+	</div>
 	<div class="form-group">
 		<label for="Nurses" class="col-lg-3 control-label">Nurses</label>
 		<div class="col-lg-9">
             <select class="form-control" id="Nurses" name="nurse_id" required>
                 <option value="">-- Please Select --</option>
-                <?php foreach ($nurses as $value): ?>
-                    <option value="<?php echo $value['id']; ?>" category="<?php echo $value['nurse_category_id']; ?>"><?php echo $value['fullname']; ?></option>
-                <?php endforeach; ?>
             </select>
-            <input name="contract_id" class="form-control" type="hidden" value="<?php echo $id; ?>">
 		</div>
 	</div>
 	<div class="form-group">

@@ -88,7 +88,15 @@ class NurseContractsController extends AppController
             $nurse_sessions = $result['data'];
         }
 
-        $this->set(compact('id', 'nurses', 'nurse_sessions'));
+        $response = $this->req('GET', '/nurse_categories');
+        $result = $response->json['data'];
+        $nurse_categories = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $nurse_categories = $result['data'];
+        }
+
+        $this->set(compact('id', 'nurses', 'nurse_sessions', 'nurse_categories'));
     }
 
     /**
@@ -145,6 +153,14 @@ class NurseContractsController extends AppController
             $nurse_sessions = $result['data'];
         }
 
+        $response = $this->req('GET', '/nurse_categories');
+        $result = $response->json['data'];
+        $nurse_categories = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $nurse_categories = $result['data'];
+        }
+
         $nurse_contracts = [];
 
         $get_nurse_contracts = $this->req('GET', '/nurse_contracts/'.$id);
@@ -154,7 +170,7 @@ class NurseContractsController extends AppController
             $nurse_contracts = $get_nurse_contracts->json['data'];
         }
 
-        $this->set(compact('nurses', 'nurse_sessions', 'nurse_contracts'));
+        $this->set(compact('nurses', 'nurse_sessions', 'nurse_contracts', 'nurse_categories'));
     }
 
     /**
