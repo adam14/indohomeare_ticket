@@ -17,6 +17,10 @@
 				url: '<?php echo $this->Url->build(['controller' => 'MedicToolContracts', 'action' => 'getMedicToolSessions']) ?>',
 				data: data_medic_tool_session,
 				dataType: "json",
+				beforeSend: function() {
+					$('#MedicToolsSessions').empty();
+					$('#MedicToolsSessions').append(new Option('Please Wait...', ''));
+				},
 				success: function(result) {
 					$('#MedicToolsSessions').empty();
 					$('#MedicToolsSessions').append(new Option('-- Please Select --', ''));

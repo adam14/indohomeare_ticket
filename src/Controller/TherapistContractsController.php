@@ -21,6 +21,7 @@ class TherapistContractsController extends AppController
             'delete',
             'getTherapist',
             'getTherapistSessions',
+            'getTherapistType',
             'saveTherapistContract'
         ];
 
@@ -87,7 +88,15 @@ class TherapistContractsController extends AppController
             $therapist_session = $result['data'];
         }
 
-        $this->set(compact('id', 'therapist', 'therapist_session'));
+        $response = $this->req('GET', '/therapist_types');
+        $result = $response->json['data'];
+        $therapist_types = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $therapist_types = $result['data'];
+        }
+
+        $this->set(compact('id', 'therapist', 'therapist_session', 'therapist_types'));
     }
 
     /**
@@ -217,6 +226,20 @@ class TherapistContractsController extends AppController
             echo json_encode($therapist_session);
         }
     }
+
+    /**
+     *  getTherapistType method
+     *  provide therapist type dropdown data based
+     */
+    public function getTherapistType()
+    {
+        $this->autoRender = false;
+
+        $getTherapistType = $this->req('GET', '/therapist_types');
+
+        $therapist_types = $getTherapistType->json['data'];
+        echo json_encode($therapist_types);
+    }
     
     /**
      *  getTherapist method
@@ -226,9 +249,13 @@ class TherapistContractsController extends AppController
     {
         $this->autoRender = false;
 
-        $getTherapist = $this->req('GET', '/therapist');
+        if ($this->request->is('post')) {
+            $therapist_type_id = $this->request->data('therapist_type_id');
 
-        $therapist = $getTherapist->json['data'];
-        echo json_encode($therapist);
+            $getTherapist = $this->req('GET', '/therapist?therapist_type_id='.$therapist_type_id);
+
+            $therapist = $getTherapist->json['data'];
+            echo json_encode($therapist);
+        }
     }
 }

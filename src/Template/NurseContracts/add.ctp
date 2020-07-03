@@ -18,6 +18,8 @@
                 data: data_nurse,
                 dataType: 'json',
 				beforeSend: function() {
+					$('#Nurses').empty();
+                    $('#Nurses').append(new Option('Please Wait...', ''));
 					$('#NurseSessions').empty();
 					$('#NurseSessions').append(new Option('-- Please Select --'));
 				},
@@ -45,6 +47,10 @@
 				url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurseSessions']) ?>',
 				data: data_nurse_session,
 				dataType: "json",
+				beforeSend: function() {
+					$('#NurseSessions').empty();
+					$('#NurseSessions').append(new Option('Please Wait...', ''));
+				},
 				success: function(result) {
 					$('#NurseSessions').empty();
 					$('#NurseSessions').append(new Option('-- Please Select --', ''));

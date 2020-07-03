@@ -20,6 +20,10 @@
             type: 'GET',
             url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurseCategories']); ?>',
             dataType: 'json',
+            beforeSend: function() {
+                $('#NurseCategory').empty();
+                $('#NurseCategory').append(new Option('Please Wait...', ''));
+            },
             success: function(result) {
                 $('#NurseCategory').empty();
 				$('#NurseCategory').append(new Option('-- Please Select --', ''));
@@ -36,6 +40,10 @@
             type: 'GET',
             url: '<?php echo $this->Url->build(['controller' => 'TherapistContracts', 'action' => 'getTherapist']); ?>',
             dataType: 'json',
+            beforeSend: function() {
+                $('#Therapist').empty();
+                $('#Therapist').append(new Option('Please Wait...', ''));
+            },
             success: function(result) {
                 $('#Therapist').empty();
 				$('#Therapist').append(new Option('-- Please Select --', ''));
@@ -47,11 +55,35 @@
         });
     }
 
+    function selectTherapistType() {
+        $.ajax({
+            type: 'GET',
+            url: '<?php echo $this->Url->build(['controller' => 'TherapistContracts', 'action' => 'getTherapistType']); ?>',
+            dataType: 'json',
+            beforeSend: function() {
+                $('#TherapistType').empty();
+                $('#TherapistType').append(new Option('Please Wait...', ''));
+            },
+            success: function(result) {
+                $('#TherapistType').empty();
+                $('#TherapistType').append(new Option('-- Please Select --', ''));
+
+                for (i = 0; i < result.data.length; i++) {
+                    $('#TherapistType').append('<option value="'+ result.data[i]['id'] +'">'+ result.data[i]['name'] +'</option>');
+                }
+            }
+        });
+    }
+
     function selectMedicTool() {
         $.ajax({
             type: 'GET',
             url: '<?php echo $this->Url->build(['controller' => 'MedicToolContracts', 'action' => 'getMedicTool']); ?>',
             dataType: 'json',
+            beforeSend: function() {
+                $('#MedicTool').empty();
+                $('#MedicTool').append(new Option('Please Wait...', ''));
+            },
             success: function(result) {
                 $('#MedicTool').empty();
 				$('#MedicTool').append(new Option('-- Please Select --', ''));
@@ -68,6 +100,10 @@
             type: 'GET',
             url: '<?php echo $this->Url->build(['controller' => 'ContractTransport', 'action' => 'getTransport']); ?>',
             dataType: 'json',
+            beforeSend: function() {
+                $('#Transport').empty();
+                $('#Transport').append(new Option('Please Wait...', ''));
+            },
             success: function(result) {
                 $('#Transport').empty();
 				$('#Transport').append(new Option('-- Please Select --', ''));
@@ -112,6 +148,14 @@
                         `);
                     }
 
+                    $('#bodyNurse').append(`
+                        <tr>
+                            <td colspan="2" align="right"><b>Subtotal</b></td>
+                            <td><b>Rp. `+ formatRupiah(subtotal.toString()) +`</b></td>
+                            <td></td>
+                        </tr>
+                    `);
+
                     $('#TotalPriceNurseContract').val(subtotal.toString());
                     TotalPrice();
                 }
@@ -151,6 +195,14 @@
                             </tr>
                         `);
                     }
+
+                    $('#bodyTherapist').append(`
+                        <tr>
+                            <td colspan="2" align="right"><b>Subtotal</b></td>
+                            <td><b>Rp. `+ formatRupiah(subtotal.toString()) +`</b></td>
+                            <td></td>
+                        </tr>
+                    `);
                     
                     $('#TotalPriceTherapistContract').val(subtotal.toString());
                     TotalPrice();
@@ -192,6 +244,14 @@
                             </tr>
                         `);
                     }
+
+                    $('#bodyMedicTool').append(`
+                        <tr>
+                            <td colspan="3" align="right"><b>Subtotal</b></td>
+                            <td><b>Rp `+ formatRupiah(subtotal.toString()) +`</b></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    `);
                     
                     $('#TotalPriceMedicToolContract').val(subtotal.toString());
                     TotalPrice();
@@ -232,6 +292,14 @@
                             </tr>
                         `);
                     }
+
+                    $('#bodyTransport').append(`
+                        <tr>
+                            <td colspan="2" align="right"><b>Subtotal</b></td>
+                            <td><b>Rp `+ formatRupiah(subtotal.toString()) +`</b></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    `);
                     
                     $('#TotalPriceTransportContract').val(subtotal.toString());
                     TotalPrice();
@@ -271,6 +339,14 @@
                             </tr>
                         `);
                     }
+
+                    $('#bodyTransport').append(`
+                        <tr>
+                            <td align="right"><b>Subtotal</b></td>
+                            <td><b>Rp `+ formatRupiah(subtotal.toString()) +`</b></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    `);
                     
                     $('#TotalPriceEventContract').val(subtotal.toString());
                     TotalPrice();
@@ -390,6 +466,10 @@
                 url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurse']); ?>',
                 data: data_nurse,
                 dataType: 'json',
+                beforeSend: function() {
+                    $('#Nurses').empty();
+                    $('#Nurses').append(new Option('Please Wait...', ''));
+                },
                 success: function(result) {
                     $('#Nurses').empty();
                     $('#Nurses').append(new Option('-- Please Select --', ''));
@@ -414,6 +494,10 @@
 				url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurseSessions']) ?>',
 				data: data_nurse_session,
 				dataType: "json",
+                beforeSend: function() {
+                    $('#NurseSessions').empty();
+                    $('#NurseSessions').append(new Option('Please Wait...', ''));
+                },
 				success: function(result) {
 					$('#NurseSessions').empty();
 					$('#NurseSessions').append(new Option('-- Please Select --', ''));
@@ -436,7 +520,8 @@
 
             $('#ButtonAddTherapistContract').hide();
             $('#TherapistList').hide();
-            selectTherapist();
+            // selectTherapist();
+            selectTherapistType();
         });
 
         $('#SaveAddTherapistContract').on('click', function() {
@@ -461,6 +546,8 @@
                         $('#ButtonAddTherapistContract').show();
                         $('#TherapistList').show();
 
+                        $('#TherapistType').empty();
+                        $('#TherapistType').append(new Option('-- Please Select --', ''));
                         $('#Therapist').empty();
                         $('#Therapist').append(new Option('-- Please Select --', ''));
                         $('#TherapistSessions').empty();
@@ -476,10 +563,38 @@
             $('#ButtonAddTherapistContract').show();
             $('#TherapistList').show();
 
+            $('#TherapistType').empty();
+            $('#TherapistType').append(new Option('-- Please Select --', ''));
             $('#Therapist').empty();
 			$('#Therapist').append(new Option('-- Please Select --', ''));
             $('#TherapistSessions').empty();
 			$('#TherapistSessions').append(new Option('-- Please Select --', ''));
+        });
+
+        $('#TherapistType').on('change', function(e) {
+            var therapist_type_id = $(this).val();
+            var data_therapist = {
+                'therapist_type_id' : therapist_type_id
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $this->Url->build(['controller' => 'TherapistContracts', 'action' => 'getTherapist']); ?>',
+                data: data_therapist,
+                dataType: 'json',
+                beforeSend: function() {
+                    $('#Therapist').empty();
+                    $('#Therapist').append(new Option('Please Wait...', ''));
+                },
+                success: function(result) {
+                    $('#Therapist').empty();
+                    $('#Therapist').append(new Option('-- Please Select --', ''));
+
+                    for (i = 0; i < result.data.length; i++) {
+                        $('#Therapist').append('<option value="'+ result.data[i]['id'] +'" type-therapist="'+ result.data[i]['therapist_type_id'] +'">'+ result.data[i]['name'] +'</option>');
+                    }
+                }
+            })
         });
 
         $('#Therapist').on('change', function(e) {
@@ -495,6 +610,10 @@
 				url: '<?php echo $this->Url->build(['controller' => 'TherapistContracts', 'action' => 'getTherapistSessions']) ?>',
 				data: data_therapist_session,
 				dataType: "json",
+                beforeSend: function() {
+                    $('#TherapistSessions').empty();
+                    $('#TherapistSessions').append(new Option('Please Wait...', ''));
+                },
 				success: function(result) {
 					$('#TherapistSessions').empty();
 					$('#TherapistSessions').append(new Option('-- Please Select --', ''));
@@ -586,6 +705,10 @@
 				url: '<?php echo $this->Url->build(['controller' => 'MedicToolContracts', 'action' => 'getMedicToolSessions']) ?>',
 				data: data_medic_tool_session,
 				dataType: "json",
+                beforeSend: function() {
+                    $('#MedicToolSessions').empty();
+					$('#MedicToolSessions').append(new Option('Please Wait...', ''));
+                },
 				success: function(result) {
 					$('#MedicToolSessions').empty();
 					$('#MedicToolSessions').append(new Option('-- Please Select --', ''));

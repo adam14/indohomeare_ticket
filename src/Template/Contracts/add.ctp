@@ -301,6 +301,12 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
+                                                                                                <label>Therapist Type</label>
+                                                                                                <select id="TherapistType" class="form-control input-sm">
+                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div class="form-group">
                                                                                                 <label>Therapist</label>
                                                                                                 <select id="Therapist" class="form-control input-sm">
                                                                                                     <option value="">-- Please Select --</option>
