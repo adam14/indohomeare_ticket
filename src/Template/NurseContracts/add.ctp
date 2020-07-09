@@ -19,13 +19,13 @@
                 dataType: 'json',
 				beforeSend: function() {
 					$('#Nurses').empty();
-                    $('#Nurses').append(new Option('Please Wait...', ''));
+                    $('#Nurses').append(new Option('Loading...', ''));
 					$('#NurseSessions').empty();
-					$('#NurseSessions').append(new Option('-- Please Select --'));
+					$('#NurseSessions').append(new Option('-- Silakan Pilih --'));
 				},
                 success: function(result) {
                     $('#Nurses').empty();
-                    $('#Nurses').append(new Option('-- Please Select --', ''));
+                    $('#Nurses').append(new Option('-- Silakan Pilih --', ''));
 
                     for (i = 0; i < result.data.length; i++) {
                         $('#Nurses').append('<option value="'+ result.data[i]['id'] +'" category="'+ result.data[i]['nurse_category_id'] +'">'+ result.data[i]['fullname'] +'</option>');
@@ -49,11 +49,11 @@
 				dataType: "json",
 				beforeSend: function() {
 					$('#NurseSessions').empty();
-					$('#NurseSessions').append(new Option('Please Wait...', ''));
+					$('#NurseSessions').append(new Option('Loading...', ''));
 				},
 				success: function(result) {
 					$('#NurseSessions').empty();
-					$('#NurseSessions').append(new Option('-- Please Select --', ''));
+					$('#NurseSessions').append(new Option('-- Silakan Pilih --', ''));
 
 					for (i = 0; i < result.data.length; i++) {
 						$('#NurseSessions').append('<option value="'+ result.data[i].id +'">'+ result.data[i].name +' [Rp. '+ formatRupiah(result.data[i].price) +']</option>');
@@ -84,10 +84,10 @@
 <input name="contract_id" class="form-control" type="hidden" value="<?php echo $id; ?>">
 <fieldset>
 	<div class="form-group">
-		<label for="NurseCategory" class="col-lg-3 control-label">Nurse Category</label>
+		<label for="NurseCategory" class="col-lg-3 control-label">Kategori Perawat</label>
 		<div class="col-lg-9">
             <select class="form-control" id="NurseCategory" name="nurse_category_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
 				<?php foreach ($nurse_categories as $value): ?>
 					<option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
 				<?php endforeach; ?>
@@ -95,24 +95,24 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Nurses" class="col-lg-3 control-label">Nurses</label>
+		<label for="Nurses" class="col-lg-3 control-label">Perawat</label>
 		<div class="col-lg-9">
             <select class="form-control" id="Nurses" name="nurse_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Perawat --</option>
             </select>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="NurseSessions" class="col-lg-3 control-label">Nurse Sessions</label>
+		<label for="NurseSessions" class="col-lg-3 control-label">Sesi Perawat</label>
 		<div class="col-lg-9">
             <select class="form-control" id="NurseSessions" name="nurse_session_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Perawat --</option>
             </select>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Add</button>
+			<button type="submit" class="btn btn-primary">Tambah</button>
 		</div>
 	</div>
 </fieldset>

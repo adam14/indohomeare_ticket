@@ -15,20 +15,20 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'edit', $transport_times['id']], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="Name" class="col-lg-3 control-label">Name</label>
+		<label for="Name" class="col-lg-3 control-label">Nama</label>
 		<div class="col-lg-9">
-			<input name="name" class="form-control" id="Name" placeholder="Name" value="<?php echo $transport_times['name']; ?>" type="text" required>
+			<input name="name" class="form-control" id="Name" placeholder="Nama" value="<?php echo $transport_times['name']; ?>" type="text" required>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Price" class="col-lg-3 control-label">Price</label>
+		<label for="Price" class="col-lg-3 control-label">Harga</label>
 		<div class="col-lg-9">
-			<input name="price" class="number form-control" id="Price" placeholder="Price" value="<?php echo $transport_times['price']; ?>" type="text" required>
+			<input name="price" class="number form-control" id="Price" placeholder="Harga" value="<?php echo $transport_times['price']; ?>" type="text" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Ubah</button>
 		</div>
 	</div>
 </fieldset>

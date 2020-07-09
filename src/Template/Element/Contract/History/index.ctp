@@ -30,7 +30,7 @@
 		</div>
 
 		<div class="form-group text-right">
-			<button type="button" class="btn btn-sm btn-primary" id="AddHistory">Add Note</button>
+			<button type="button" class="btn btn-sm btn-primary" id="AddHistory">Tambah Histori</button>
 			<button type="reset" class="btn btn-sm btn-danger" id="ResetHistory">Reset</button>
 		</div>
 		<?php echo $this->Form->end(); ?>
@@ -38,7 +38,7 @@
 </div>
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		Ticket Notes
+		Histori Kontrak
 	</div>
 	<div class="panel-body" id="ResultNote" style="overflow-y:scroll; height:300px;">
 	</div>

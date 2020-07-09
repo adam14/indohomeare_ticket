@@ -15,21 +15,21 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'add', $id], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="EventName" class="col-lg-3 control-label">Event Name</label>
+		<label for="EventName" class="col-lg-3 control-label">Nama Event</label>
 		<div class="col-lg-9">
 			<input name="event_name" class="form-control" id="EventName" placeholder="Event Name" type="text" required>
             <input name="contract_id" class="form-control" type="hidden" value="<?php echo $id; ?>">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Price" class="col-lg-3 control-label">Price</label>
+		<label for="Price" class="col-lg-3 control-label">Harga</label>
 		<div class="col-lg-9">
 			<input name="price" class="number form-control" id="Price" placeholder="Price" type="text" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Add</button>
+			<button type="submit" class="btn btn-primary">Tambah</button>
 		</div>
 	</div>
 </fieldset>

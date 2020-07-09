@@ -19,11 +19,11 @@
                 dataType: 'json',
                 beforeSend: function() {
                     $('#Therapist').empty();
-                    $('#Therapist').append(new Option('Please Wait...', ''));
+                    $('#Therapist').append(new Option('Loading...', ''));
                 },
                 success: function(result) {
                     $('#Therapist').empty();
-                    $('#Therapist').append(new Option('-- Please Select --', ''));
+                    $('#Therapist').append(new Option('-- Silakan Pilih --', ''));
 
                     for (i = 0; i < result.data.length; i++) {
                         $('#Therapist').append('<option value="'+ result.data[i]['id'] +'" type-therapist="'+ result.data[i]['therapist_type_id'] +'">'+ result.data[i]['name'] +'</option>');
@@ -47,11 +47,11 @@
 				dataType: "json",
                 beforeSend: function() {
                     $('#TherapistSessions').empty();
-                    $('#TherapistSessions').append(new Option('Please Wait...', ''));
+                    $('#TherapistSessions').append(new Option('Loading...', ''));
                 },
 				success: function(result) {
 					$('#TherapistSessions').empty();
-					$('#TherapistSessions').append(new Option('-- Please Select --', ''));
+					$('#TherapistSessions').append(new Option('-- Silakan Pilih --', ''));
 
 					for (i = 0; i < result.data.length; i++) {
 						$('#TherapistSessions').append('<option value="'+ result.data[i].id +'">'+ result.data[i].name +' [Rp. '+ formatRupiah(result.data[i].price) +']</option>');
@@ -81,10 +81,10 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'add', $id], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="TherapistType" class="col-lg-3 control-label">Therapist Type</label>
+		<label for="TherapistType" class="col-lg-3 control-label">Tipe Terapi</label>
 		<div class="col-lg-9">
             <select class="form-control" id="TherapistType" name="therapist_type_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
                 <?php foreach ($therapist_types as $value): ?>
                     <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                 <?php endforeach; ?>
@@ -93,24 +93,24 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Therapist" class="col-lg-3 control-label">Therapist</label>
+		<label for="Therapist" class="col-lg-3 control-label">Terapi</label>
 		<div class="col-lg-9">
             <select class="form-control" id="Therapist" name="therapist_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
             </select>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="TherapistSessions" class="col-lg-3 control-label">Therapist Sessions</label>
+		<label for="TherapistSessions" class="col-lg-3 control-label">Sesi Terapi</label>
 		<div class="col-lg-9">
             <select class="form-control" id="TherapistSessions" name="therapist_session_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
             </select>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Add</button>
+			<button type="submit" class="btn btn-primary">Tambah</button>
 		</div>
 	</div>
 </fieldset>

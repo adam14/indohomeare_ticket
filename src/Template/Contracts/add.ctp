@@ -238,25 +238,25 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
-                                                                                                <label>Nurse Category</label>
+                                                                                                <label>Kategori Perawat</label>
                                                                                                 <select id="NurseCategory" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Nurses</label>
+                                                                                                <label>Perawat</label>
                                                                                                 <select id="Nurses" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Nurse Sessions</label>
+                                                                                                <label>Sesi Perawat</label>
                                                                                                 <select id="NurseSessions" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                             </div>
-                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddContractNurse">Save</button>
-                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddContractNurse">Cancel</button>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddContractNurse">Simpan</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddContractNurse">Batal</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -268,10 +268,10 @@
                                                                                     <table class="table table-striped table-hover">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th>Nurse Name</th>
-                                                                                                <th>Nurse Session</th>
-                                                                                                <th>Price</th>
-                                                                                                <th>Action</th>
+                                                                                                <th>Nama Perawat</th>
+                                                                                                <th>Sesi Perawat</th>
+                                                                                                <th>Harga</th>
+                                                                                                <th>&nbsp;</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody id="bodyNurse">
@@ -301,25 +301,25 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
-                                                                                                <label>Therapist Type</label>
+                                                                                                <label>Tipe Terapi</label>
                                                                                                 <select id="TherapistType" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Therapist</label>
+                                                                                                <label>Terapi</label>
                                                                                                 <select id="Therapist" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Therapist Sessions</label>
+                                                                                                <label>Sesi Terapi</label>
                                                                                                 <select id="TherapistSessions" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                             </div>
-                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddTherapistContract">Save</button>
-                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddTherapistContract">Cancel</button>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddTherapistContract">Simpan</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddTherapistContract">Batal</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -331,10 +331,10 @@
                                                                                     <table class="table table-striped table-hover">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th>Therapist Name</th>
-                                                                                                <th>Therapist Session</th>
-                                                                                                <th>Price</th>
-                                                                                                <th>Action</th>
+                                                                                                <th>Nama Terapi</th>
+                                                                                                <th>Sesi Terapi</th>
+                                                                                                <th>Harga</th>
+                                                                                                <th>&nbsp;</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody id="bodyTherapist">
@@ -364,29 +364,29 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
-                                                                                                <label>Medic Tools</label>
+                                                                                                <label>Alkes</label>
                                                                                                 <select id="MedicTool" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Medic Tool Sessions</label>
+                                                                                                <label>Sesi Alkes</label>
                                                                                                 <select id="MedicToolSessions" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                                 <input type="hidden" id="PriceMedicToolSessions" class="form-control input-sm">
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Quantity</label>
+                                                                                                <label>Jumlah</label>
                                                                                                 <input type="text" id="Quantity" class="form-control input-sm number">
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Total Price</label>
+                                                                                                <label>Total Harga</label>
                                                                                                 <input type="text" id="FormTotalPriceMedicToolContract" class="form-control input-sm" readonly>
                                                                                                 <input type="hidden" id="SaveTotalPriceMedicToolContract" class="form-control input-sm">
                                                                                             </div>
-                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddMedicToolContract">Save</button>
-                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddMedicToolContract">Cancel</button>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddMedicToolContract">Simpan</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddMedicToolContract">Batal</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -398,11 +398,11 @@
                                                                                     <table class="table table-striped table-hover">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th>Medic Tool Name</th>
-                                                                                                <th>Price</th>
-                                                                                                <th>Quantity</th>
-                                                                                                <th>Total Price</th>
-                                                                                                <th>Action</th>
+                                                                                                <th>Nama Alkes</th>
+                                                                                                <th>Harga</th>
+                                                                                                <th>Jumlah</th>
+                                                                                                <th>Total Harga</th>
+                                                                                                <th>&nbsp;</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody id="bodyMedicTool">
@@ -434,15 +434,15 @@
                                                                                             <div class="form-group">
                                                                                                 <label>Transport</label>
                                                                                                 <select id="Transport" class="form-control input-sm">
-                                                                                                    <option value="">-- Please Select --</option>
+                                                                                                    <option value="">-- Silakan Pilih --</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Distance</label>
+                                                                                                <label>Jarak</label>
                                                                                                 <input type="text" id="Distance" class="form-control input-sm number">
                                                                                             </div>
-                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddTransportContract">Save</button>
-                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddTransportContract">Cancel</button>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddTransportContract">Simpan</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddTransportContract">Batal</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -454,10 +454,10 @@
                                                                                     <table class="table table-striped table-hover">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th>Transport Name</th>
-                                                                                                <th>Distance (KM)</th>
-                                                                                                <th>Price</th>
-                                                                                                <th>Action</th>
+                                                                                                <th>Nama Transport</th>
+                                                                                                <th>Jarak (KM)</th>
+                                                                                                <th>Harga</th>
+                                                                                                <th>&nbsp;</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody id="bodyTransport">
@@ -487,15 +487,15 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
                                                                                             <div class="form-group">
-                                                                                                <label>Event Name</label>
+                                                                                                <label>Nama Event</label>
                                                                                                 <input type="text" id="EventName" class="form-control input-sm">
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label>Price</label>
+                                                                                                <label>Harga</label>
                                                                                                 <input type="text" id="PriceEvent" class="form-control input-sm number">
                                                                                             </div>
-                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddEventContract">Save</button>
-                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddEventContract">Cancel</button>
+                                                                                            <button type="button" class="btn btn-sm btn-success" id="SaveAddEventContract">Simpan</button>
+                                                                                            <button type="button" class="btn btn-sm btn-default" id="CancelAddEventContract">Batal</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -507,9 +507,9 @@
                                                                                     <table class="table table-striped table-hover">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th>Event Name</th>
-                                                                                                <th>Price</th>
-                                                                                                <th>Action</th>
+                                                                                                <th>Nama Event</th>
+                                                                                                <th>Harga</th>
+                                                                                                <th>&nbsp;</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody id="bodyEvent">

@@ -15,10 +15,10 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'add'], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
     <div class="form-group">
-        <label for="NurseCategory" class="col-lg-3 control-label">Nurse Category</label>
+        <label for="NurseCategory" class="col-lg-3 control-label">Kategori Perawat</label>
         <div class="col-lg-9">
             <select class="form-control" id="NurseCategory" name="nurse_category_id" required>
-                <option value="">-- Please select --</option>
+                <option value="">-- Silakan Pilih --</option>
                 <?php foreach ($nurse_categories as $value): ?>
                     <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                 <?php endforeach; ?>
@@ -26,20 +26,20 @@
         </div>
     </div>
 	<div class="form-group">
-		<label for="Name" class="col-lg-3 control-label">Name</label>
+		<label for="Name" class="col-lg-3 control-label">Nama</label>
 		<div class="col-lg-9">
-			<input name="name" class="form-control" id="Name" placeholder="Name" type="text" required>
+			<input name="name" class="form-control" id="Name" placeholder="Nama" type="text" required>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Price" class="col-lg-3 control-label">Price</label>
+		<label for="Price" class="col-lg-3 control-label">Harga</label>
 		<div class="col-lg-9">
-			<input name="price" class="number form-control" id="Price" placeholder="Price" type="text" required>
+			<input name="price" class="number form-control" id="Price" placeholder="Harga" type="text" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Add</button>
+			<button type="submit" class="btn btn-primary">Tambah</button>
 		</div>
 	</div>
 </fieldset>

@@ -11,9 +11,9 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'edit', $patients['id']], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="Fullname" class="col-lg-3 control-label">Fullname</label>
+		<label for="Fullname" class="col-lg-3 control-label">Nama Lengkap</label>
 		<div class="col-lg-9">
-			<input name="fullname" class="form-control" id="Fullname" placeholder="Fullname" type="text" value="<?php echo $patients['fullname']; ?>" required>
+			<input name="fullname" class="form-control" id="Fullname" placeholder="Nama Lengkap" type="text" value="<?php echo $patients['fullname']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Gender" class="col-lg-3 control-label">Gender</label>
+		<label for="Gender" class="col-lg-3 control-label">Jenis Kelamin</label>
 		<div class="col-lg-9">
 			<select class="form-control" id="Gender" name="gender" required>
 				<option value="">-- Please Select --</option>
@@ -38,56 +38,56 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Years" class="col-lg-3 control-label">Age</label>
+		<label for="Years" class="col-lg-3 control-label">Umur</label>
 		<div class="col-lg-9">
-			<input type="text" maxlength="3" id="Years" name="years" class="form-control number" placeholder="Age" value="<?php echo $patients['years']; ?>" required>
+			<input type="text" maxlength="3" id="Years" name="years" class="form-control number" placeholder="Umur" value="<?php echo $patients['years']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="RecomendationFrom" class="col-lg-3 control-label">Recomendation From</label>
+		<label for="RecomendationFrom" class="col-lg-3 control-label">Rekomendasi Dari</label>
 		<div class="col-lg-9">
-			<input type="text" id="RecomendationFrom" name="recomendation_from" class="form-control" placeholder="Recomendation From" value="<?php echo $patients['recomendation_from']; ?>" required>
+			<input type="text" id="RecomendationFrom" name="recomendation_from" class="form-control" placeholder="Rekomendasi Dari" value="<?php echo $patients['recomendation_from']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Height" class="col-lg-3 control-label">Height</label>
+		<label for="Height" class="col-lg-3 control-label">Berat (Kg)</label>
 		<div class="col-lg-9">
-			<input type="text" id="Height" name="height" class="form-control number" placeholder="Height" value="<?php echo $patients['height']; ?>" required>
+			<input type="text" id="Height" name="height" class="form-control number" placeholder="Berat (Kg)" value="<?php echo $patients['height']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Weight" class="col-lg-3 control-label">Weight</label>
+		<label for="Weight" class="col-lg-3 control-label">Tinggi (CM)</label>
 		<div class="col-lg-9">
-			<input type="text" id="Weight" name="weight" class="form-control number" placeholder="Weight" value="<?php echo $patients['weight']; ?>" required>
+			<input type="text" id="Weight" name="weight" class="form-control number" placeholder="Tinggi (CM)" value="<?php echo $patients['weight']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Address" class="col-lg-3 control-label">Address</label>
+		<label for="Address" class="col-lg-3 control-label">Alamat</label>
 		<div class="col-lg-9">
-			<textarea rows="5" id="Address" name="address" class="form-control" required><?php echo $patients['address']; ?></textarea>
+			<textarea rows="5" id="Address" name="address" placeholder="Alamat" class="form-control" required><?php echo $patients['address']; ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="AttachedTools" class="col-lg-3 control-label">Attached Tools</label>
+		<label for="AttachedTools" class="col-lg-3 control-label">Alat Terpasang</label>
 		<div class="col-lg-9">
-			<textarea rows="5" id="AttachedTools" name="attached_tools" class="form-control" required><?php echo $patients['attached_tools']; ?></textarea>
+			<textarea rows="5" id="AttachedTools" name="attached_tools" placeholder="Alat Terpasang" class="form-control" required><?php echo $patients['attached_tools']; ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Diagnosis" class="col-lg-3 control-label">Diagnosis</label>
+		<label for="Diagnosis" class="col-lg-3 control-label">Diagnosa</label>
 		<div class="col-lg-9">
-			<textarea rows="5" id="Diagnosis" name="diagnosis" class="form-control" required><?php echo $patients['diagnosis']; ?></textarea>
+			<textarea rows="5" id="Diagnosis" name="diagnosis" placeholder="Diagnosa" class="form-control" required><?php echo $patients['diagnosis']; ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="MainComplaint" class="col-lg-3 control-label">Main Complaint</label>
+		<label for="MainComplaint" class="col-lg-3 control-label">Keluhan Utama</label>
 		<div class="col-lg-9">
-			<textarea rows="5" id="MainComplaint" name="main_complaint" class="form-control" required><?php echo $patients['main_complaint']; ?></textarea>
+			<textarea rows="5" id="MainComplaint" name="main_complaint" placeholder="Keluhan Utama" class="form-control" required><?php echo $patients['main_complaint']; ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Ubah</button>
 		</div>
 	</div>
 </fieldset>

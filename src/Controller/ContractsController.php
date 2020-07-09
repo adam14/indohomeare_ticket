@@ -46,10 +46,55 @@ class ContractsController extends AppController
      */
     public function index()
     {
+
+        $pjs = $this->req('GET', '/pjs')->json['data']['data'];
+
         $page = $this->request->query('page');
+        $disable_date = $this->request->query('disable_date');
+        $start_date = $this->request->query('start_date');
+        $end_date = $this->request->query('end_date');
+        $no_contract = $this->request->query('no_contract');
+        $pj_id = $this->request->query('pj_id');
+        $name_patient = $this->request->query('name_patient');
+        $status_contract = $this->request->query('status_contract');
+        $action_contract = $this->request->query('action_contract');
+
+        $current_date = date('Y-m-d');
+
+        $start_check = strtotime($start_date);
+        $end_check = strtotime($end_date);
+        $current_check = strtotime($current_date);
+		
+		$start_date = ($start_check == false || $start_check > $current_check) ? $current_check : $start_check;
+		$end_date = ($end_check == false || $end_check > $current_check) ? $current_check : $end_check;
+
         $data_limit = 20;
 
         $conditions = '?limit='.$data_limit;
+
+        if (!empty($action_contract)) {
+            $conditions .= '&action_contract='.$action_contract;
+        }
+
+        if ($disable_date != 1) {
+            $conditions .= '&start='.$start_date.'&end='.$end_date;
+        }
+
+        if (!empty($no_contract)) {
+            $conditions .= '&contract_no='.$no_contract;
+        }
+
+        if (!empty($pj_id)) {
+            $conditions .= '&pj_id='.$pj_id;
+        }
+
+        if (!empty($name_patient)) {
+            $conditions .= '&name_patient='.$name_patient;
+        }
+
+        if (!empty($status_contract)) {
+            $conditions .= '&status='.$status_contract;
+        }
 
         if (!is_numeric($page)) {
             $page = 1;
@@ -67,12 +112,12 @@ class ContractsController extends AppController
         $paging['current'] = 0;
 
         if (in_array($response->code, [200, 201])) {
-            $total_data = $result['data']['total'];
-            $contracts = $result['data']['data'];
-            $paging = $result['data']['current_page'];
+            $total_data = (!empty($result['data']['total'])) ? $result['data']['total'] : 0;
+            $contracts = (!empty($result['data']['data'])) ? $result['data']['data'] : [];
+            $paging = (!empty($result['data']['current_page'])) ? $result['data']['current_page'] : 0;
         }
 
-        $this->set(compact('contracts', 'total_data', 'paging', 'data_limit'));
+        $this->set(compact('contracts', 'total_data', 'paging', 'data_limit', 'pjs'));
     }
 
     /**
@@ -83,7 +128,7 @@ class ContractsController extends AppController
     {
         $this->autoRender = false;
 
-        $response = $this->req('GET', '/contracts?start='.date('Y-m-01').'&end='.date('Y-m-d'));
+        $response = $this->req('GET', '/contracts?start_no='.date('Y-m-01').'&end_no='.date('Y-m-d'));
         $result = $response->json;
         $total_contract = count($result['data']);
 

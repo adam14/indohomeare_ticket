@@ -134,23 +134,23 @@ class AppController extends Controller
                         'url' => ['controller' => 'Home', 'action' => 'index']
                     ],
                     [
-                        'title' => 'Contract',
+                        'title' => 'Kontrak',
                         'url' => ['controller' => 'Contracts', 'action' => 'index']
                     ],
                     [
-                        'title' => 'Medic Tools',
+                        'title' => 'Alkes',
                         'url' => ['controller' => 'MedicTools', 'action' => 'index']
                     ],
                     [
-                        'title' => 'Therapist',
+                        'title' => 'Terapi',
                         'url' => ['controller' => 'Therapist', 'action' => 'index']
                     ],
                     [
-                        'title' => 'Nurses',
+                        'title' => 'Perawat',
                         'url' => ['controller' => 'Nurses', 'action' => 'index']
                     ],
                     [
-                        'title' => 'Transport Times',
+                        'title' => 'Transport',
                         'url' => ['controller' => 'TransportTime', 'action' => 'index']
                     ],
                     [
@@ -158,7 +158,7 @@ class AppController extends Controller
                         'url' => ['controller' => 'Pjs', 'action' => 'index']
                     ],
                     [
-                        'title' => 'Patient',
+                        'title' => 'Pasien',
                         'url' => ['controller' => 'Patient', 'action' => 'index']
                     ]
                 ]

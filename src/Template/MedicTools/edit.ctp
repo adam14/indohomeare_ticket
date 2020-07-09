@@ -11,13 +11,13 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'edit', $medic_tools['id']], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="Name" class="col-lg-3 control-label">Name</label>
+		<label for="Name" class="col-lg-3 control-label">Nama</label>
 		<div class="col-lg-9">
 			<input name="name" class="form-control" id="Name" placeholder="Name" type="text" value="<?php echo $medic_tools['name']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="MedicToolsCategory" class="col-lg-3 control-label">Medic Tools Category</label>
+		<label for="MedicToolsCategory" class="col-lg-3 control-label">Kategori Alkes</label>
 		<div class="col-lg-9">
             <select class="form-control" name="medic_tool_category" id="MedicToolsCategory" required>
                 <option value="">-- Please Select --</option>
@@ -28,7 +28,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Ubah</button>
 		</div>
 	</div>
 </fieldset>

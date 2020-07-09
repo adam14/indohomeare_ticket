@@ -11,14 +11,14 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'edit', $nurse_categories['id']], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="Name" class="col-lg-3 control-label">Name</label>
+		<label for="Name" class="col-lg-3 control-label">Nama</label>
 		<div class="col-lg-9">
-			<input name="name" class="form-control" id="Name" placeholder="Name" type="text" value="<?php echo $nurse_categories['name']; ?>" required>
+			<input name="name" class="form-control" id="Name" placeholder="Nama" type="text" value="<?php echo $nurse_categories['name']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Ubah</button>
 		</div>
 	</div>
 </fieldset>

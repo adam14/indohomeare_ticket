@@ -19,11 +19,11 @@
 				dataType: "json",
 				beforeSend: function() {
 					$('#MedicToolsSessions').empty();
-					$('#MedicToolsSessions').append(new Option('Please Wait...', ''));
+					$('#MedicToolsSessions').append(new Option('Loading...', ''));
 				},
 				success: function(result) {
 					$('#MedicToolsSessions').empty();
-					$('#MedicToolsSessions').append(new Option('-- Please Select --', ''));
+					$('#MedicToolsSessions').append(new Option('-- Silakan Pilih --', ''));
 
 					for (i = 0; i < result.data.length; i++) {
 						$('#MedicToolsSessions').append('<option value="'+ result.data[i].id +'">Rp. '+ formatRupiah(result.data[i].price) +'</option>');
@@ -53,10 +53,10 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'add', $id], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="MedicTools" class="col-lg-3 control-label">Medic Tools</label>
+		<label for="MedicTools" class="col-lg-3 control-label">Alkes</label>
 		<div class="col-lg-9">
             <select class="form-control" id="MedicTools" name="medic_tool_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
                 <?php foreach ($medic_tools as $value): ?>
                     <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                 <?php endforeach; ?>
@@ -65,16 +65,16 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="MedicToolsSessions" class="col-lg-3 control-label">Medic Tools Sessions</label>
+		<label for="MedicToolsSessions" class="col-lg-3 control-label">Sesi Alkes</label>
 		<div class="col-lg-9">
             <select class="form-control" id="MedicToolsSessions" name="medic_tool_session_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
             </select>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Add</button>
+			<button type="submit" class="btn btn-primary">Tambah</button>
 		</div>
 	</div>
 </fieldset>

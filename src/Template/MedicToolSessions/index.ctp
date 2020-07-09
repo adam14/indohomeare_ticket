@@ -41,8 +41,8 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4 class="page-head-line">Medic Tools Session</h4>
-                <?php echo $this->Html->link('Add New', '#', ['class' => 'disable btn btn-sm btn-success', 'data-href' => $this->Url->build(['controller' => 'MedicToolSessions', 'action' => 'add']), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Add Data', 'title' => 'Click to Add', 'escape' => false]); ?>
+                <h4 class="page-head-line">Sesi Alkes</h4>
+                <?php echo $this->Html->link('Tambah Baru', '#', ['class' => 'disable btn btn-sm btn-success', 'data-href' => $this->Url->build(['controller' => 'MedicToolSessions', 'action' => 'add']), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Tambah Data', 'title' => 'Click to Add', 'escape' => false]); ?>
                 <div class="row">
                     <div class="col-md-12 margin-bottom-30">
                         <div class="panel panel-primary">
@@ -51,11 +51,11 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Medic Tools</th>
-                                            <th>Name</th>
-                                            <th>Category</th>
-                                            <th>Price</th>
-                                            <th>Action</th>
+                                            <th>Alkes</th>
+                                            <th>Nama</th>
+                                            <th>Kategori</th>
+                                            <th>Harga</th>
+                                            <th>&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,8 +69,8 @@
                                                     <td><?php echo $value['medic_tools']['medic_tool_category'] ?></td>
                                                     <td><?php echo $this->Number->currency($value['price'], 'Rp '); ?></td>
                                                     <td>
-                                                        <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'MedicToolSessions', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Edit Data', 'title' => 'Click to Edit', 'escape' => false]); ?>
-                                                        <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'confirm btn btn-sm btn-danger', 'data-href' => $this->Url->build(['controller' => 'MedicToolSessions', 'action' => 'delete', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#confirm', 'data-label' => 'Confirm Delete', 'data-message' => 'Are you sure you want to delete?', 'title' => 'Click to Delete', 'escape' => false]); ?>
+                                                        <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'MedicToolSessions', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Ubah Data', 'title' => 'Click to Edit', 'escape' => false]); ?>
+                                                        <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'confirm btn btn-sm btn-danger', 'data-href' => $this->Url->build(['controller' => 'MedicToolSessions', 'action' => 'delete', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#confirm', 'data-label' => 'Konfirmasi Hapus', 'data-message' => 'Yakin ingin menghapus data ini?', 'title' => 'Click to Delete', 'escape' => false]); ?>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -99,13 +99,13 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="btn btn-sm pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="confirm-label">Confirm</h4>
+				<h4 class="modal-title" id="confirm-label">Konfirmasi</h4>
 			</div>
 			<div class="modal-body body-confirm">
 			</div>
 			<div class="modal-footer">
-				<a class="btn btn-primary btn-ok">Yes</a>
-				<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+				<a class="btn btn-primary btn-ok">Ya</a>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
 			</div>
 		</div>
 	</div>

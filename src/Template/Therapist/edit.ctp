@@ -11,13 +11,13 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'edit', $therapist['id']], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="Name" class="col-lg-3 control-label">Name</label>
+		<label for="Name" class="col-lg-3 control-label">Nama</label>
 		<div class="col-lg-9">
-			<input name="name" class="form-control" id="Name" placeholder="Name" type="text" value="<?php echo $therapist['name']; ?>" required>
+			<input name="name" class="form-control" id="Name" placeholder="Nama" type="text" value="<?php echo $therapist['name']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="TherapistType" class="col-lg-3 control-label">Therapist Type</label>
+		<label for="TherapistType" class="col-lg-3 control-label">Tipe Terapi</label>
 		<div class="col-lg-9">
 			<select class="form-control" id="TherapistType" name="therapist_type_id" required>
 				<option value="">-- Please Select --</option>
@@ -29,7 +29,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Ubah</button>
 		</div>
 	</div>
 </fieldset>

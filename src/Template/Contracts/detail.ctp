@@ -227,7 +227,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4 class="page-head-line">Contract No : <?php echo $contracts->contract_no; ?> <span class="pull-right" id="StatusContract">Status: <?php echo $contracts->status; ?></span></h4>
+                <h4 class="page-head-line">No Kontrak : <?php echo $contracts->contract_no; ?> <span class="pull-right" id="StatusContract">Status: <?php echo $contracts->status; ?></span></h4>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="AlertUpdate" hidden="true"></div>
@@ -236,7 +236,7 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#detail" class="menu-tab">Detail</a></li>
                             <li><a data-toggle="tab" href="#perawat" class="menu-tab">Perawat</a></li>
-                            <li><a data-toggle="tab" href="#therapist" class="menu-tab">Therapist</a></li>
+                            <li><a data-toggle="tab" href="#therapist" class="menu-tab">Terapi</a></li>
                             <li><a data-toggle="tab" href="#alkes" class="menu-tab">Alkes</a></li>
                             <li><a data-toggle="tab" href="#transport" class="menu-tab">Transport</a></li>
                             <li><a data-toggle="tab" href="#event" class="menu-tab">Event</a></li>

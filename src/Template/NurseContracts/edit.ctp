@@ -22,9 +22,13 @@
 			type: 'GET',
 			url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurseCategories']); ?>',
 			dataType: 'json',
+			beforeSend: function() {
+				$('#NurseCategory').empty();
+				$('#NurseCategory').append(new Option('Loading...', ''));
+			},
 			success: function(result) {
 				$('#NurseCategory').empty();
-				$('#NurseCategory').append(new Option('-- Please Select --', ''));
+				$('#NurseCategory').append(new Option('-- Silakan Pilih --', ''));
 
                 for (i = 0; i < result.data.length; i++) {
                     $('#NurseCategory').append('<option value="'+ result.data[i].id +'">'+ result.data[i].name +'</option>');
@@ -38,9 +42,13 @@
 			url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'getNurseSessions']) ?>',
 			data: data_nurse_session,
 			dataType: "json",
+			beforeSend: function() {
+				$('#NurseSessions').empty();
+				$('#NurseSessions').append(new Option('Loading...', ''));
+			},
 			success: function(result) {
 				$('#NurseSessions').empty();
-				$('#NurseSessions').append(new Option('-- Please Select --', ''));
+				$('#NurseSessions').append(new Option('-- Silakan Pilih --', ''));
 
 				for (i = 0; i < result.data.length; i++) {
 					if (nurse_session_id == result.data[i].id) {
@@ -66,13 +74,13 @@
                 dataType: 'json',
 				beforeSend: function() {
 					$('#Nurses').empty();
-					$('#Nurses').append(new Option('Please Wait...', ''));
+					$('#Nurses').append(new Option('Loading...', ''));
 					$('#NurseSessions').empty();
-					$('#NurseSessions').append(new Option('-- Please Select --'));
+					$('#NurseSessions').append(new Option('-- Silakan Pilih --'));
 				},
                 success: function(result) {
                     $('#Nurses').empty();
-                    $('#Nurses').append(new Option('-- Please Select --', ''));
+                    $('#Nurses').append(new Option('-- Silakan Pilih --', ''));
 
                     for (i = 0; i < result.data.length; i++) {
                         $('#Nurses').append('<option value="'+ result.data[i]['id'] +'" category="'+ result.data[i]['nurse_category_id'] +'">'+ result.data[i]['fullname'] +'</option>');
@@ -96,11 +104,11 @@
 				dataType: "json",
 				beforeSend: function() {
 					$('#NurseSessions').empty();
-					$('#NurseSessions').append(new Option('Please Wait...', ''));
+					$('#NurseSessions').append(new Option('Loading...', ''));
 				},
 				success: function(result) {
 					$('#NurseSessions').empty();
-					$('#NurseSessions').append(new Option('-- Please Select --', ''));
+					$('#NurseSessions').append(new Option('-- Silakan Pilih --', ''));
 
 					for (i = 0; i < result.data.length; i++) {
 						$('#NurseSessions').append('<option value="'+ result.data[i].id +'">'+ result.data[i].name +' [Rp. '+ formatRupiah(result.data[i].price) +']</option>');
@@ -131,10 +139,10 @@
 <input name="contract_id" class="form-control" type="hidden" value="<?php echo $nurse_contracts['contract_id']; ?>">
 <fieldset>
 	<div class="form-group">
-		<label for="NurseCategory" class="col-lg-3 control-label">Nurse Category</label>
+		<label for="NurseCategory" class="col-lg-3 control-label">Kategori Perawat</label>
 		<div class="col-lg-9">
             <select class="form-control" id="NurseCategory" name="nurse_category_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
 				<!-- <?php foreach ($nurse_categories as $value): ?>
 					<option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
 				<?php endforeach; ?> -->
@@ -142,10 +150,10 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Nurses" class="col-lg-3 control-label">Nurses</label>
+		<label for="Nurses" class="col-lg-3 control-label">Perawat</label>
 		<div class="col-lg-9">
             <select class="form-control" id="Nurses" name="nurse_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
                 <?php foreach ($nurses as $value): ?>
                     <option value="<?php echo $value['id']; ?>" <?php echo ($nurse_contracts['nurse_id'] == $value['id']) ? 'selected' : ''; ?> category="<?php echo $value['nurse_category_id']; ?>"><?php echo $value['fullname']; ?></option>
                 <?php endforeach; ?>
@@ -153,16 +161,16 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="NurseSessions" class="col-lg-3 control-label">Nurse Sessions</label>
+		<label for="NurseSessions" class="col-lg-3 control-label">Sesi Perawat</label>
 		<div class="col-lg-9">
             <select class="form-control" id="NurseSessions" name="nurse_session_id" required>
-                <option value="">-- Please Select --</option>
+                <option value="">-- Silakan Pilih --</option>
             </select>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Ubah</button>
 		</div>
 	</div>
 </fieldset>

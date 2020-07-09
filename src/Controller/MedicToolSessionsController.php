@@ -74,15 +74,17 @@ class MedicToolSessionsController extends AppController
 
         if ($this->request->is('post')) {
             $medic_tool_id = $this->request->data('medic_tool_id');
+            $name = $this->request->data('name');
             $price = $this->request->data('price');
 
-            if (empty($medic_tool_id) || empty($price)) {
+            if (empty($medic_tool_id) || empty($name) || empty($price)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
 
             $data = [
                 'medic_tool_id' => $medic_tool_id,
+                'name' => $name,
                 'price' => $price
             ];
 
@@ -123,15 +125,17 @@ class MedicToolSessionsController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $medic_tool_id = $this->request->data('medic_tool_id');
+            $name = $this->request->data('name');
             $price = $this->request->data('price');
 
-            if (empty($medic_tool_id) || empty($price)) {
+            if (empty($medic_tool_id) || empty($name) || empty($price)) {
                 $this->Flash->error('Please complete the form.');
                 return $this->redirect($this->referer());
             }
 
             $data = [
                 'medic_tool_id' => $medic_tool_id,
+                'name' => $name,
                 'price' => $price,
                 'updated_at' => date('Y-m-d H:i:s')
             ];

@@ -6,7 +6,7 @@
             dataType: 'json',
             success: function(result) {
                 $('#Nurses').empty();
-				$('#Nurses').append(new Option('-- Please Select --', ''));
+				$('#Nurses').append(new Option('-- Silakan Pilih --', ''));
 
                 for (i = 0; i < result.data.length; i++) {
                     $('#Nurses').append('<option value="'+ result.data[i]['id'] +'" category="'+ result.data[i]['nurse_category_id'] +'">'+ result.data[i]['fullname'] +'</option>');
@@ -22,11 +22,11 @@
             dataType: 'json',
             beforeSend: function() {
                 $('#NurseCategory').empty();
-                $('#NurseCategory').append(new Option('Please Wait...', ''));
+                $('#NurseCategory').append(new Option('Loading...', ''));
             },
             success: function(result) {
                 $('#NurseCategory').empty();
-				$('#NurseCategory').append(new Option('-- Please Select --', ''));
+				$('#NurseCategory').append(new Option('-- Silakan Pilih --', ''));
 
                 for (i = 0; i < result.data.length; i++) {
                     $('#NurseCategory').append('<option value="'+ result.data[i]['id'] +'">'+ result.data[i]['name'] +'</option>');
@@ -42,11 +42,11 @@
             dataType: 'json',
             beforeSend: function() {
                 $('#Therapist').empty();
-                $('#Therapist').append(new Option('Please Wait...', ''));
+                $('#Therapist').append(new Option('Loading...', ''));
             },
             success: function(result) {
                 $('#Therapist').empty();
-				$('#Therapist').append(new Option('-- Please Select --', ''));
+				$('#Therapist').append(new Option('-- Silakan Pilih --', ''));
 
                 for (i = 0; i < result.data.length; i++) {
                     $('#Therapist').append('<option value="'+ result.data[i]['id'] +'" type-therapist="'+ result.data[i]['therapist_type_id'] +'">'+ result.data[i]['name'] +'</option>');
@@ -62,11 +62,11 @@
             dataType: 'json',
             beforeSend: function() {
                 $('#TherapistType').empty();
-                $('#TherapistType').append(new Option('Please Wait...', ''));
+                $('#TherapistType').append(new Option('Loading...', ''));
             },
             success: function(result) {
                 $('#TherapistType').empty();
-                $('#TherapistType').append(new Option('-- Please Select --', ''));
+                $('#TherapistType').append(new Option('-- Silakan Pilih --', ''));
 
                 for (i = 0; i < result.data.length; i++) {
                     $('#TherapistType').append('<option value="'+ result.data[i]['id'] +'">'+ result.data[i]['name'] +'</option>');
@@ -82,11 +82,11 @@
             dataType: 'json',
             beforeSend: function() {
                 $('#MedicTool').empty();
-                $('#MedicTool').append(new Option('Please Wait...', ''));
+                $('#MedicTool').append(new Option('Loading...', ''));
             },
             success: function(result) {
                 $('#MedicTool').empty();
-				$('#MedicTool').append(new Option('-- Please Select --', ''));
+				$('#MedicTool').append(new Option('-- Silakan Pilih --', ''));
 
                 for (i = 0; i < result.data.length; i++) {
                     $('#MedicTool').append('<option value="'+ result.data[i]['id'] +'">'+ result.data[i]['name'] +'</option>');
@@ -102,11 +102,11 @@
             dataType: 'json',
             beforeSend: function() {
                 $('#Transport').empty();
-                $('#Transport').append(new Option('Please Wait...', ''));
+                $('#Transport').append(new Option('Loading...', ''));
             },
             success: function(result) {
                 $('#Transport').empty();
-				$('#Transport').append(new Option('-- Please Select --', ''));
+				$('#Transport').append(new Option('-- Silakan Pilih --', ''));
 
                 for (i = 0; i < result.data.length; i++) {
                     $('#Transport').append('<option value="'+ result.data[i]['id'] +'">'+ result.data[i]['name'] +' [Rp. '+ formatRupiah(result.data[i]['price']) +']</option>');
@@ -431,11 +431,11 @@
                         $('#NurseList').show();
 
                         $('#NurseCategory').empty();
-                        $('#NurseCategory').append(new Option('-- Please Select --', ''));
+                        $('#NurseCategory').append(new Option('-- Silakan Pilih --', ''));
                         $('#Nurses').empty();
-                        $('#Nurses').append(new Option('-- Please Select --', ''));
+                        $('#Nurses').append(new Option('-- Silakan Pilih --', ''));
                         $('#NurseSessions').empty();
-                        $('#NurseSessions').append(new Option('-- Please Select --', ''));
+                        $('#NurseSessions').append(new Option('-- Silakan Pilih --', ''));
                     }
                 }
             });
@@ -448,11 +448,11 @@
             $('#NurseList').show();
 
             $('#NurseCategory').empty();
-            $('#NurseCategory').append(new Option('-- Please Select --', ''));
+            $('#NurseCategory').append(new Option('-- Silakan Pilih --', ''));
             $('#Nurses').empty();
-			$('#Nurses').append(new Option('-- Please Select --', ''));
+			$('#Nurses').append(new Option('-- Silakan Pilih --', ''));
             $('#NurseSessions').empty();
-			$('#NurseSessions').append(new Option('-- Please Select --', ''));
+			$('#NurseSessions').append(new Option('-- Silakan Pilih --', ''));
         });
 
         $('#NurseCategory').on('change', function(e) {
@@ -468,11 +468,11 @@
                 dataType: 'json',
                 beforeSend: function() {
                     $('#Nurses').empty();
-                    $('#Nurses').append(new Option('Please Wait...', ''));
+                    $('#Nurses').append(new Option('Loading...', ''));
                 },
                 success: function(result) {
                     $('#Nurses').empty();
-                    $('#Nurses').append(new Option('-- Please Select --', ''));
+                    $('#Nurses').append(new Option('-- Silakan Pilih --', ''));
 
                     for (i = 0; i < result.data.length; i++) {
                         $('#Nurses').append('<option value="'+ result.data[i]['id'] +'" category="'+ result.data[i]['nurse_category_id'] +'">'+ result.data[i]['fullname'] +'</option>');
@@ -496,11 +496,11 @@
 				dataType: "json",
                 beforeSend: function() {
                     $('#NurseSessions').empty();
-                    $('#NurseSessions').append(new Option('Please Wait...', ''));
+                    $('#NurseSessions').append(new Option('Loading...', ''));
                 },
 				success: function(result) {
 					$('#NurseSessions').empty();
-					$('#NurseSessions').append(new Option('-- Please Select --', ''));
+					$('#NurseSessions').append(new Option('-- Silakan Pilih --', ''));
 
 					for (i = 0; i < result.data.length; i++) {
 						$('#NurseSessions').append('<option value="'+ result.data[i].id +'">'+ result.data[i].name +' [Rp. '+ formatRupiah(result.data[i].price) +']</option>');
@@ -547,11 +547,11 @@
                         $('#TherapistList').show();
 
                         $('#TherapistType').empty();
-                        $('#TherapistType').append(new Option('-- Please Select --', ''));
+                        $('#TherapistType').append(new Option('-- Silakan Pilih --', ''));
                         $('#Therapist').empty();
-                        $('#Therapist').append(new Option('-- Please Select --', ''));
+                        $('#Therapist').append(new Option('-- Silakan Pilih --', ''));
                         $('#TherapistSessions').empty();
-                        $('#TherapistSessions').append(new Option('-- Please Select --', ''));
+                        $('#TherapistSessions').append(new Option('-- Silakan Pilih --', ''));
                     }
                 }
             });
@@ -564,11 +564,11 @@
             $('#TherapistList').show();
 
             $('#TherapistType').empty();
-            $('#TherapistType').append(new Option('-- Please Select --', ''));
+            $('#TherapistType').append(new Option('-- Silakan Pilih --', ''));
             $('#Therapist').empty();
-			$('#Therapist').append(new Option('-- Please Select --', ''));
+			$('#Therapist').append(new Option('-- Silakan Pilih --', ''));
             $('#TherapistSessions').empty();
-			$('#TherapistSessions').append(new Option('-- Please Select --', ''));
+			$('#TherapistSessions').append(new Option('-- Silakan Pilih --', ''));
         });
 
         $('#TherapistType').on('change', function(e) {
@@ -584,11 +584,11 @@
                 dataType: 'json',
                 beforeSend: function() {
                     $('#Therapist').empty();
-                    $('#Therapist').append(new Option('Please Wait...', ''));
+                    $('#Therapist').append(new Option('Loading...', ''));
                 },
                 success: function(result) {
                     $('#Therapist').empty();
-                    $('#Therapist').append(new Option('-- Please Select --', ''));
+                    $('#Therapist').append(new Option('-- Silakan Pilih --', ''));
 
                     for (i = 0; i < result.data.length; i++) {
                         $('#Therapist').append('<option value="'+ result.data[i]['id'] +'" type-therapist="'+ result.data[i]['therapist_type_id'] +'">'+ result.data[i]['name'] +'</option>');
@@ -612,11 +612,11 @@
 				dataType: "json",
                 beforeSend: function() {
                     $('#TherapistSessions').empty();
-                    $('#TherapistSessions').append(new Option('Please Wait...', ''));
+                    $('#TherapistSessions').append(new Option('Loading...', ''));
                 },
 				success: function(result) {
 					$('#TherapistSessions').empty();
-					$('#TherapistSessions').append(new Option('-- Please Select --', ''));
+					$('#TherapistSessions').append(new Option('-- Silakan Pilih --', ''));
 
 					for (i = 0; i < result.data.length; i++) {
 						$('#TherapistSessions').append('<option value="'+ result.data[i].id +'">'+ result.data[i].name +' [Rp. '+ formatRupiah(result.data[i].price) +']</option>');
@@ -666,9 +666,9 @@
                         $('#MedicToolList').show();
 
                         $('#MedicTool').empty();
-                        $('#MedicTool').append(new Option('-- Please Select --', ''));
+                        $('#MedicTool').append(new Option('-- Silakan Pilih --', ''));
                         $('#MedicToolSessions').empty();
-                        $('#MedicToolSessions').append(new Option('-- Please Select --', ''));
+                        $('#MedicToolSessions').append(new Option('-- Silakan Pilih --', ''));
                         $('#Quantity').val('');
                         $('#FormTotalPriceMedicToolContract').val('');
                         $('#PriceMedicToolSessions').val('');
@@ -685,9 +685,9 @@
             $('#MedicToolList').show();
 
             $('#MedicTool').empty();
-			$('#MedicTool').append(new Option('-- Please Select --', ''));
+			$('#MedicTool').append(new Option('-- Silakan Pilih --', ''));
             $('#MedicToolSessions').empty();
-			$('#MedicToolSessions').append(new Option('-- Please Select --', ''));
+			$('#MedicToolSessions').append(new Option('-- Silakan Pilih --', ''));
             $('#Quantity').val('');
             $('#FormTotalPriceMedicToolContract').val('');
             $('#PriceMedicToolSessions').val('');
@@ -707,11 +707,11 @@
 				dataType: "json",
                 beforeSend: function() {
                     $('#MedicToolSessions').empty();
-					$('#MedicToolSessions').append(new Option('Please Wait...', ''));
+					$('#MedicToolSessions').append(new Option('Loading...', ''));
                 },
 				success: function(result) {
 					$('#MedicToolSessions').empty();
-					$('#MedicToolSessions').append(new Option('-- Please Select --', ''));
+					$('#MedicToolSessions').append(new Option('-- Silakan Pilih --', ''));
 
 					for (i = 0; i < result.data.length; i++) {
 						$('#MedicToolSessions').append('<option value="'+ result.data[i].id +'" price-medic-tool-session="'+ result.data[i].price +'">Rp. '+ formatRupiah(result.data[i].price) +'</option>');
@@ -768,7 +768,7 @@
                         $('#TransportList').show();
 
                         $('#Transport').empty();
-                        $('#Transport').append(new Option('-- Please Select --', ''));
+                        $('#Transport').append(new Option('-- Silakan Pilih --', ''));
                         $('#Distance').val('');
                     }
                 }
@@ -782,7 +782,7 @@
             $('#TransportList').show();
 
             $('#Transport').empty();
-			$('#Transport').append(new Option('-- Please Select --', ''));
+			$('#Transport').append(new Option('-- Silakan Pilih --', ''));
             $('#Distance').val('');
         });
         /** End */

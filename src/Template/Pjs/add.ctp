@@ -15,9 +15,9 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'add'], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="Fullname" class="col-lg-3 control-label">Fullname</label>
+		<label for="Fullname" class="col-lg-3 control-label">Nama Lengkap</label>
 		<div class="col-lg-9">
-			<input name="fullname" class="form-control" id="Fullname" placeholder="Fullname" type="text" required>
+			<input name="fullname" class="form-control" id="Fullname" placeholder="Nama Lengkap" type="text" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -39,14 +39,14 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Address" class="col-lg-3 control-label">Address</label>
+		<label for="Address" class="col-lg-3 control-label">Alamat</label>
 		<div class="col-lg-9">
-			<textarea rows="5" name="address" class="form-control" id="Address" placeholder="Address" required></textarea>
+			<textarea rows="5" name="address" class="form-control" id="Address" placeholder="Alamat" required></textarea>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-lg-9 col-lg-offset-3">
-			<button type="submit" class="btn btn-primary">Add</button>
+			<button type="submit" class="btn btn-primary">Tambah</button>
 		</div>
 	</div>
 </fieldset>

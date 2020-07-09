@@ -15,9 +15,9 @@
 <?php echo $this->Form->create(null, ['url' => ['action' => 'edit', $pjs['id']], 'type' => 'file', 'class' => 'form-horizontal', 'data-parsley-validate']); ?>
 <fieldset>
 	<div class="form-group">
-		<label for="Fullname" class="col-lg-3 control-label">Fullname</label>
+		<label for="Fullname" class="col-lg-3 control-label">Nama Lengkap</label>
 		<div class="col-lg-9">
-			<input name="fullname" class="form-control" id="Fullname" placeholder="Fullname" type="text" value="<?php echo $pjs['fullname']; ?>" required>
+			<input name="fullname" class="form-control" id="Fullname" placeholder="Nama Lengkap" type="text" value="<?php echo $pjs['fullname']; ?>" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -39,9 +39,9 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Address" class="col-lg-3 control-label">Address</label>
+		<label for="Address" class="col-lg-3 control-label">Alamat</label>
 		<div class="col-lg-9">
-			<textarea rows="5" name="address" class="form-control" id="Address" placeholder="Address" required><?php echo $pjs['address']; ?></textarea>
+			<textarea rows="5" name="address" class="form-control" id="Address" placeholder="Alamat" required><?php echo $pjs['address']; ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
