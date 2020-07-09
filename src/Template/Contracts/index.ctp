@@ -183,6 +183,12 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nomor Kontrak</th>
+											<th>Status</th>
+											<th>PJ</th>
+											<th>Pasien</th>
+											<th>Tanggal Mulai</th>
+											<th>Tanggal Akhir</th>
+											<th>Total Biaya</th>
                                             <!-- <th>Action</th> -->
                                         </tr>
                                     </thead>
@@ -199,6 +205,12 @@
 															<a href="<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detail']); ?>/<?php echo $value['id']; ?>"><?php echo $value['contract_no']; ?></a>
 														<?php endif; ?>
 													</td>
+													<td><?php echo $value['status'] ?></td>
+													<td><?php echo $value['pjs']['fullname'] ?></td>
+													<td><?php echo $value['patients']['fullname'] ?></td>
+													<td><?php echo $value['start_date'] ?></td>
+													<td><?php echo $value['end_date'] ?></td>
+													<td><?php echo $value['total_price'] ?></td>
                                                     <!-- <td>
                                                         <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'Contracts', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Edit Data', 'title' => 'Click to Edit', 'escape' => false]); ?>
                                                         <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'confirm btn btn-sm btn-danger', 'data-href' => $this->Url->build(['controller' => 'Contracts', 'action' => 'delete', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#confirm', 'data-label' => 'Confirm Delete', 'data-message' => 'Are you sure you want to delete?', 'title' => 'Click to Delete', 'escape' => false]); ?>

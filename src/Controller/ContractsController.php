@@ -205,7 +205,7 @@ class ContractsController extends AppController
 
         $response = $this->req('GET', '/contracts?contract_no='.$contract_no);
         $result = $response->json;
-        $contracts = $result['data'];
+        $contracts = $result['data']['data'][0];
 
         $response = $this->req('GET', '/patients');
         $result = $response->json['data'];
