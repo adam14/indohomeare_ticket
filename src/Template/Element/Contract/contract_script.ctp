@@ -340,7 +340,7 @@
                         `);
                     }
 
-                    $('#bodyTransport').append(`
+                    $('#bodyEvent').append(`
                         <tr>
                             <td align="right"><b>Subtotal</b></td>
                             <td><b>Rp `+ formatRupiah(subtotal.toString()) +`</b></td>
@@ -617,6 +617,8 @@
 				success: function(result) {
 					$('#TherapistSessions').empty();
 					$('#TherapistSessions').append(new Option('-- Silakan Pilih --', ''));
+
+                    console.log(result.data.length);
 
 					for (i = 0; i < result.data.length; i++) {
 						$('#TherapistSessions').append('<option value="'+ result.data[i].id +'">'+ result.data[i].name +' [Rp. '+ formatRupiah(result.data[i].price) +']</option>');

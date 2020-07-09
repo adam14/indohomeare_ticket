@@ -185,7 +185,8 @@ class ContractsController extends AppController
                 'patient_id' => $patient_id,
                 'start_date' => $start_date,
                 'end_date' => $end_date,
-                'total_price' => (!empty($total_price)) ? $total_price : 0
+                'total_price' => (!empty($total_price)) ? $total_price : 0,
+                'status' => 'Deal'
             ];
 
             $post_data = $this->req('PUT', '/contracts/'.$contract_id, $data);
