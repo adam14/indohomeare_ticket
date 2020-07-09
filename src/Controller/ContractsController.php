@@ -130,7 +130,8 @@ class ContractsController extends AppController
 
         $response = $this->req('GET', '/contracts?start_no='.date('Y-m-01').'&end_no='.date('Y-m-d'));
         $result = $response->json;
-        $total_contract = count($result['data']);
+        // $total_contract = count($result['data']);
+        $total_contract = $result['data']['total'];
 
         $no_prefix = $total_contract + 1;
         $contract_no = "NMK.".date("Y-m-").sprintf('%04d', $no_prefix);
