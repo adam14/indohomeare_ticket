@@ -19,6 +19,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $subtotal_nurse = 0; ?>
                                         <?php if (!empty($nurse_contracts)): ?>
                                             <?php $i = 1; ?>
                                             <?php foreach ($nurse_contracts as $value): ?>

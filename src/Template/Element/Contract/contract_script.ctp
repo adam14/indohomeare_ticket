@@ -157,6 +157,7 @@
                     `);
 
                     $('#TotalPriceNurseContract').val(subtotal.toString());
+                    $('#SubtotalPriceNurseContract').html('Subtotal Perawat : Rp. ' + formatRupiah(subtotal.toString()));
                     TotalPrice();
                 }
             }
@@ -205,6 +206,7 @@
                     `);
                     
                     $('#TotalPriceTherapistContract').val(subtotal.toString());
+                    $('#SubtotalPriceTherapistContract').html('Subtotal Terapi : Rp. ' + formatRupiah(subtotal.toString()));
                     TotalPrice();
                 }
             }
@@ -254,6 +256,7 @@
                     `);
                     
                     $('#TotalPriceMedicToolContract').val(subtotal.toString());
+                    $('#SubtotalPriceMedicToolContract').html('Subtotal Alkes : Rp. ' + formatRupiah(subtotal.toString()));
                     TotalPrice();
                 }
             }
@@ -302,6 +305,7 @@
                     `);
                     
                     $('#TotalPriceTransportContract').val(subtotal.toString());
+                    $('#SubtotalPriceTransportContract').html('Subtotal Transport : Rp. ' + formatRupiah(subtotal.toString()));
                     TotalPrice();
                 }
             }
@@ -349,6 +353,7 @@
                     `);
                     
                     $('#TotalPriceEventContract').val(subtotal.toString());
+                    $('#SubtotalPriceEventContract').html('Subtotal Event : Rp. ' + formatRupiah(subtotal.toString()));
                     TotalPrice();
                 }
             }

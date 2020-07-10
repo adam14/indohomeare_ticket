@@ -13,7 +13,7 @@
 			weekStart: 1,
 			language: 'en',
 			startDate: '',
-			endDate: '<?php echo date('Y-m-d'); ?>',
+			endDate: '',
 			todayHighlight: true,
 		});
 

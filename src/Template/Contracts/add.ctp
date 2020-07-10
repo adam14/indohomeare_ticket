@@ -161,6 +161,13 @@
                                                     <input type="hidden" class="form-control input-sm" id="TotalPriceContract" name="total_price">
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <p id="SubtotalPriceNurseContract"></p>
+                                                <p id="SubtotalPriceTherapistContract"></p>
+                                                <p id="SubtotalPriceMedicToolContract"></p>
+                                                <p id="SubtotalPriceTransportContract"></p>
+                                                <p id="SubtotalPriceEventContract"></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -1,3 +1,40 @@
+<?php
+$subtotal_nurse = 0;
+$subtotal_therapist = 0;
+$subtotal_medic_tool = 0;
+$subtotal_transport = 0;
+$subtotal_event = 0;
+
+if (!empty($nurse_contracts)) {
+    foreach ($nurse_contracts as $value) {
+        $subtotal_nurse = $subtotal_nurse + $value['nurse_sessions']['price'];
+    }
+}
+
+if (!empty($therapist_contracts)) {
+    foreach ($therapist_contracts as $value) {
+        $subtotal_therapist = $subtotal_therapist + $value['therapist_sessions']['price'];
+    }
+}
+
+if (!empty($medic_tool_contracts)) {
+    foreach ($medic_tool_contracts as $value) {
+        $subtotal_medic_tool = $subtotal_medic_tool + $value['total_price'];
+    }
+}
+
+if (!empty($transport_contracts)) {
+    foreach ($transport_contracts as $value) {
+        $subtotal_transport = $subtotal_transport + $value['transport_times']['price'];
+    }
+}
+
+if (!empty($event_contracts)) {
+    foreach ($event_contracts as $value) {
+        $subtotal_event = $sutotal_event + $value['price'];
+    }
+}
+?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
@@ -45,6 +82,13 @@
                                                 <label>Jumlah Biaya</label>
                                                 <input type="text" class="form-control input-sm" value="<?php echo $this->Number->currency($contracts->total_price, 'Rp '); ?>" readonly>
                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p>Subtotal Perawat : <?php echo $this->Number->currency($subtotal_nurse, 'Rp '); ?></p>
+                                            <p>Subtotal Terapi : <?php echo $this->Number->currency($subtotal_therapist, 'Rp '); ?></p>
+                                            <p>Subtotal Alkes : <?php echo $this->Number->currency($subtotal_medic_tool, 'Rp '); ?></p>
+                                            <p>Subtotal Transport : <?php echo $this->Number->currency($subtotal_transport, 'Rp '); ?></p>
+                                            <p>Subtotal Event : <?php echo $this->Number->currency($subtotal_event, 'Rp '); ?></p>
                                         </div>
                                     </div>
                                 </div>
