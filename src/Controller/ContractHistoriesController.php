@@ -53,7 +53,8 @@ class ContractHistoriesController extends AppController
 
             $data = [
                 'contract_id' => $contract_id,
-                'description' => $description
+                'description' => $description,
+                'user_id' => $this->request->session()->read('Auth.User.id')
             ];
 
             $post_data = $this->req('POST', '/contract_histories', $data);
@@ -150,7 +151,8 @@ class ContractHistoriesController extends AppController
 
             $data = [
                 'contract_id' => $contract_id,
-                'description' => $description
+                'description' => $description,
+                'user_id' => $this->request->session()->read('Auth.User.id')
             ];
 
             $post_data = $this->req('POST', '/contract_histories', $data);

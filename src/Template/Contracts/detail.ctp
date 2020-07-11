@@ -136,7 +136,7 @@
 
 					if (result.status == 'true') {
 						$.each(result.data.data, function(i, result) {
-							$('#ResultNote').append(`<i>` + result.created_at + `</i> <p>[Status : <?php echo $contracts->status; ?>] `+ result.description +`</p>`);
+							$('#ResultNote').append(`<i>` + result.created_at + `</i> <b>`+result.users.fullname+`</b> <p>[Status : <?php echo $contracts->status; ?>] `+ result.description +`</p>`);
 						});
 					}
 				}
@@ -209,7 +209,7 @@
 						status_last = status_updated;
 					}
 
-					$('#ResultNote').append(`<i><?php echo date('Y-m-d H:i:s'); ?></i> <p>[Status : `+ status_last +`] `+ data_contract_histories.description +`</p>`);
+					$('#ResultNote').append(`<i><?php echo date('Y-m-d H:i:s'); ?></i> <b>`+"<?php echo $this->request->session()->read('Auth.User.fullname') ?>"+`</b> <p>[Status : `+ status_last +`] `+ data_contract_histories.description +`</p>`);
 					$('#StatusContract').html('Status: '+ status_last);
 				} else {
 					$('#AlertUpdate').html(`<div class="alert alert-error">`+ result.error_msg +`</div>`);
