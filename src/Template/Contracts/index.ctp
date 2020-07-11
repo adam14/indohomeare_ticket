@@ -6,6 +6,36 @@
 <?php echo $this->Html->script('/vendor/bootstrap-datepicker/js/bootstrap-datepicker'); ?>
 <script>
 	$(document).ready(function() {
+
+		var pj_id = "<?php echo $this->request->query('pj_id') ?>";
+		if (pj_id != "") {
+            var data_pj = {
+                'pj_id' : pj_id
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'getPatient']); ?>',
+                data: data_pj,
+                dataType: "json",
+				beforeSend: function() {
+					$('#Patient').empty();
+					$('#Patient').append(new Option('Loading...'));
+				},
+                success: function(result) {
+                    $('#Patient').empty();
+                    $('#Patient').append(new Option('-- Silakan Pilih --', ''));
+
+                    for (i = 0; i < result.data.length; i++) {
+                        $('#Patient').append('<option value="'+ result.data[i].id +'">'+ result.data[i].fullname +'</option>')
+						if (result.data[i].id == <?php echo $this->request->query('patient_id') ?>) {
+							$('#Patient').val(<?php echo $this->request->query('patient_id') ?>);
+						}
+                    }
+                }
+            });
+		}
+		
 		$(".date").datepicker({
 			format: 'yyyy-mm-dd',
 			autoclose: true,
@@ -165,7 +195,7 @@
 									</div>
 									<div class="row">
 										<div class="form-group col-sm-6">
-											<button type="submit" class="btn btn-sm btn-primary" name="submit_search_contract" id="SubmitSearchContract">Proses</button>
+											<button type="submit" class="btn btn-sm btn-primary" name="submit_search_contract" id="SubmitSearchContract">Cari</button>
 										</div>
 									</div>
 								<?php echo $this->Form->end(); ?>
@@ -189,7 +219,6 @@
 											<th>Tanggal Mulai</th>
 											<th>Tanggal Akhir</th>
 											<th>Total Biaya</th>
-                                            <!-- <th>Action</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -211,10 +240,6 @@
 													<td><?php echo $value['start_date'] ?></td>
 													<td><?php echo $value['end_date'] ?></td>
 													<td><?php echo $value['total_price'] ?></td>
-                                                    <!-- <td>
-                                                        <?php echo $this->Html->link('<i class="fa fa-pencil"></i>', '#', ['class' => 'btn btn-sm btn-info', 'data-href' => $this->Url->build(['controller' => 'Contracts', 'action' => 'edit', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Edit Data', 'title' => 'Click to Edit', 'escape' => false]); ?>
-                                                        <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '#', ['class' => 'confirm btn btn-sm btn-danger', 'data-href' => $this->Url->build(['controller' => 'Contracts', 'action' => 'delete', $value['id']]), 'data-toggle' => 'modal', 'data-target' => '#confirm', 'data-label' => 'Confirm Delete', 'data-message' => 'Are you sure you want to delete?', 'title' => 'Click to Delete', 'escape' => false]); ?>
-                                                    </td> -->
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>

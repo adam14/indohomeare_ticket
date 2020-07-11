@@ -30,7 +30,8 @@ class ContractsController extends AppController
             'getHistory',
             'getPatient',
             'progressContract',
-            'updateStatus'
+            'updateStatus',
+            'print'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -38,6 +39,89 @@ class ContractsController extends AppController
         }
 
         $this->Flash->error('You\'re not worthy.');
+    }
+
+    public function print($id = null)
+    {
+        $this->viewBuilder()->layout('modal');
+        /** Contract Event */
+        $response = $this->req('GET', '/event_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $event_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $event_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Transport Contract */
+        $response = $this->req('GET', '/transport_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $transport_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $transport_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Nurse Contract */
+        $response = $this->req('GET', '/nurse_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $nurse_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $nurse_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Therapist Contract */
+        $response = $this->req('GET', '/therapist_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $therapist_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $therapist_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Medic Tools Contract */
+        $response = $this->req('GET', '/medic_tool_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $medic_tool_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $medic_tool_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Contract Histories */
+        $response = $this->req('GET', '/contract_histories');
+        $result = $response->json['data'];
+        $contract_histories = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $contract_histories = $result['data'];
+        }
+        /** End */
+
+        /** Get PJ */
+        $response = $this->req('GET', '/pjs');
+        $result = $response->json['data'];
+        $pjs = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $pjs = $result['data'];
+        }
+        /** End */
+
+        $contracts = [];
+        $get_contracts = $this->req('GET', '/contracts/'.$id);
+
+        if (in_array($get_contracts->code, [200, 201])) {
+            $contracts = (object) $get_contracts->json['data'];
+        }
+
+        $this->set(compact('contracts', 'event_contracts', 'transport_contracts', 'nurse_contracts', 'therapist_contracts', 'medic_tool_contracts', 'contract_histories', 'pjs'));
     }
 
     /**
@@ -58,6 +142,7 @@ class ContractsController extends AppController
         $name_patient = $this->request->query('name_patient');
         $status_contract = $this->request->query('status_contract');
         $action_contract = $this->request->query('action_contract');
+        $patient_id = $this->request->query('patient_id');
 
         $current_date = date('Y-m-d');
 
@@ -94,6 +179,10 @@ class ContractsController extends AppController
 
         if (!empty($status_contract)) {
             $conditions .= '&status='.$status_contract;
+        }
+
+        if (!empty($patient_id)) {
+            $conditions .= '&patient_id='.$patient_id;
         }
 
         if (!is_numeric($page)) {
@@ -201,8 +290,6 @@ class ContractsController extends AppController
 
             return $this->redirect($this->referer());
         }
-
-        // $contract_no = "NMK.".date("Y-m-").rand(1000,9999);
 
         $response = $this->req('GET', '/contracts?contract_no='.$contract_no);
         $result = $response->json;

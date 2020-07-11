@@ -4,35 +4,41 @@ $subtotal_therapist = 0;
 $subtotal_medic_tool = 0;
 $subtotal_transport = 0;
 $subtotal_event = 0;
+$total = 0;
 
 if (!empty($nurse_contracts)) {
     foreach ($nurse_contracts as $value) {
         $subtotal_nurse = $subtotal_nurse + $value['nurse_sessions']['price'];
     }
+    $total += $subtotal_nurse;
 }
 
 if (!empty($therapist_contracts)) {
     foreach ($therapist_contracts as $value) {
         $subtotal_therapist = $subtotal_therapist + $value['therapist_sessions']['price'];
     }
+    $total += $subtotal_therapist;
 }
 
 if (!empty($medic_tool_contracts)) {
     foreach ($medic_tool_contracts as $value) {
         $subtotal_medic_tool = $subtotal_medic_tool + $value['total_price'];
     }
+    $total += $subtotal_medic_tool;
 }
 
 if (!empty($transport_contracts)) {
     foreach ($transport_contracts as $value) {
         $subtotal_transport = $subtotal_transport + $value['transport_times']['price'];
     }
+    $total += $subtotal_transport;
 }
 
 if (!empty($event_contracts)) {
     foreach ($event_contracts as $value) {
-        $subtotal_event = $sutotal_event + $value['price'];
+        $subtotal_event = $subtotal_event + $value['price'];
     }
+    $total += $subtotal_event;
 }
 ?>
 <div class="row">
@@ -80,7 +86,7 @@ if (!empty($event_contracts)) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Jumlah Biaya</label>
-                                                <input type="text" class="form-control input-sm" value="<?php echo $this->Number->currency($contracts->total_price, 'Rp '); ?>" readonly>
+                                                <input type="text" class="form-control input-sm" value="<?php echo $this->Number->currency($total, 'Rp '); ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -141,6 +147,9 @@ if (!empty($event_contracts)) {
                                     </div>
                                 </div>
 							</div>
+                            <div class="col-md-6 col-sm-12 margin-bottom-30">
+                                <a target="_blank" href="<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'print']); ?>/<?php echo $contracts->id; ?>" class="btn btn-primary btn-sm">Print Invoice</a>
+                            </div>
                             <div class="col-md-12 col-sm-12 margin-bottom-30">
                                 <h4>Data Pasien</h4>
                                 <div class="panel panel-primary">
