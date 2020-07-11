@@ -43,7 +43,7 @@ class ContractsController extends AppController
 
     public function print($id = null)
     {
-        $this->viewBuilder()->layout('modal');
+        $this->viewBuilder()->layout('invoice');
         /** Contract Event */
         $response = $this->req('GET', '/event_contracts?contract_id='.$id);
         $result = $response->json['data'];
