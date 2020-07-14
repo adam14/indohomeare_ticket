@@ -1,10 +1,23 @@
 <?php $this->start('style'); ?>
 <?php echo $this->Html->css('/vendor/bootstrap-select/css/bootstrap-select'); ?>
 <?php echo $this->Html->css('/vendor/select-multiple/css/select-multiple'); ?>
+<?php echo $this->Html->css('/vendor/bootstrap-datepicker/css/bootstrap-datepicker'); ?>
 <?php $this->end(); ?>
 <?php $this->start('script'); ?>
+<?php echo $this->Html->script('/vendor/bootstrap-datepicker/js/bootstrap-datepicker'); ?>
 <script>
 	$(document).ready(function() {
+		$(".date").datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            minView: 2,
+            weekStart: 1,
+            language: 'en',
+            startDate: '',
+            endDate: '',
+            todayHighlight: true,
+	    });
+
 		var contract_pj_id = $('#ContractPJ').val();
 		var data_contract_pj = {
 			'pj_id' : contract_pj_id
@@ -15,75 +28,173 @@
 			url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'getPatient']); ?>',
 			data: data_contract_pj,
 			dataType: "json",
+			beforeSend: function() {
+				$('#ContractPatient').empty();
+				$('#ContractPatient').append(new Option('Loading...', ''));
+			},
 			success: function(result) {
-                    $('#ContractPatient').empty();
-                    $('#ContractPatient').append(new Option('-- Please Select --', ''));
+				$('#ContractPatient').empty();
+				$('#ContractPatient').append(new Option('-- Please Select --', ''));
 
-                    for (i = 0; i < result.data.length; i++) {
-                        $('#ContractPatient').append('<option value="'+ result.data[i].id +'">'+ result.data[i].fullname +'</option>')
-						$('#ContractPatient').val('<?php echo $contracts->patient_id; ?>');
-                    }
-					
-					$('#ContractPatient').attr('disabled', true);
+				for (i = 0; i < result.data.length; i++) {
+					$('#ContractPatient').append('<option value="'+ result.data[i].id +'">'+ result.data[i].fullname +'</option>')
+					$('#ContractPatient').val('<?php echo $contracts->patient_id; ?>');
+				}
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detailPj']); ?>',
-                        data: data_contract_pj,
-                        dataType: "json",
-                        success: function(result) {                            
-                            if (result.status == 'true') {
-                                $('#ContractPJNamaLengkap').val(result.data.fullname);
-                                $('#ContractPJNomorTelepon').val(result.data.handphone);
-                                $('#ContractPJKTP').val(result.data.ktp);
-                                $('#ContractPJEmail').val(result.data.email);
-                                $('#ContractPJAlamat').val(result.data.address);
-                            } else {
-                                $('#ContractPJNamaLengkap').val('');
-                                $('#ContractPJNomorTelepon').val('');
-                                $('#ContractPJKTP').val('');
-                                $('#ContractPJEmail').val('');
-                                $('#ContractPJAlamat').val('');
-                            }
-                        }
-                    });
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detailPj']); ?>',
+					data: data_contract_pj,
+					dataType: "json",
+					success: function(result) {                            
+						if (result.status == 'true') {
+							$('#ContractPJNamaLengkap').val(result.data.fullname);
+							$('#ContractPJNomorTelepon').val(result.data.handphone);
+							$('#ContractPJKTP').val(result.data.ktp);
+							$('#ContractPJEmail').val(result.data.email);
+							$('#ContractPJAlamat').val(result.data.address);
+						} else {
+							$('#ContractPJNamaLengkap').val('');
+							$('#ContractPJNomorTelepon').val('');
+							$('#ContractPJKTP').val('');
+							$('#ContractPJEmail').val('');
+							$('#ContractPJAlamat').val('');
+						}
+					}
+				});
 
-					var patient_id = '<?php echo $contracts->patient_id ?>';
-					var contract_data_patient = {
-						'patient_id' : patient_id
+				var patient_id = '<?php echo $contracts->patient_id ?>';
+				var contract_data_patient = {
+					'patient_id' : patient_id
+				}
+
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detailPatient']); ?>',
+					data: contract_data_patient,
+					dataType: "json",
+					success: function(result) {
+						if (result.status == 'true') {
+							$('#ContractPatientRekomendasiDari').val(result.data.recomendation_from);
+							$('#ContractPatientJenisKelamin').val(result.data.gender);
+							$('#ContractPatientUmur').val(result.data.years);
+							$('#ContractPatientBeratBadan').val(result.data.height);
+							$('#ContractPatientTinggiBadan').val(result.data.weight);
+							$('#ContractPatientAlamatLengkap').val(result.data.address);
+							$('#ContractPatientAlatTerpasang').val(result.data.attached_tools);
+							$('#ContractPatientDiagnosa').val(result.data.diagnosis);
+							$('#ContractPatientKeluhanUtama').val(result.data.main_complaint);
+						} else {
+							$('#ContractPatientRekomendasiDari').val('');
+							$('#ContractPatientJenisKelamin').val('');
+							$('#ContractPatientUmur').val('');
+							$('#ContractPatientBeratBadan').val('');
+							$('#ContractPatientTinggiBadan').val('');
+							$('#ContractPatientAlamatLengkap').val('');
+							$('#ContractPatientAlatTerpasang').val('');
+							$('#ContractPatientDiagnosa').val('');
+							$('#ContractPatientKeluhanUtama').val('');
+						}
+					}
+				});
+			}
+		});
+
+		$('#ContractPJ').on('change', function() {
+			var pj_id = $(this).val();
+			var data_pj = {
+				'pj_id' : pj_id
+			};
+
+			$.ajax({
+				type: 'POST',
+				url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'getPatient']); ?>',
+				data: data_pj,
+				dataType: 'json',
+				beforeSend: function() {
+					$('#ContractPatient').empty();
+					$('#ContractPatient').append(new Option('Loading...', ''));
+
+					$('#ContractPatientRekomendasiDari').val('');
+					$('#ContractPatientJenisKelamin').val('');
+					$('#ContractPatientUmur').val('');
+					$('#ContractPatientBeratBadan').val('');
+					$('#ContractPatientTinggiBadan').val('');
+					$('#ContractPatientAlamatLengkap').val('');
+					$('#ContractPatientAlatTerpasang').val('');
+					$('#ContractPatientDiagnosa').val('');
+					$('#ContractPatientKeluhanUtama').val('');
+				},
+				success: function(result) {
+					$('#ContractPatient').empty();
+					$('#ContractPatient').append(new Option('-- Silakan Pilih --', ''));
+					$('#ContractPatient').removeAttr('disabled');
+
+					for (i = 0; i < result.data.length; i++) {
+						$('#ContractPatient').append('<option value="'+ result.data[i].id +'">'+ result.data[i].fullname +'</option>');
 					}
 
 					$.ajax({
 						type: 'POST',
-						url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detailPatient']); ?>',
-						data: contract_data_patient,
-						dataType: "json",
+						url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detailPj']); ?>',
+						data: data_pj,
+						dataType: 'json',
 						success: function(result) {
 							if (result.status == 'true') {
-								$('#ContractPatientRekomendasiDari').val(result.data.recomendation_from);
-								$('#ContractPatientJenisKelamin').val(result.data.gender);
-								$('#ContractPatientUmur').val(result.data.years);
-								$('#ContractPatientBeratBadan').val(result.data.height);
-								$('#ContractPatientTinggiBadan').val(result.data.weight);
-								$('#ContractPatientAlamatLengkap').val(result.data.address);
-								$('#ContractPatientAlatTerpasang').val(result.data.attached_tools);
-								$('#ContractPatientDiagnosa').val(result.data.diagnosis);
-								$('#ContractPatientKeluhanUtama').val(result.data.main_complaint);
+								$('#ContractPJNamaLengkap').val(result.data.fullname);
+								$('#ContractPJNomorTelepon').val(result.data.handphone);
+								$('#ContractPJKTP').val(result.data.ktp);
+								$('#ContractPJEmail').val(result.data.email);
+								$('#ContractPJAlamat').val(result.data.address);
 							} else {
-								$('#ContractPatientRekomendasiDari').val('');
-								$('#ContractPatientJenisKelamin').val('');
-								$('#ContractPatientUmur').val('');
-								$('#ContractPatientBeratBadan').val('');
-								$('#ContractPatientTinggiBadan').val('');
-								$('#ContractPatientAlamatLengkap').val('');
-								$('#ContractPatientAlatTerpasang').val('');
-								$('#ContractPatientDiagnosa').val('');
-								$('#ContractPatientKeluhanUtama').val('');
+								$('#ContractPJNamaLengkap').val('');
+								$('#ContractPJNomorTelepon').val('');
+								$('#ContractPJKTP').val('');
+								$('#ContractPJEmail').val('');
+								$('#ContractPJAlamat').val('');
 							}
 						}
 					});
-                }
-		})
+				}
+			});
+		});
+
+		$('#ContractPatient').on('change', function() {
+			var patient_id = $(this).val();
+			var data_patient = {
+				'patient_id' : patient_id
+			};
+
+			$.ajax({
+				type: 'POST',
+				url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'detailPatient']); ?>',
+				data: data_patient,
+				dataType: 'json',
+				success: function(result) {
+					if (result.status == 'true') {
+						$('#ContractPatientRekomendasiDari').val(result.data.recomendation_from);
+						$('#ContractPatientJenisKelamin').val(result.data.gender);
+						$('#ContractPatientUmur').val(result.data.years);
+						$('#ContractPatientBeratBadan').val(result.data.height);
+						$('#ContractPatientTinggiBadan').val(result.data.weight);
+						$('#ContractPatientAlamatLengkap').val(result.data.address);
+						$('#ContractPatientAlatTerpasang').val(result.data.attached_tools);
+						$('#ContractPatientDiagnosa').val(result.data.diagnosis);
+						$('#ContractPatientKeluhanUtama').val(result.data.main_complaint);
+					} else {
+						$('#ContractPatientRekomendasiDari').val('');
+						$('#ContractPatientJenisKelamin').val('');
+						$('#ContractPatientUmur').val('');
+						$('#ContractPatientBeratBadan').val('');
+						$('#ContractPatientTinggiBadan').val('');
+						$('#ContractPatientAlamatLengkap').val('');
+						$('#ContractPatientAlatTerpasang').val('');
+						$('#ContractPatientDiagnosa').val('');
+						$('#ContractPatientKeluhanUtama').val('');
+					}
+				}
+			});
+		});
 
 		$('#confirm').on('show.bs.modal', function(e) {
 			var link = $(e.relatedTarget).data('href');
@@ -130,8 +241,6 @@
 				},
 				dataType: 'json',
 				success: function(result) {
-					console.log(result);
-
 					$('#ResultNote').html('');
 
 					if (result.status == 'true') {
@@ -180,6 +289,10 @@
 			$('#Description').val('');
 		});
 		/** End */
+
+		<?php if ($this->request->session()->read('Auth.User.role_id') == 1): ?>
+			$('#TanggalMulaiKontrak, #TanggalBerakhirKontrak, #ContractPJ, #ContractPatient').removeAttr('disabled');
+		<?php endif; ?>
 	});
 
 	function addHistory(status_updated) {

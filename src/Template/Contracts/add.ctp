@@ -36,9 +36,13 @@
                 url: '<?php echo $this->Url->build(['controller' => 'Contracts', 'action' => 'getPatient']); ?>',
                 data: data_pj,
                 dataType: "json",
+                beforeSend: function() {
+                    $('#Patient').empty();
+                    $('#Patient').append(new Option('Loading...', ''));
+                },
                 success: function(result) {
                     $('#Patient').empty();
-                    $('#Patient').append(new Option('-- Please Select --', ''));
+                    $('#Patient').append(new Option('-- Silakan Pilih --', ''));
 
                     for (i = 0; i < result.data.length; i++) {
                         $('#Patient').append('<option value="'+ result.data[i].id +'">'+ result.data[i].fullname +'</option>')

@@ -30,8 +30,10 @@ class ContractsController extends AppController
             'getHistory',
             'getPatient',
             'progressContract',
+            'updateContract',
             'updateStatus',
-            'print'
+            'print',
+            'printNew'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -42,6 +44,89 @@ class ContractsController extends AppController
     }
 
     public function print($id = null)
+    {
+        $this->viewBuilder()->layout('invoice');
+        /** Contract Event */
+        $response = $this->req('GET', '/event_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $event_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $event_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Transport Contract */
+        $response = $this->req('GET', '/transport_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $transport_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $transport_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Nurse Contract */
+        $response = $this->req('GET', '/nurse_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $nurse_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $nurse_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Therapist Contract */
+        $response = $this->req('GET', '/therapist_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $therapist_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $therapist_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Medic Tools Contract */
+        $response = $this->req('GET', '/medic_tool_contracts?contract_id='.$id);
+        $result = $response->json['data'];
+        $medic_tool_contracts = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $medic_tool_contracts = $result['data'];
+        }
+        /** End */
+
+        /** Contract Histories */
+        $response = $this->req('GET', '/contract_histories');
+        $result = $response->json['data'];
+        $contract_histories = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $contract_histories = $result['data'];
+        }
+        /** End */
+
+        /** Get PJ */
+        $response = $this->req('GET', '/pjs');
+        $result = $response->json['data'];
+        $pjs = [];
+
+        if (in_array($response->code, [200, 201])) {
+            $pjs = $result['data'];
+        }
+        /** End */
+
+        $contracts = [];
+        $get_contracts = $this->req('GET', '/contracts/'.$id);
+
+        if (in_array($get_contracts->code, [200, 201])) {
+            $contracts = (object) $get_contracts->json['data'];
+        }
+
+        $this->set(compact('contracts', 'event_contracts', 'transport_contracts', 'nurse_contracts', 'therapist_contracts', 'medic_tool_contracts', 'contract_histories', 'pjs'));
+    }
+
+    public function printNew($id = null)
     {
         $this->viewBuilder()->layout('invoice');
         /** Contract Event */
@@ -251,8 +336,6 @@ class ContractsController extends AppController
      */
     public function add($contract_no = null)
     {
-        //$this->viewBuilder()->layout('modal');
-
         if (empty($contract_no)) {
             return $this->redirect(['action' => 'index']);
         }
@@ -398,6 +481,42 @@ class ContractsController extends AppController
         }
 
         $this->set(compact('contracts', 'event_contracts', 'transport_contracts', 'nurse_contracts', 'therapist_contracts', 'medic_tool_contracts', 'contract_histories', 'pjs'));
+    }
+
+    /**
+     *  updateContract method
+     *  update contract with contract_id
+     */
+    public function updateContract()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $id = $this->request->data('contract_id');
+            $pj_id = $this->request->data('contract_pj_id');
+            $patient_id = $this->request->data('contract_patient_id');
+            $start_date = $this->request->data('start_date');
+            $end_date = $this->request->data('end_date');
+
+            $data = [
+                'pj_id' => $pj_id,
+                'patient_id' => $patient_id,
+                'start_date' => $start_date,
+                'end_date' => $end_date,
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+
+            $put_data = $this->req('PUT', '/contracts/'.$id, $data);
+            $updateData = $put_data->json;
+
+            if ($updateData['status'] == 'true') {
+                $this->Flash->success('Data successfully edited.');
+            } else {
+                $this->Flash->error('The contract could not be edited. Please, try again.');
+            }
+
+            return $this->redirect($this->referer());
+        }
     }
 
     /**

@@ -239,7 +239,7 @@
 													<td><?php echo $value['patients']['fullname'] ?></td>
 													<td><?php echo $value['start_date'] ?></td>
 													<td><?php echo $value['end_date'] ?></td>
-													<td><?php echo $value['total_price'] ?></td>
+													<td><?php echo $this->Number->currency((!empty($value['total_price'])) ? $value['total_price'] : 0, 'Rp '); ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
