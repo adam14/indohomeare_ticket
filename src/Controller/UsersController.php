@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\SecurityController;
 use Cake\Event\Event;
+use Cake\Utility\Security;
 
 class UsersController extends AppController
 {

@@ -215,7 +215,6 @@ class ContractsController extends AppController
      */
     public function index()
     {
-
         $pjs = $this->req('GET', '/pjs')->json['data']['data'];
 
         $page = $this->request->query('page');
@@ -338,6 +337,11 @@ class ContractsController extends AppController
     {
         if (empty($contract_no)) {
             return $this->redirect(['action' => 'index']);
+        }
+
+        if ($this->request->session()->read('Auth.User.role_id') != 2) {
+            $this->Flash->error('Page access only Customer Service.');
+            return $this->redirect($this->referer());
         }
 
         if ($this->request->is('post')) {

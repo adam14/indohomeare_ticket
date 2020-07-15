@@ -139,9 +139,11 @@
 									<div class="col-md-6">
 										Pencarian Data
 									</div>
-									<div class="col-md-6" align="right">
-										<?php echo $this->Html->link('Tambah Baru', ['controller' => 'Contracts', 'action' => 'progressContract'], ['class' => 'disable btn btn-sm btn-success', 'title' => 'Click to Add', 'escape' => false]); ?>
-									</div>
+									<?php if ($this->request->session()->read('Auth.User.role_id') == 2): ?>
+										<div class="col-md-6" align="right">
+											<?php echo $this->Html->link('Tambah Baru', ['controller' => 'Contracts', 'action' => 'progressContract'], ['class' => 'disable btn btn-sm btn-success', 'title' => 'Click to Add', 'escape' => false]); ?>
+										</div>
+									<?php endif; ?>
 								</div>
 								<hr>
 								<?php echo $this->Form->create(null, ['url' => ['action' => 'index'], 'type' => 'get', 'data-parsley-validate']); ?>
