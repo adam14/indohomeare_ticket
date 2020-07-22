@@ -1,1 +1,0 @@
-<?php echo $this->MenuBuilder->build('menu-top', ['class' => 'nav navbar-nav navbar-right']); ?>

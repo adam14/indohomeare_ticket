@@ -29,11 +29,12 @@ class ContractsController extends AppController
             'getAllTransportContract',
             'getHistory',
             'getPatient',
-            'progressContract',
-            'updateContract',
-            'updateStatus',
             'print',
-            'printNew'
+            'printNew',
+            'progressContract',
+            'report',
+            'updateContract',
+            'updateStatus'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -485,6 +486,14 @@ class ContractsController extends AppController
         }
 
         $this->set(compact('contracts', 'event_contracts', 'transport_contracts', 'nurse_contracts', 'therapist_contracts', 'medic_tool_contracts', 'contract_histories', 'pjs'));
+    }
+
+    /**
+     *  report method
+     *  report page
+     */
+    public function report()
+    {
     }
 
     /**
