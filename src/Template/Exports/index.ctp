@@ -63,6 +63,16 @@
                                 <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
                             </tr>
                         <?php endforeach; ?>
+                        <?php foreach ($events as $value): ?>
+                            <tr>
+                                <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
+                                <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
+                                <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
+                                <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
+                                <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
+                                <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </td>

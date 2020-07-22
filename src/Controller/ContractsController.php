@@ -315,7 +315,8 @@ class ContractsController extends AppController
         $data = [
             'contract_no' => $contract_no,
             'created_by' => $created_by,
-            'status' => $status
+            'status' => $status,
+            'contract_status_id' => 1
         ];
 
         $post_data = $this->req('POST', '/contracts', $data);
@@ -364,7 +365,8 @@ class ContractsController extends AppController
                 'start_date' => $start_date,
                 'end_date' => $end_date,
                 'total_price' => (!empty($total_price)) ? $total_price : 0,
-                'status' => 'Deal'
+                'status' => 'Deal',
+                'contract_status_id' => 2
             ];
 
             $post_data = $this->req('PUT', '/contracts/'.$contract_id, $data);
@@ -705,9 +707,23 @@ class ContractsController extends AppController
         if ($this->request->is('post')) {
             $id = $this->request->data('id');
             $status = $this->request->data('status');
+            $contract_status_id = '';
+
+            if ($status == 'Done') {
+                $contract_status_id = 3;
+            }
+        
+            if ($status == 'No Response') {
+                $contract_status_id = 4;
+            }
+
+            if ($status == 'Cancelled') {
+                $contract_status_id = 5;
+            }
 
             $data = [
                 'status' => $status,
+                'contract_status_id' => $contract_status_id,
                 'updated_at' => date('Y-m-d H:i:s')
             ];
 

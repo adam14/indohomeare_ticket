@@ -89,7 +89,17 @@ class ExportsController extends AppController
             }
             /** End */
 
-            $this->set(compact('disable_date', 'start_date', 'end_date', 'nurses', 'medic_tools', 'therapists', 'transports'));
+            /** Report Event */
+            $response = $this->req('GET', '/reports/events?start='.$start_date.'&end='.$end_date);
+            $result = $response->json['data'];
+            $events = [];
+
+            if (in_array($response->code, [200, 201])) {
+                $events = $result;
+            }
+            /** End */
+
+            $this->set(compact('disable_date', 'start_date', 'end_date', 'nurses', 'medic_tools', 'therapists', 'transports', 'events'));
         }
     }
 }
