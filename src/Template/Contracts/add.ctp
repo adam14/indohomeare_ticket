@@ -240,6 +240,7 @@
                                                         <div class="col-md-12">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
+                                                                    <div id="AlertNurseContract" hidden="true"></div>
                                                                     <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddContractNurse', 'title' => 'Click to Add', 'escape' => false]); ?>
                                                                     <input type="hidden" id="TotalPriceNurseContract" class="form-control input-sm" value="0">
                                                                     <div class="row">
@@ -303,6 +304,7 @@
                                                         <div class="col-md-12">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
+                                                                    <div id="AlertTherapistContract" hidden="true"></div>
                                                                     <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddTherapistContract', 'title' => 'Click to Add', 'escape' => false]); ?>
                                                                     <input type="hidden" id="TotalPriceTherapistContract" class="form-control input-sm" value="0">
                                                                     <div class="row">
@@ -366,6 +368,7 @@
                                                         <div class="col-md-12">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
+                                                                    <div id="AlertMedicToolContract" hidden="true"></div>
                                                                     <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddMedicToolContract', 'title' => 'Click to Add', 'escape' => false]); ?>
                                                                     <input type="hidden" id="TotalPriceMedicToolContract" class="form-control input-sm" value="0">
                                                                     <div class="row">
@@ -434,6 +437,7 @@
                                                         <div class="col-md-12">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
+                                                                    <div id="AlertTransportContract" hidden="true"></div>
                                                                     <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddTransportContract', 'title' => 'Click to Add', 'escape' => false]); ?>
                                                                     <input type="hidden" id="TotalPriceTransportContract" class="form-control input-sm" value="0">
                                                                     <div class="row">
@@ -489,6 +493,7 @@
                                                         <div class="col-md-12">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
+                                                                    <div id="AlertEventContract" hidden="true"></div>
                                                                     <?php echo $this->Html->link('Add New', 'javascript:;', ['class' => 'disable btn btn-sm btn-success', 'id' => 'ButtonAddEventContract', 'title' => 'Click to Add', 'escape' => false]); ?>
                                                                     <input type="hidden" id="TotalPriceEventContract" class="form-control input-sm" value="0">
                                                                     <div class="row">

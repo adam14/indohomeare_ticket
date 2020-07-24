@@ -19,6 +19,7 @@ class TherapistContractsController extends AppController
             'add',
             'edit',
             'delete',
+            'deleteAjax',
             'getTherapist',
             'getTherapistSessions',
             'getTherapistType',
@@ -181,6 +182,24 @@ class TherapistContractsController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  deleteAjax method
+     *  delete therapist contract with ajax
+     */
+    public function deleteAjax()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $therapist_contract_id = $this->request->data('therapist_contract_id');
+            
+            $response = $this->req('DELETE', '/therapist_contracts/'.$therapist_contract_id);
+
+            $delete = $response->json;
+            echo json_encode($delete);
+        }
     }
 
     /**

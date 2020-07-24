@@ -17,10 +17,11 @@ class ContractEventController extends AppController
         $allowed_method = [
             'index',
             'add',
+            'delete',
+            'deleteAjax',
+            'disable',
             'edit',
             'enable',
-            'disable',
-            'delete',
             'saveEventContract'
         ];
 
@@ -140,6 +141,24 @@ class ContractEventController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  deleteAjax method
+     *  delete contract event with ajax
+     */
+    public function deleteAjax()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $event_contract_id = $this->request->data('event_contract_id');
+
+            $response = $this->req('DELETE', '/event_contracts/'.$event_contract_id);
+
+            $delete = $response->json;
+            echo json_encode($delete);
+        }
     }
 
     /**

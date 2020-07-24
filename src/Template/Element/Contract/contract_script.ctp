@@ -119,6 +119,7 @@
         var data_nurse_contract = {
             'contract_id' : contract_id
         };
+        
 
         $.ajax({
             type: 'POST',
@@ -142,7 +143,7 @@
                                 <td>`+ result.data.data[i]['nurse_sessions']['name'] +`</td>
                                 <td>Rp. `+ formatRupiah(result.data.data[i]['nurse_sessions']['price']) +`</td>
                                 <td>
-                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractNurse"><i class="fa fa-trash"></i></a>
+                                    <button type="button" class="btn btn-sm btn-danger" id="ButtonDeleteContractNurse" data-nurse-contract-id="`+ result.data.data[i]['id'] +`"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                         `);
@@ -158,6 +159,36 @@
 
                     $('#TotalPriceNurseContract').val(subtotal.toString());
                     $('#SubtotalPriceNurseContract').html('Subtotal Perawat : Rp. ' + formatRupiah(subtotal.toString()));
+                    TotalPrice();
+
+                    $('#ButtonDeleteContractNurse').on('click', function(e) {
+                        var nurse_contract_id = $(this).data('nurse-contract-id');
+                        var data_nurse_contract = {
+                            'nurse_contract_id' : nurse_contract_id
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?php echo $this->Url->build(['controller' => 'NurseContracts', 'action' => 'deleteAjax']); ?>',
+                            data: data_nurse_contract,
+                            dataType: 'json',
+                            success: function(result) {
+                                if (result.status == 'true') {
+                                    $('#AlertNurseContract').html(`<div class="alert alert-success">Data successfully deleted.</div>`);
+                                } else {
+                                    $('#AlertNurseContract').html(`<div class="alert alert-danger">There was error. Please try again.</div>`);
+                                }
+
+                                $('#AlertNurseContract').show('slow');
+                                listNurse(contract_id);
+                            }
+                        });
+                    });
+                } else {
+                    var subtotal = 0;
+
+                    $('#TotalPriceNurseContract').val(subtotal.toString());
+                    $('#SubtotalPriceNurseContract').html('');
                     TotalPrice();
                 }
             }
@@ -191,7 +222,7 @@
                                 <td>`+ result.data.data[i]['therapist_sessions']['name'] +`</td>
                                 <td>Rp. `+ formatRupiah(result.data.data[i]['therapist_sessions']['price']) +`</td>
                                 <td>
-                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractNurse"><i class="fa fa-trash"></i></a>
+                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractTherapist" data-therapist-contract-id="`+ result.data.data[i]['id'] +`"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         `);
@@ -207,6 +238,36 @@
                     
                     $('#TotalPriceTherapistContract').val(subtotal.toString());
                     $('#SubtotalPriceTherapistContract').html('Subtotal Terapi : Rp. ' + formatRupiah(subtotal.toString()));
+                    TotalPrice();
+
+                    $('#ButtonDeleteContractTherapist').on('click', function(e) {
+                        var therapist_contract_id = $(this).data('therapist-contract-id');
+                        var data_therapist_contract = {
+                            'therapist_contract_id' : therapist_contract_id
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?php echo $this->Url->build(['controller' => 'TherapistContracts', 'action' => 'deleteAjax']); ?>',
+                            data: data_therapist_contract,
+                            dataType: 'json',
+                            success: function(result) {
+                                if (result.status == 'true') {
+                                    $('#AlertTherapistContract').html(`<div class="alert alert-success">Data successfully deleted.</div>`);
+                                } else {
+                                    $('#AlertTherapistContract').html(`<div class="alert alert-danger">There was error. Please try again.</div>`);
+                                }
+
+                                $('#AlertTherapistContract').show('slow');
+                                listTherapist(contract_id);
+                            }
+                        });
+                    });
+                } else {
+                    var subtotal = 0;
+
+                    $('#TotalPriceTherapistContract').val(subtotal.toString());
+                    $('#SubtotalPriceTherapistContract').html('');
                     TotalPrice();
                 }
             }
@@ -241,7 +302,7 @@
                                 <td>`+ result.data.data[i]['quantity'] +`</td>
                                 <td>Rp. `+ formatRupiah(result.data.data[i]['total_price']) +`</td>
                                 <td>
-                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractNurse"><i class="fa fa-trash"></i></a>
+                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractMedicTool" data-medic-tool-contract-id="`+ result.data.data[i]['id'] +`"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         `);
@@ -257,6 +318,36 @@
                     
                     $('#TotalPriceMedicToolContract').val(subtotal.toString());
                     $('#SubtotalPriceMedicToolContract').html('Subtotal Alkes : Rp. ' + formatRupiah(subtotal.toString()));
+                    TotalPrice();
+
+                    $('#ButtonDeleteContractMedicTool').on('click', function(e) {
+                        var medic_tool_contract_id = $(this).data('medic-tool-contract-id');
+                        var data_medic_tool_contract = {
+                            'medic_tool_contract_id' : medic_tool_contract_id
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?php echo $this->Url->build(['controller' => 'MedicToolContracts', 'action' => 'deleteAjax']); ?>',
+                            data: data_medic_tool_contract,
+                            dataType: 'json',
+                            success: function(result) {
+                                if (result.status == 'true') {
+                                    $('#AlertMedicToolContract').html(`<div class="alert alert-success">Data successfully deleted.</div>`);
+                                } else {
+                                    $('#AlertMedicToolContract').html(`<div class="alert alert-danger">There was error. Please try again.</div>`);
+                                }
+
+                                $('#AlertMedicToolContract').show('slow');
+                                listMedicTool(contract_id);
+                            }
+                        });
+                    });
+                } else {
+                    var subtotal = 0;
+
+                    $('#TotalPriceMedicToolContract').val(subtotal.toString());
+                    $('#SubtotalPriceMedicToolContract').html('');
                     TotalPrice();
                 }
             }
@@ -290,7 +381,7 @@
                                 <td>`+ result.data.data[i]['distance'] +`</td>
                                 <td>Rp. `+ formatRupiah(result.data.data[i]['transport_times']['price']) +`</td>
                                 <td>
-                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractNurse"><i class="fa fa-trash"></i></a>
+                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractTransport" data-transport-contract-id="`+ result.data.data[i]['id'] +`"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         `);
@@ -306,6 +397,36 @@
                     
                     $('#TotalPriceTransportContract').val(subtotal.toString());
                     $('#SubtotalPriceTransportContract').html('Subtotal Transport : Rp. ' + formatRupiah(subtotal.toString()));
+                    TotalPrice();
+
+                    $('#ButtonDeleteContractTransport').on('click', function(e) {
+                        var transport_contract_id = $(this).data('transport-contract-id');
+                        var data_transport_contract = {
+                            'transport_contract_id' : transport_contract_id
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?php echo $this->Url->build(['controller' => 'ContractTransport', 'action' => 'deleteAjax']); ?>',
+                            data: data_transport_contract,
+                            dataType: 'json',
+                            success: function(result) {
+                                if (result.status == 'true') {
+                                    $('#AlertTransportContract').html(`<div class="alert alert-success">Data successfully deleted.</div>`);
+                                } else {
+                                    $('#AlertTransportContract').html(`<div class="alert alert-danger">There was error. Please try again.</div>`);
+                                }
+
+                                $('#AlertTransportContract').show('slow');
+                                listTransport(contract_id);
+                            }
+                        });
+                    });
+                } else {
+                    var subtotal = 0;
+
+                    $('#TotalPriceTransportContract').val(subtotal.toString());
+                    $('#SubtotalPriceTransportContract').html('');
                     TotalPrice();
                 }
             }
@@ -338,7 +459,7 @@
                                 <td>`+ result.data.data[i]['event_name'] +`</td>
                                 <td>Rp. `+ formatRupiah(result.data.data[i]['price']) +`</td>
                                 <td>
-                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractNurse"><i class="fa fa-trash"></i></a>
+                                    <a href="javascript:;" class="btn btn-sm btn-danger" id="ButtonDeleteContractEvent" data-event-contract-id="`+ result.data.data[i]['id'] +`"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         `);
@@ -354,6 +475,36 @@
                     
                     $('#TotalPriceEventContract').val(subtotal.toString());
                     $('#SubtotalPriceEventContract').html('Subtotal Event : Rp. ' + formatRupiah(subtotal.toString()));
+                    TotalPrice();
+
+                    $('#ButtonDeleteContractEvent').on('click', function(e) {
+                        var event_contract_id = $(this).data('event-contract-id');
+                        var data_event_contract = {
+                            'event_contract_id' : event_contract_id
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '<?php echo $this->Url->build(['controller' => 'ContractEvent', 'action' => 'deleteAjax']); ?>',
+                            data: data_event_contract,
+                            dataType: 'json',
+                            success: function(result) {
+                                if (result.status == 'true') {
+                                    $('#AlertEventContract').html(`<div class="alert alert-success">Data successfully deleted.</div>`);
+                                } else {
+                                    $('#AlertEventContract').html(`<div class="alert alert-danger">There was error. Please try again.</div>`);
+                                }
+
+                                $('#AlertEventContract').show('slow');
+                                listEvent(contract_id);
+                            }
+                        });
+                    });
+                } else {
+                    var subtotal = 0;
+
+                    $('#TotalPriceEventContract').val(subtotal.toString());
+                    $('#SubtotalPriceEventContract').html('');
                     TotalPrice();
                 }
             }
@@ -398,6 +549,28 @@
     $(document).ready(function() {
         var contract_id = '<?php echo (!empty($contracts)) ? $contracts['id'] : ''; ?>';
         TotalPrice();
+
+        $('.menu-tab').on('click', function() {
+            var value = $(this).attr('href');
+
+            if (value == '#perawat') {
+                $('#AlertNurseContract').hide();
+                listNurse(contract_id);
+            } else if (value == '#therapist') {
+                $('#AlertTherapistContract').hide();
+                listTherapist(contract_id);
+            } else if (value == '#alkes') {
+                $('#AlertMedicToolContract').hide();
+                listMedicTool(contract_id);
+            } else if (value == '#transport') {
+                $('#AlertTransportContract').hide();
+                listTransport(contract_id);
+            } else if (value == '#event') {
+                $('#AlertEventContract').hide();
+                listEvent(contract_id);
+                TotalPrice();
+            }
+        });
 
         /** Nurse */
         listNurse(contract_id);

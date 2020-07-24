@@ -23,56 +23,66 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($nurses as $value): ?>
-                            <tr>
-                                <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                        <?php foreach ($medic_tools as $value): ?>
-                            <tr>
-                                <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                        <?php foreach ($therapists as $value): ?>
-                            <tr>
-                                <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                        <?php foreach ($transports as $value): ?>
-                            <tr>
-                                <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                        <?php foreach ($events as $value): ?>
-                            <tr>
-                                <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
-                                <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
+                        <?php if (!empty($nurses)) : ?>
+                            <?php foreach ($nurses as $value): ?>
+                                <tr>
+                                    <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <?php if (!empty($medic_tools)): ?>
+                            <?php foreach ($medic_tools as $value): ?>
+                                <tr>
+                                    <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <?php if (!empty($therapists)): ?>
+                            <?php foreach ($therapists as $value): ?>
+                                <tr>
+                                    <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <?php if (!empty($transports)): ?>
+                            <?php foreach ($transports as $value): ?>
+                                <tr>
+                                    <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <?php if (!empty($events)): ?>
+                            <?php foreach ($events as $value): ?>
+                                <tr>
+                                    <td style="padding: 3px;"><?php echo $value['permintaan_jasa']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_draft']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_deal']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_done']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_no_response']; ?></td>
+                                    <td style="padding: 3px;"><?php echo $value['status_cancel']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </td>

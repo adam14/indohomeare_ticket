@@ -17,11 +17,12 @@ class MedicToolContractsController extends AppController
         $allowed_method = [
             'index',
             'add',
+            'delete',
+            'deleteAjax',
             'edit',
             'getMedicTool',
             'getMedicToolSessions',
-            'saveMedicToolContract',
-            'delete'
+            'saveMedicToolContract'
         ];
 
         if (in_array($action, $allowed_method)) {
@@ -156,6 +157,24 @@ class MedicToolContractsController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  deleteAjax method
+     *  delete medic tool contracts with ajax
+     */
+    public function deleteAjax()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $medic_tool_contract_id = $this->request->data('medic_tool_contract_id');
+
+            $response = $this->req('DELETE', '/medic_tool_contracts/'.$medic_tool_contract_id);
+
+            $delete = $response->json;
+            echo json_encode($delete);
+        }
     }
 
     /**

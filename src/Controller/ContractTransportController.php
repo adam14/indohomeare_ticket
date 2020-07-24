@@ -19,8 +19,9 @@ class ContractTransportController extends AppController
             'add',
             'edit',
             'enable',
-            'disable',
             'delete',
+            'deleteAjax',
+            'disable',
             'getTransport',
             'saveTransportContract'
         ];
@@ -157,6 +158,24 @@ class ContractTransportController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  deleteAjax method
+     *  delete transport contract with ajax
+     */
+    public function deleteAjax()
+    {
+        $this->autoRender = false;
+        
+        if ($this->request->is('post')) {
+            $transport_contract_id = $this->request->data('transport_contract_id');
+
+            $response = $this->req('DELETE', '/transport_contracts/'.$transport_contract_id);
+
+            $delete = $response->json;
+            echo json_encode($delete);
+        }
     }
 
     /**

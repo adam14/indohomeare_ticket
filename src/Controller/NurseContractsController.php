@@ -18,6 +18,7 @@ class NurseContractsController extends AppController
             'index',
             'add',
             'delete',
+            'deleteAjax',
             'edit',
             'getNurse',
             'getNurseCategories',
@@ -190,6 +191,24 @@ class NurseContractsController extends AppController
         }
 
         return $this->redirect($this->referer());
+    }
+
+    /**
+     *  deleteAjax method
+     *  delete nurse contract with ajax
+     */
+    public function deleteAjax()
+    {
+        $this->autoRender = false;
+
+        if ($this->request->is('post')) {
+            $nurse_contract_id = $this->request->data('nurse_contract_id');
+
+            $response = $this->req('DELETE', '/nurse_contracts/'.$nurse_contract_id);
+
+            $delete = $response->json;
+            echo json_encode($delete);
+        }
     }
 
     /**
