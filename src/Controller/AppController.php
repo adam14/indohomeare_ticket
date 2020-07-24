@@ -127,6 +127,7 @@ class AppController extends Controller
 
             $user_menu = $this->request->session()->read('Auth');
 
+
             $menu = [
                 'menu-top' => [
                     [
@@ -163,6 +164,29 @@ class AppController extends Controller
                     ]
                 ]
             ];
+
+            if ($this->request->session()->read('Auth.User.role_id') != 1) {
+                $menu = [
+                    'menu-top' => [
+                        [
+                            'title' => 'Dashboard',
+                            'url' => ['controller' => 'Home', 'action' => 'index']
+                        ],
+                        [
+                            'title' => 'Kontrak',
+                            'url' => ['controller' => 'Contracts', 'action' => 'index']
+                        ],
+                        [
+                            'title' => 'PJ',
+                            'url' => ['controller' => 'Pjs', 'action' => 'index']
+                        ],
+                        [
+                            'title' => 'Pasien',
+                            'url' => ['controller' => 'Patient', 'action' => 'index']
+                        ]
+                    ]
+                ];
+            }
 
             $this->set(compact('menu', 'user_menu'));
 		}
