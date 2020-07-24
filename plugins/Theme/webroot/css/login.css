@@ -1,0 +1,63 @@
+@import url(font-awesome.min.css);
+@import url(flatly/bootstrap.min.css);
+
+* { font-family: 'Ubuntu', sans-serif; }
+body { background-color: #ffffff; }
+
+.container-login {
+    min-height: 0;
+    min-width: 280px;
+    max-width: 480px;
+    color: #333333;
+    margin-top: 10px;
+    padding: 0;
+}
+.container-login > section {
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 10px;
+}
+#top-bar {
+    display: inherit;
+}
+.nav-tabs.nav-justified {
+    border-bottom: 0 none;
+    width: 100%;
+}
+.nav-tabs.nav-justified > li {
+    display: table-cell;
+    width: 1%;
+    float: none;
+}
+.container-login .nav-tabs.nav-justified > li > a,
+.container-login .nav-tabs.nav-justified > li > a:hover,
+.container-login .nav-tabs.nav-justified > li > a:focus {
+    background: #34495e;
+    border: medium none;
+    color: #ffffff;
+    margin-bottom: 0;
+    margin-right: 0;
+    border-radius: 0;
+}
+.container-login .nav-tabs.nav-justified > .active > a,
+.container-login .nav-tabs.nav-justified > .active > a:hover,
+.container-login .nav-tabs.nav-justified > .active > a:focus {
+    background: #EBEBEB;
+    color: #333333;
+}
+.container-login .nav-tabs.nav-justified > li > a:hover,
+.container-login .nav-tabs.nav-justified > li > a:focus {
+    color: #EBEBEB;
+}
+.tabs-login {
+    background: #EBEBEB;
+    border: medium none;
+    margin-top: -1px;
+    padding: 10px 30px;
+}
+.container-login h2 {
+    color: #34495e;
+}
+.container-login .checkbox {
+    margin-top: -15px;
+}
