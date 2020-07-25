@@ -140,9 +140,7 @@
 										Pencarian Data
 									</div>
 									<div class="col-md-6" align="right">
-										<?php if ($this->request->session()->read('Auth.User.role_id') == 2): ?>
-											<?php echo $this->Html->link('Tambah Baru', ['controller' => 'Contracts', 'action' => 'progressContract'], ['class' => 'disable btn btn-sm btn-success', 'title' => 'Click to Add', 'escape' => false]); ?>
-										<?php endif; ?>
+										<?php echo $this->Html->link('Tambah Baru', ['controller' => 'Contracts', 'action' => 'progressContract'], ['class' => 'disable btn btn-sm btn-success', 'title' => 'Click to Add', 'escape' => false]); ?>
 										<?php echo $this->Html->link('Laporan', ['controller' => 'Contracts', 'action' => 'Report'], ['class' => 'disable btn btn-sm btn-info', 'title' => 'Click to Reports', 'escape' => false]); ?>
 									</div>
 								</div>
