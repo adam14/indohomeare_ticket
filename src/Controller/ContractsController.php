@@ -341,10 +341,6 @@ class ContractsController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
-        if ($this->request->session()->read('Auth.User.role_id') != 2) {
-            $this->Flash->error('Page access only Customer Service.');
-            return $this->redirect($this->referer());
-        }
 
         if ($this->request->is('post')) {
             $pj_id = $this->request->data('pj_id');

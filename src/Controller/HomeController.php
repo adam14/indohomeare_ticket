@@ -28,8 +28,7 @@ class HomeController extends AppController
         $action = $this->request->params['action'];
         $allowed_method = [
             'index',
-            'getByStatus',
-            'getByService',
+            'dealStatistic'
         ];
 		
 		if (in_array($action, $allowed_method)) {
@@ -45,48 +44,12 @@ class HomeController extends AppController
      */
     public function index()
     {
-        $session = $this->request->session();
-        $date = [];
-        $draft = [];
-        $deal = [];
-        $done = [];
-        $no_response = [];
-        $cancel = [];
+        
+    }
 
-        $date_service = [];
-        $nurse_service = [];
-        $medic_tool_service = [];
-        $therapist_service = [];
-        $event_service = [];
-        $transport_service = [];
-
-        $response = $this->req('GET', '/statistic/status?start='.strtotime(date('Y-m-01')).'&end='.strtotime(date('Y-m-d')));
-        $result = $response->json['data'];
-        if (in_array($response->code, [200, 201])) {
-            foreach ($result as $value) {
-                $date[] = date('Y-m-d', strtotime($value['date']));
-                $draft[] = $value['draft'];
-                $deal[] = $value['deal'];
-                $done[] = $value['done'];
-                $no_response[] = $value['no_response'];
-                $cancel[] = $value['cancel'];
-            }
-        }
-
-        $response = $this->req('GET', '/statistic/service?start='.strtotime(date('Y-m-01')).'&end='.strtotime(date('Y-m-d')));
-        $result = $response->json['data'];
-        if (in_array($response->code, [200, 201])) {
-            foreach ($result as $value) {
-                $date_service[] = date('Y-m-d', strtotime($value['date']));
-                $nurse_service[] = $value['nurse_service'];
-                $medic_tool_service[] = $value['medic_tool_service'];
-                $therapist_service[] = $value['therapist_service'];
-                $event_service[] = $value['event_service'];
-                $transport_service[] = $value['transport_service'];
-            }
-        }
-
-        $this->set(compact('date','draft', 'deal', 'done', 'no_response', 'cancel', 'date_service', 'nurse_service', 'medic_tool_service', 'therapist_service', 'event_service', 'transport_service'));
+    public function dealStatistic()
+    {
+        
     }
 
     public function getByStatus()

@@ -135,37 +135,45 @@ class AppController extends Controller
                         'url' => ['controller' => 'Home', 'action' => 'index']
                     ],
                     [
-                        'title' => 'Kontrak',
-                        'url' => ['controller' => 'Contracts', 'action' => 'index']
+                        'title' => 'Layanan',
+                        'url' => ['controller' => 'Services', 'action' => 'index']
                     ],
                     [
-                        'title' => 'Alkes',
-                        'url' => ['controller' => 'MedicTools', 'action' => 'index']
+                        'title' => 'Sesi',
+                        'url' => ['controller' => 'Sessions', 'action' => 'index']
                     ],
-                    [
-                        'title' => 'Terapi',
-                        'url' => ['controller' => 'Therapist', 'action' => 'index']
-                    ],
-                    [
-                        'title' => 'Perawat',
-                        'url' => ['controller' => 'Nurses', 'action' => 'index']
-                    ],
-                    [
-                        'title' => 'Transport',
-                        'url' => ['controller' => 'TransportTime', 'action' => 'index']
-                    ],
-                    [
-                        'title' => 'PJ',
-                        'url' => ['controller' => 'Pjs', 'action' => 'index']
-                    ],
-                    [
-                        'title' => 'Pasien',
-                        'url' => ['controller' => 'Patient', 'action' => 'index']
-                    ]
+                    // [
+                    //     'title' => 'Kontrak',
+                    //     'url' => ['controller' => 'Contracts', 'action' => 'index']
+                    // ],
+                    // [
+                    //     'title' => 'Alkes',
+                    //     'url' => ['controller' => 'MedicTools', 'action' => 'index']
+                    // ],
+                    // [
+                    //     'title' => 'Terapi',
+                    //     'url' => ['controller' => 'Therapist', 'action' => 'index']
+                    // ],
+                    // [
+                    //     'title' => 'Perawat',
+                    //     'url' => ['controller' => 'Nurses', 'action' => 'index']
+                    // ],
+                    // [
+                    //     'title' => 'Transport',
+                    //     'url' => ['controller' => 'TransportTime', 'action' => 'index']
+                    // ],
+                    // [
+                    //     'title' => 'PJ',
+                    //     'url' => ['controller' => 'Pjs', 'action' => 'index']
+                    // ],
+                    // [
+                    //     'title' => 'Pasien',
+                    //     'url' => ['controller' => 'Patient', 'action' => 'index']
+                    // ]
                 ]
             ];
 
-            if ($this->request->session()->read('Auth.User.role_id') != 1) {
+            if ($this->request->session()->read('Auth.User.role_id') == 2) {
                 $menu = [
                     'menu-top' => [
                         [
@@ -173,16 +181,12 @@ class AppController extends Controller
                             'url' => ['controller' => 'Home', 'action' => 'index']
                         ],
                         [
-                            'title' => 'Kontrak',
-                            'url' => ['controller' => 'Contracts', 'action' => 'index']
+                            'title' => 'Otorisasi',
+                            'url' => ['controller' => 'Authorizations', 'action' => 'index']
                         ],
                         [
-                            'title' => 'PJ',
-                            'url' => ['controller' => 'Pjs', 'action' => 'index']
-                        ],
-                        [
-                            'title' => 'Pasien',
-                            'url' => ['controller' => 'Patient', 'action' => 'index']
+                            'title' => 'Report',
+                            'url' => ['controller' => 'Reports', 'action' => 'index']
                         ]
                     ]
                 ];
