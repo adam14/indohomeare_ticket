@@ -36,7 +36,12 @@ class ServicesController extends AppController
     {
     }
 
+    /**
+     *  add method
+     *  add services page and process
+     */
     public function add()
     {
+        $this->viewBuilder()->layout('modal');
     }
 }

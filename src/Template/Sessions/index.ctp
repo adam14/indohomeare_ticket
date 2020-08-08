@@ -1,3 +1,4 @@
+<?php $page = $this->PagingInfo->data($total_data, $data_limit, $paging); ?>
 <?php $this->start('script'); ?>
 <script>
     $(document).ready(function() {
@@ -41,6 +42,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <h4 class="page-head-line">Daftar Sesi</h4>
+                <div id="AlertFinish" hidden="true"></div>
                 <?php echo $this->Html->link('Tambah Baru', '#', ['class' => 'disable btn btn-sm btn-success', 'data-href' => $this->Url->build(['controller' => 'Sessions', 'action' => 'add']), 'data-toggle' => 'modal', 'data-target' => '#modal-form', 'data-label' => 'Tambah Data', 'title' => 'Click to Add', 'escape' => false]); ?>
                 <div class="row">
                     <div class="col-md-12 margin-bottom-30">
@@ -55,6 +57,28 @@
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        <?php if (!empty($sessions)): ?>
+                                            <?php $i = $page['lowest']; ?>
+                                            <?php foreach ($sessions as $value): ?>
+                                                <tr>
+                                                    <td><?php echo $i++; ?></td>
+                                                    <td><?php echO $value['name']; ?></td>
+                                                    <td>
+                                                        <ul>
+                                                            <?php foreach ($service_sessions as $val): ?>
+                                                                <?php if ($value['id'] == $val['session_id']): ?>
+                                                                    <li><?php echo $val['services']['name']; ?></li>
+                                                                <?php endif; ?>
+                                                            <?php endforeach; ?>
+                                                        </ul>
+                                                    </td>
+                                                    <td><button class="btn btn-sm btn-warning">Edit</button></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+                                    <!--
                                     <tbody>
                                         <tr>
                                             <td>1</td>
@@ -123,11 +147,17 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    -->
                                 </table>
                             </div>
                             <nav class="pull-left">
-                                <?php echo 'Showing 1 to 5 of 10 entries'; ?>
+                                <?php echo 'Showing '.$page['lowest'].' to '.$page['highest'].' of '.$page['total'].' entries'; ?>
                             </nav>
+							<?php if ($total_data > $data_limit): ?>
+								<nav class="pull-right">
+									<?php echo $this->PagingInfo->paginate($data_limit, $paging['current'], $total_data, $paging['last'], $this->Url->build(['controller' => 'Therapist', 'action' => 'index'])); ?>
+								</nav>
+							<?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -153,11 +183,11 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="form-label" aria-hidden="true">
+<div class="modal fade" id="modal-form" role="dialog" aria-labelledby="form-label" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="btn btn-sm pull-right" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<!-- <button type="button" class="btn btn-sm pull-right" data-dismiss="modal" aria-hidden="true">&times;</button> -->
 				<h4 class="modal-title" id="form-label">Form</h4>
 			</div>
 			<div class="modal-body body-form">

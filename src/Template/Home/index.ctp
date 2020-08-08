@@ -17,6 +17,7 @@
 			todayHighlight: true,
 		});
 
+        /**
         Highcharts.chart('done_contract', {
             chart: {type: 'line'},
             title: {text: 'Contract'},
@@ -44,7 +45,9 @@
                 ]
             }]
         });
+        */
 
+        /**
         Highcharts.chart('not_done_contract', {
             chart: {type: 'column'},
             title: {text: 'Contract'},
@@ -158,6 +161,7 @@
             },
             ]
         });
+        */
 
         $('#DoneFilterBtn').bind('click', function() {
             var chart1 = $('#done_contract').highcharts();
